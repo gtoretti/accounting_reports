@@ -1279,10 +1279,14 @@ private fun BalanceSheetItemsScreenContent(
                     .fillMaxWidth())
             {
                 Text(
-                    text = balanceSheetName.value
+                    text = balanceSheetName.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    text = balanceSheetDate.value
+                    text = balanceSheetDate.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
 
@@ -1872,7 +1876,9 @@ private fun BalanceSheetItemRow(
         Text(
             text = item.level4Description,
             modifier = Modifier
-                .fillMaxWidth(0.4f)
+                .fillMaxWidth(0.4f),
+            style = TextStyle(fontFamily = FontFamily.SansSerif),
+            color = MaterialTheme.colorScheme.primary,
         )
 
 
@@ -1880,7 +1886,9 @@ private fun BalanceSheetItemRow(
             text = item.value.toScreen(),
             modifier = Modifier
                 .fillMaxWidth(0.75f),
-            textAlign = TextAlign.End
+            textAlign = TextAlign.End,
+            style = TextStyle(fontFamily = FontFamily.SansSerif),
+            color = MaterialTheme.colorScheme.primary,
         )
     }
 
@@ -2025,10 +2033,14 @@ private fun BalanceSheetItemsAddItemScreenContent(
                     .fillMaxWidth())
             {
                 Text(
-                    text = balanceSheetName.value
+                    text = balanceSheetName.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    text = balanceSheetDate.value
+                    text = balanceSheetDate.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
 
@@ -2407,10 +2419,14 @@ private fun BalanceSheetItemsEditItemScreenContent(
                     .fillMaxWidth())
             {
                 Text(
-                    text = balanceSheetName.value
+                    text = balanceSheetName.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    text = balanceSheetDate.value
+                    text = balanceSheetDate.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
 
@@ -2595,10 +2611,14 @@ private fun BalanceSheetHomeScreenContent(
                             modifier = Modifier
                                 .fillMaxWidth()) {
                             Text(
-                                text = balanceSheet.name
+                                text = balanceSheet.name,
+                                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                                color = MaterialTheme.colorScheme.primary,
                             )
                             Text(
-                                text = fmt.format(balanceSheet.date)
+                                text = fmt.format(balanceSheet.date),
+                                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                                color = MaterialTheme.colorScheme.primary,
                             )
                         }
                     }

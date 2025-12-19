@@ -1766,7 +1766,9 @@ fun displayEachAccountingAccountLine(
             }
 
             Text(
-                text = accountingAccount.level4 + ": " + accountingAccount.description
+                text = accountingAccount.level4 + ": " + accountingAccount.description,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
             )
         }
 
@@ -1820,7 +1822,9 @@ fun displayEachExpandableTitleRow(expandCollapseFlag: MutableState<Boolean>,titl
         }
 
         Text(
-            text = title
+            text = title,
+            style = TextStyle(fontFamily = FontFamily.SansSerif),
+            color = MaterialTheme.colorScheme.primary,
         )
     }
 }

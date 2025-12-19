@@ -66,6 +66,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -495,7 +496,9 @@ private fun ExplanatoryNotesHomeScreenContent(
                             .padding(horizontal = 10.dp)
                     ) {
                         Text(
-                            text = explanatoryNote.index
+                            text = explanatoryNote.index,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
                         )
                     }
 

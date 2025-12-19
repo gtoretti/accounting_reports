@@ -1167,7 +1167,7 @@ fun CellCard(label: String, modifier: Modifier){
         modifier = modifier
     ){
         Text(label, modifier.padding(3.dp),textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.bodyMedium,
+            style = TextStyle(fontFamily = FontFamily.SansSerif),
 
             )
     }
@@ -1187,7 +1187,7 @@ fun CellTitleRowCard(label: String, modifier: Modifier){
         modifier = modifier
     ){
         Text(label, modifier.padding(3.dp),textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.bodyMedium,
+            style = TextStyle(fontFamily = FontFamily.SansSerif),
 
             )
     }
@@ -1273,7 +1273,7 @@ fun CellTitleColumnCard(label: String, modifier: Modifier,
                 }
             }
             Text(label, Modifier.padding(3.dp), textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodyMedium,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
 
                 )
         }
@@ -1300,7 +1300,7 @@ fun CellTitleFinalColumnCard(label: String, modifier: Modifier){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(label, Modifier.padding(3.dp), textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodyMedium,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
 
                 )
         }
@@ -1950,7 +1950,9 @@ fun SignedDoubleField(fieldName: MutableState<String>,isCredit: MutableState<Boo
             )
             Text(
                 text = if (isCredit.value) stringResource(R.string.cash_flows_statement_credit) else stringResource(R.string.cash_flows_statement_debit),
-                maxLines = 1
+                maxLines = 1,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+
             )
         }
     }

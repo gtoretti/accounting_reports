@@ -1008,10 +1008,14 @@ private fun CashFlowsStatementItemsScreenContent(
                     .fillMaxWidth())
             {
                 Text(
-                    text = cashFlowsStatementName.value
+                    text = cashFlowsStatementName.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    text = cashFlowsStatementStartDate.value + " - " + cashFlowsStatementEndDate.value
+                    text = cashFlowsStatementStartDate.value + " - " + cashFlowsStatementEndDate.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
 
                 var cashFlowsStatementInitialCashBalanceText = cashFlowsStatementInitialCashBalance.value.toScreen()
@@ -1032,7 +1036,9 @@ private fun CashFlowsStatementItemsScreenContent(
                 )
                 {
                     Text(
-                        text = stringResource(R.string.cash_flows_statement_initial_balance_cash_value)+" $cashFlowsStatementInitialCashBalanceText"
+                        text = stringResource(R.string.cash_flows_statement_initial_balance_cash_value)+" $cashFlowsStatementInitialCashBalanceText",
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
 
                     TextButton(
@@ -1087,10 +1093,14 @@ private fun CashFlowsStatementItemsScreenContent(
                     .fillMaxWidth(0.82f)
                 ){
                 Text(
-                    text = stringResource(R.string.cash_flows_statement_total)
+                    text = stringResource(R.string.cash_flows_statement_total),
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    text = totalOperatingText
+                    text = totalOperatingText,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
                 }
             }
@@ -1126,10 +1136,14 @@ private fun CashFlowsStatementItemsScreenContent(
                         .fillMaxWidth(0.82f)
                 ){
                     Text(
-                        text = stringResource(R.string.cash_flows_statement_total)
+                        text = stringResource(R.string.cash_flows_statement_total),
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                     Text(
-                        text = totalInvestingText
+                        text = totalInvestingText,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
             }
@@ -1166,10 +1180,14 @@ private fun CashFlowsStatementItemsScreenContent(
                         .fillMaxWidth(0.82f)
                 ){
                     Text(
-                        text = stringResource(R.string.cash_flows_statement_total)
+                        text = stringResource(R.string.cash_flows_statement_total),
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                     Text(
-                        text = totalFinancingText
+                        text = totalFinancingText,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
             }
@@ -1195,10 +1213,14 @@ private fun CashFlowsStatementItemsScreenContent(
                     .fillMaxWidth(0.82f)
             ) {
                 Text(
-                        text = stringResource(R.string.cash_flows_statement_increase)
+                        text = stringResource(R.string.cash_flows_statement_increase),
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                     )
                 Text(
-                    text = "$ $cashIncreaseText"
+                    text = "$ $cashIncreaseText",
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
 
@@ -1209,10 +1231,14 @@ private fun CashFlowsStatementItemsScreenContent(
                     .fillMaxWidth(0.82f)
             ) {
                 Text(
-                    text = stringResource(R.string.cash_flows_statement_final_balance)
+                    text = stringResource(R.string.cash_flows_statement_final_balance),
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    text = "$ $finalBalance"
+                    text = "$ $finalBalance",
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
 
@@ -1311,18 +1337,24 @@ private fun CashFlowsStatementItemRow(
         Text(
             text = item.description,
             modifier = Modifier
-                .fillMaxWidth(0.4f)
+                .fillMaxWidth(0.4f),
+            style = TextStyle(fontFamily = FontFamily.SansSerif),
+            color = MaterialTheme.colorScheme.primary,
         )
         Text(
             text = fmt.format(item.date),
             modifier = Modifier
-                .padding(5.dp)
+                .padding(5.dp),
+            style = TextStyle(fontFamily = FontFamily.SansSerif),
+            color = MaterialTheme.colorScheme.primary,
         )
         Text(
             text = value,
             modifier = Modifier
                 .fillMaxWidth(0.75f),
-            textAlign = TextAlign.End
+            textAlign = TextAlign.End,
+            style = TextStyle(fontFamily = FontFamily.SansSerif),
+            color = MaterialTheme.colorScheme.primary,
         )
     }
 
@@ -1401,10 +1433,14 @@ private fun CashFlowsStatementItemsAddItemScreenContent(
                     .fillMaxWidth())
             {
                 Text(
-                    text = cashFlowsStatementName.value
+                    text = cashFlowsStatementName.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    text = cashFlowsStatementStartDate.value + " - " + cashFlowsStatementEndDate.value
+                    text = cashFlowsStatementStartDate.value + " - " + cashFlowsStatementEndDate.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
 
@@ -1675,10 +1711,14 @@ private fun CashFlowsStatementItemsEditItemScreenContent(
                     .fillMaxWidth())
             {
                 Text(
-                    text = cashFlowsStatementName.value
+                    text = cashFlowsStatementName.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    text = cashFlowsStatementStartDate.value + " - " + cashFlowsStatementEndDate.value
+                    text = cashFlowsStatementStartDate.value + " - " + cashFlowsStatementEndDate.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
 
@@ -2278,10 +2318,14 @@ private fun CashFlowsStatementHomeScreenContent(
                             modifier = Modifier
                                 .fillMaxWidth()) {
                             Text(
-                                text = cashFlowsStatement.name
+                                text = cashFlowsStatement.name,
+                                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                                color = MaterialTheme.colorScheme.primary,
                             )
                             Text(
-                                text = fmt.format(cashFlowsStatement.startDate) + " - " + fmt.format(cashFlowsStatement.endDate)
+                                text = fmt.format(cashFlowsStatement.startDate) + " - " + fmt.format(cashFlowsStatement.endDate),
+                                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                                color = MaterialTheme.colorScheme.primary,
                             )
                         }
                     }

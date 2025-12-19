@@ -1115,10 +1115,14 @@ private fun PeriodResultStatementItemsScreenContent(
                     .fillMaxWidth())
             {
                 Text(
-                    text = periodResultStatementName.value
+                    text = periodResultStatementName.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    text = periodResultStatementStartDate.value + " - " + periodResultStatementEndDate.value
+                    text = periodResultStatementStartDate.value + " - " + periodResultStatementEndDate.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
 
                 Row(
@@ -1187,10 +1191,14 @@ private fun PeriodResultStatementItemsScreenContent(
                         .fillMaxWidth(0.82f)
                 ){
                     Text(
-                        text = stringResource(R.string.period_results_statement_gross_profit)
+                        text = stringResource(R.string.period_results_statement_gross_profit),
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                     Text(
-                        text = grossProfitText
+                        text = grossProfitText,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
 
@@ -1262,10 +1270,14 @@ private fun PeriodResultStatementItemsScreenContent(
                         .fillMaxWidth(0.82f)
                 ){
                     Text(
-                        text = stringResource(R.string.period_results_statement_operating_profit)
+                        text = stringResource(R.string.period_results_statement_operating_profit),
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                     Text(
-                        text = operatingProfitText
+                        text = operatingProfitText,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
             }
@@ -1293,10 +1305,14 @@ private fun PeriodResultStatementItemsScreenContent(
                     Text(
                         text = stringResource(R.string.period_results_statement_profit_before_financing_and_taxes),
                         modifier = Modifier
-                            .fillMaxWidth(0.5f)
+                            .fillMaxWidth(0.5f),
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                     Text(
-                        text = profitBeforeFinancingAndTaxesText
+                        text = profitBeforeFinancingAndTaxesText,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
             }
@@ -1336,10 +1352,14 @@ private fun PeriodResultStatementItemsScreenContent(
                     Text(
                         text = stringResource(R.string.period_results_statement_profit_before_taxes),
                         modifier = Modifier
-                            .fillMaxWidth(0.5f)
+                            .fillMaxWidth(0.5f),
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                     Text(
-                        text = profitBeforeTaxesText
+                        text = profitBeforeTaxesText,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
             }
@@ -1367,10 +1387,14 @@ private fun PeriodResultStatementItemsScreenContent(
                     Text(
                         text = stringResource(R.string.period_results_statement_profit_from_continuing_operations),
                         modifier = Modifier
-                            .fillMaxWidth(0.5f)
+                            .fillMaxWidth(0.5f),
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                     Text(
-                        text = profitFromContinuingOperationsText
+                        text = profitFromContinuingOperationsText,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
             }
@@ -1400,10 +1424,14 @@ private fun PeriodResultStatementItemsScreenContent(
                 Text(
                     text = stringResource(R.string.period_results_statement_net_profit),
                     modifier = Modifier
-                        .fillMaxWidth(0.5f)
+                        .fillMaxWidth(0.5f),
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    text = netProfitText
+                    text = netProfitText,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
 
@@ -1482,14 +1510,18 @@ private fun PeriodResultStatementItemRow(
             Text(
                 text = item.description,
                 modifier = Modifier
-                    .fillMaxWidth(0.4f)
+                    .fillMaxWidth(0.4f),
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
             )
 
             Text(
                 text = value,
                 modifier = Modifier
                     .fillMaxWidth(0.75f),
-                textAlign = TextAlign.End
+                textAlign = TextAlign.End,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
             )
         }
 
@@ -1667,10 +1699,14 @@ private fun PeriodResultStatementItemsAddItemScreenContent(
                     .fillMaxWidth())
             {
                 Text(
-                    text = periodResultStatementName.value
+                    text = periodResultStatementName.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    text = periodResultStatementStartDate.value + " - " + periodResultStatementEndDate.value
+                    text = periodResultStatementStartDate.value + " - " + periodResultStatementEndDate.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
 
@@ -1837,10 +1873,14 @@ private fun PeriodResultStatementItemsEditItemScreenContent(
                     .fillMaxWidth())
             {
                 Text(
-                    text = periodResultStatementName.value
+                    text = periodResultStatementName.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    text = periodResultStatementStartDate.value + " - " + periodResultStatementEndDate.value
+                    text = periodResultStatementStartDate.value + " - " + periodResultStatementEndDate.value,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
 
@@ -2163,10 +2203,14 @@ private fun PeriodResultStatementHomeScreenContent(
                             modifier = Modifier
                                 .fillMaxWidth()) {
                             Text(
-                                text = periodResultStatement.name
+                                text = periodResultStatement.name,
+                                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                                color = MaterialTheme.colorScheme.primary,
                             )
                             Text(
-                                text = fmt.format(periodResultStatement.startDate) + " - " + fmt.format(periodResultStatement.endDate)
+                                text = fmt.format(periodResultStatement.startDate) + " - " + fmt.format(periodResultStatement.endDate),
+                                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                                color = MaterialTheme.colorScheme.primary,
                             )
                         }
                     }
