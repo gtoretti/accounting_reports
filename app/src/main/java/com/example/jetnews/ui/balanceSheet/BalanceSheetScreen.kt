@@ -1928,6 +1928,7 @@ fun Level4DropdownMenu(level4DescriptionDropdownMenu: MutableState<String>, leve
                     expanded.value = !expanded.value
                 },
             value = level4DescriptionDropdownMenu.value,
+            textStyle = TextStyle(color = MaterialTheme.colorScheme.primary,fontFamily = FontFamily.SansSerif),
             onValueChange = {
 
             },
@@ -1957,6 +1958,8 @@ fun Level4DropdownMenu(level4DescriptionDropdownMenu: MutableState<String>, leve
                                     text = {
                                         Text(
                                             text = item,
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = MaterialTheme.colorScheme.primary,
                                         )
                                     },
                                     onClick = {
@@ -1969,6 +1972,8 @@ fun Level4DropdownMenu(level4DescriptionDropdownMenu: MutableState<String>, leve
                     }
                     Text(
                         text = "Conta Sintética: Analítica",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
 
@@ -2157,6 +2162,7 @@ fun Level1DropdownMenu(level1DropdownMenu: MutableState<String>,level2DropdownMe
                     expanded = !expanded
                 },
             value = level1DropdownMenu.value,
+            textStyle = TextStyle(color = MaterialTheme.colorScheme.primary,fontFamily = FontFamily.SansSerif),
             onValueChange = {
 
             },
@@ -2186,6 +2192,8 @@ fun Level1DropdownMenu(level1DropdownMenu: MutableState<String>,level2DropdownMe
                                     text = {
                                         Text(
                                             text = item,
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = MaterialTheme.colorScheme.primary,
                                         )
                                     },
                                     onClick = {
@@ -2201,6 +2209,8 @@ fun Level1DropdownMenu(level1DropdownMenu: MutableState<String>,level2DropdownMe
                     }
                     Text(
                         text = "Conta Patrimonial:",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
 
@@ -2222,6 +2232,7 @@ fun Level2DropdownMenu(level2DropdownMenu: MutableState<String>,level3DropdownMe
                     expanded = !expanded
                 },
             value = level2DropdownMenu.value,
+            textStyle = TextStyle(color = MaterialTheme.colorScheme.primary,fontFamily = FontFamily.SansSerif),
             onValueChange = {
 
             },
@@ -2251,6 +2262,8 @@ fun Level2DropdownMenu(level2DropdownMenu: MutableState<String>,level3DropdownMe
                                     text = {
                                         Text(
                                             text = item,
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = MaterialTheme.colorScheme.primary,
                                         )
                                     },
                                     onClick = {
@@ -2265,6 +2278,8 @@ fun Level2DropdownMenu(level2DropdownMenu: MutableState<String>,level3DropdownMe
                     }
                     Text(
                         text = "Liquidez:",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
 
@@ -2286,6 +2301,7 @@ fun Level3DropdownMenu(level3DropdownMenu: MutableState<String>,level4DropdownMe
                     expanded = !expanded
                 },
             value = level3DropdownMenu.value,
+            textStyle = TextStyle(color = MaterialTheme.colorScheme.primary,fontFamily = FontFamily.SansSerif),
             onValueChange = {
 
             },
@@ -2315,6 +2331,8 @@ fun Level3DropdownMenu(level3DropdownMenu: MutableState<String>,level4DropdownMe
                                     text = {
                                         Text(
                                             text = item,
+                                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                                            color = MaterialTheme.colorScheme.primary,
                                         )
                                     },
                                     onClick = {
@@ -2328,6 +2346,8 @@ fun Level3DropdownMenu(level3DropdownMenu: MutableState<String>,level4DropdownMe
                     }
                     Text(
                         text = "Subtipo:",
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
 

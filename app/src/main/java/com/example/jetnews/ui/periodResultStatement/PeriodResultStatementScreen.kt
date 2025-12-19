@@ -77,6 +77,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -1972,6 +1973,7 @@ fun Level1TypeResultDropdownAddItem(level1DropdownMenu: MutableState<String>, ac
                     expanded = !expanded
                 },
             value = level1DropdownMenu.value,
+            textStyle = TextStyle(color = MaterialTheme.colorScheme.primary,fontFamily = FontFamily.SansSerif),
             onValueChange = {
 
             },
@@ -2001,6 +2003,8 @@ fun Level1TypeResultDropdownAddItem(level1DropdownMenu: MutableState<String>, ac
                                     text = {
                                         Text(
                                             text = item,
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = MaterialTheme.colorScheme.primary,
                                         )
                                     },
                                     onClick = {
@@ -2014,6 +2018,8 @@ fun Level1TypeResultDropdownAddItem(level1DropdownMenu: MutableState<String>, ac
                     }
                     Text(
                         text = stringResource(R.string.period_results_statement_category),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
 
@@ -2035,6 +2041,7 @@ fun Level4DropdownMenuAddItem(level4DescriptionDropdownMenu: MutableState<String
                     expanded = !expanded
                 },
             value = level4DescriptionDropdownMenu.value,
+            textStyle = TextStyle(color = MaterialTheme.colorScheme.primary,fontFamily = FontFamily.SansSerif),
             onValueChange = {
 
             },
@@ -2064,6 +2071,8 @@ fun Level4DropdownMenuAddItem(level4DescriptionDropdownMenu: MutableState<String
                                     text = {
                                         Text(
                                             text = item,
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = MaterialTheme.colorScheme.primary,
                                         )
                                     },
                                     onClick = {
@@ -2076,6 +2085,8 @@ fun Level4DropdownMenuAddItem(level4DescriptionDropdownMenu: MutableState<String
                     }
                     Text(
                         text = stringResource(R.string.cash_flows_statement_result_account),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
 
