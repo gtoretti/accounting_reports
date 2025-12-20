@@ -1066,18 +1066,20 @@ private fun EquityChangesStatementItemsScreenContent(
             modifier = Modifier.fillMaxWidth()
         )
         {
-            TextButton(
-                modifier = Modifier.padding(1.dp),
-                onClick =
-                    {
+            if (equityChangesItems.isNotEmpty()){
+                TextButton(
+                    modifier = Modifier.padding(1.dp),
+                    onClick =
+                        {
 
-                    }
-            ) {
-                Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.convert_to_text_24px),
-                    contentDescription = stringResource(R.string.cash_flows_statement_add),
-                    modifier = Modifier
-                )
+                        }
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(R.drawable.convert_to_text_24px),
+                        contentDescription = stringResource(R.string.cash_flows_statement_add),
+                        modifier = Modifier
+                    )
+                }
             }
 
             val allTypesAlreadyAdded = stringResource(R.string.equity_changes_statement_all_items_already_added)
@@ -1111,29 +1113,31 @@ private fun EquityChangesStatementItemsScreenContent(
                 .padding(horizontal = 5.dp).verticalScroll(rememberScrollState()),
 
         ) {
-            //datatable
-            var cellHeigth =150
-            cellHeigth += cellHeigth * equityChangesItems.size
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.End,
-                modifier = Modifier.fillMaxWidth().height(cellHeigth.dp)
-            )
-            {
-                GridRowTitles(equityChangesItems,
-                    equityChangesStatementItemId,
-                    equityChangesStatementItemType,
-                    equityChangesStatementItemPaidInCapitalValue,
-                    equityChangesStatementItemCapitalReservesGrantedOptionsAndTreasurySharesValue,
-                    equityChangesStatementItemProfitReservesValue,
-                    equityChangesStatementItemAccumulatedProfitsOrLossesValue,
-                    equityChangesStatementItemOtherComprehensiveResultsValue,
-                    equityChangesStatementItemEquityOfTheParentCompanyShareholdersValue,
-                    equityChangesStatementItemNonControllingInterestsInEquityOfSubsidiaryValue,
-                    equityChangesStatementItemConsolidatedEquityValue,
-                    isEquityChangesStatementItemsEditItemScreen,
-                    isItemsPageDeleteItem)
-                ScrollingGrid(equityChangesItems)
+            if (equityChangesItems.isNotEmpty()){
+                //datatable
+                var cellHeigth =135
+                cellHeigth += cellHeigth * equityChangesItems.size
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.End,
+                    modifier = Modifier.fillMaxWidth().height(cellHeigth.dp)
+                )
+                {
+                    GridRowTitles(equityChangesItems,
+                        equityChangesStatementItemId,
+                        equityChangesStatementItemType,
+                        equityChangesStatementItemPaidInCapitalValue,
+                        equityChangesStatementItemCapitalReservesGrantedOptionsAndTreasurySharesValue,
+                        equityChangesStatementItemProfitReservesValue,
+                        equityChangesStatementItemAccumulatedProfitsOrLossesValue,
+                        equityChangesStatementItemOtherComprehensiveResultsValue,
+                        equityChangesStatementItemEquityOfTheParentCompanyShareholdersValue,
+                        equityChangesStatementItemNonControllingInterestsInEquityOfSubsidiaryValue,
+                        equityChangesStatementItemConsolidatedEquityValue,
+                        isEquityChangesStatementItemsEditItemScreen,
+                        isItemsPageDeleteItem)
+                    ScrollingGrid(equityChangesItems)
+                }
             }
         }
     }
@@ -1242,7 +1246,7 @@ fun CellTitleColumnCard(label: String, modifier: Modifier,
         modifier = modifier
     ){
         Column(
-            modifier = modifier.padding(6.dp),
+            modifier = modifier.padding(1.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row(
@@ -1252,7 +1256,7 @@ fun CellTitleColumnCard(label: String, modifier: Modifier,
             )
             {
                 TextButton(
-                    modifier = Modifier.padding(3.dp),
+                    //modifier = Modifier.padding(3.dp),
                     onClick =
                         {
                             isItemsPageDeleteItem.value=true
@@ -1269,7 +1273,7 @@ fun CellTitleColumnCard(label: String, modifier: Modifier,
                 }
 
                 TextButton(
-                    modifier = Modifier.padding(3.dp),
+                    //modifier = Modifier.padding(3.dp),
                     onClick =
                         {
                             isEquityChangesStatementItemsEditItemScreen.value=true
@@ -1293,7 +1297,7 @@ fun CellTitleColumnCard(label: String, modifier: Modifier,
                     )
                 }
             }
-            Text(label, Modifier.padding(3.dp), textAlign = TextAlign.Center,
+            Text(label, Modifier, textAlign = TextAlign.Center,
                 style = TextStyle(fontFamily = FontFamily.SansSerif),
 
                 )
@@ -1345,7 +1349,7 @@ fun GridRowTitles(equityChangesItems: List<EquityChangesStatementItem>,
 
 
     val itemModifier = Modifier
-        .size(width = 150.dp, height = 200.dp)
+        .size(width = 120.dp, height = 200.dp)
 
     LazyHorizontalGrid(
         rows = GridCells.Fixed(equityChangesItems.size+2),
@@ -1865,7 +1869,7 @@ fun ScrollingGrid(equityChangesItems: List<EquityChangesStatementItem>) {
     val itemsList = list.toList()
 
     val itemModifier = Modifier
-        .size(width = 150.dp, height = 200.dp)
+        .size(width = 120.dp, height = 200.dp)
 
     LazyHorizontalGrid(
         rows = GridCells.Fixed(ordered.size+2),
