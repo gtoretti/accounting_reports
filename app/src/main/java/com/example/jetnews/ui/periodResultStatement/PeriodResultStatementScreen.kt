@@ -78,6 +78,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -2060,6 +2061,7 @@ fun Level1TypeResultDropdownAddItem(level1DropdownMenu: MutableState<String>, ac
                         text = stringResource(R.string.period_results_statement_category),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
@@ -2127,6 +2129,7 @@ fun Level4DropdownMenuAddItem(level4DescriptionDropdownMenu: MutableState<String
                         text = stringResource(R.string.cash_flows_statement_result_account),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 

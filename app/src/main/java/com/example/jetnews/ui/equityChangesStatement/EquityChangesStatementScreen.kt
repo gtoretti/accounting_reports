@@ -95,6 +95,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontFamily.Companion
+import androidx.compose.ui.text.font.FontWeight
 
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -1910,6 +1911,7 @@ fun SignedDoubleField(fieldName: MutableState<String>,isCredit: MutableState<Boo
             text = label,
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.primary,
+            fontWeight = FontWeight.Bold
         )
     }
     Row(
@@ -2121,6 +2123,7 @@ private fun EquityChangesStatementItemsAddItemScreenContent(
                     text = stringResource(R.string.equity_changes_statement_consolidatedEquityValue),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold
                 )
             }
             Row(
@@ -2401,6 +2404,7 @@ private fun EquityChangesStatementItemsEditItemScreenContent(
                     text = stringResource(R.string.equity_changes_statement_consolidatedEquityValue),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold
                 )
             }
             Row(
@@ -2559,6 +2563,7 @@ fun TypeDropdown(equityChangeType: MutableState<String>, typeList: List<String>)
                         text = stringResource(R.string.equity_changes_statement_item_type),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 

@@ -76,6 +76,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 
 
 import androidx.compose.ui.unit.dp
@@ -1423,6 +1424,7 @@ fun TypeDropdownMenu(typeDropdownMenu: MutableState<String>, typeList: List<Stri
                         text = "Tipo:",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
@@ -1491,6 +1493,7 @@ fun Level1DropdownMenu(level1DropdownMenu: MutableState<String>,level2DropdownMe
                         text = "Conta Patrimonial:",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
@@ -1558,6 +1561,7 @@ fun Level1TypeResultDropdownMenu(level1DropdownMenu: MutableState<String>, level
                         text = "Subtipo:",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
@@ -1625,6 +1629,7 @@ fun Level2DropdownMenu(level2DropdownMenu: MutableState<String>,level3DropdownMe
                         text = "Liquidez:",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
@@ -1693,6 +1698,7 @@ fun Level3DropdownMenu(level3DropdownMenu: MutableState<String>, level3List: Lis
                         text = "Subtipo:",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
@@ -1747,24 +1753,6 @@ fun displayEachAccountingAccountLine(
             modifier = Modifier.fillMaxWidth(0.65f)
                 .padding(horizontal = 10.dp)
         ) {
-            if (accountingAccount.type==ACCOUNTING_ACCOUNTS_TYPE_ASSET) {
-                Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.subdirectory_arrow_right_transp_24px),
-                    contentDescription = "",
-                    modifier = Modifier
-                )
-                Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.subdirectory_arrow_right_transp_24px),
-                    contentDescription = "",
-                    modifier = Modifier
-                )
-                Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.subdirectory_arrow_right_transp_24px),
-                    contentDescription = "",
-                    modifier = Modifier
-                )
-            }
-
             Text(
                 text = accountingAccount.level4 + ": " + accountingAccount.description,
                 style = TextStyle(fontFamily = FontFamily.SansSerif),
@@ -1825,6 +1813,7 @@ fun displayEachExpandableTitleRow(expandCollapseFlag: MutableState<Boolean>,titl
             text = title,
             style = TextStyle(fontFamily = FontFamily.SansSerif),
             color = MaterialTheme.colorScheme.primary,
+            fontWeight = FontWeight.Bold
         )
     }
 }

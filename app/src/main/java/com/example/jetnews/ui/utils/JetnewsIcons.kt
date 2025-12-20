@@ -103,7 +103,7 @@ fun switchState(state: MutableState<Boolean>){
 fun showExpandCollapseButton(expanded: Boolean,level: Int){
     if (level == 2){
         Icon(
-            imageVector = ImageVector.vectorResource(R.drawable.subdirectory_arrow_right_24px),
+            imageVector = ImageVector.vectorResource(R.drawable.subdirectory_arrow_right_transp_24px),
             contentDescription = "Abrir",
             modifier = Modifier
         )
@@ -115,18 +115,28 @@ fun showExpandCollapseButton(expanded: Boolean,level: Int){
 
         )
         Icon(
-            imageVector = ImageVector.vectorResource(R.drawable.subdirectory_arrow_right_24px),
+            imageVector = ImageVector.vectorResource(R.drawable.subdirectory_arrow_right_transp_24px),
             contentDescription = "Abrir",
             modifier = Modifier
         )
     }
     if (expanded){
         Icon(
+            imageVector = ImageVector.vectorResource(R.drawable.keyboard_arrow_down_24px),
+            contentDescription = "Fechar",
+            modifier = Modifier
+        )
+        Icon(
             imageVector = ImageVector.vectorResource(R.drawable.folder_open_24px),
             contentDescription = "Fechar",
             modifier = Modifier
         )
     }else{
+        Icon(
+            imageVector = ImageVector.vectorResource(R.drawable.keyboard_arrow_right_24px),
+            contentDescription = "Fechar",
+            modifier = Modifier
+        )
         Icon(
             imageVector = ImageVector.vectorResource(R.drawable.folder_24px),
             contentDescription = "Abrir",

@@ -1982,6 +1982,7 @@ fun Level4DropdownMenu(level4DescriptionDropdownMenu: MutableState<String>, leve
                         text = "Conta Sintética: Analítica",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
@@ -2223,6 +2224,7 @@ fun Level1DropdownMenu(level1DropdownMenu: MutableState<String>,level2DropdownMe
                         text = "Conta Patrimonial:",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
@@ -2292,6 +2294,7 @@ fun Level2DropdownMenu(level2DropdownMenu: MutableState<String>,level3DropdownMe
                         text = "Liquidez:",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
@@ -2360,6 +2363,7 @@ fun Level3DropdownMenu(level3DropdownMenu: MutableState<String>,level4DropdownMe
                         text = "Subtipo:",
                         style = TextStyle(fontFamily = FontFamily.SansSerif),
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
