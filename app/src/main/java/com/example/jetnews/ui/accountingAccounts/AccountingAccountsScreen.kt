@@ -820,23 +820,6 @@ private fun AccountingAccountsHomeScreenContent(
                 }
             }
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Button(
-                    onClick = {
-
-                    }
-                ) {
-                    Text(
-                        text = "Relatório",
-                    )
-                }
-            }
-
-
         }
     }
     when {

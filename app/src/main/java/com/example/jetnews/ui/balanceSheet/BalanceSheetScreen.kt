@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -1282,13 +1283,19 @@ private fun BalanceSheetItemsScreenContent(
                     text = balanceSheetName.value,
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold,
                 )
                 Text(
                     text = balanceSheetDate.value,
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold,
                 )
             }
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+            )
+            Spacer(Modifier.height(10.dp))
 
             //scale
             var totalAssets = 0.0
@@ -1361,6 +1368,19 @@ private fun BalanceSheetItemsScreenContent(
                 modifier = Modifier.fillMaxWidth()
             )
             {
+                TextButton(
+                    modifier = Modifier.padding(1.dp),
+                    onClick =
+                        {
+
+                        }
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(R.drawable.convert_to_text_24px),
+                        contentDescription = stringResource(R.string.cash_flows_statement_add),
+                        modifier = Modifier
+                    )
+                }
                 TextButton(
                     modifier = Modifier.padding(1.dp),
                     onClick =
@@ -1800,22 +1820,6 @@ private fun BalanceSheetItemsScreenContent(
                 }
             }
 
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Button(
-                    onClick = {
-
-                    }
-                ) {
-                    Text(
-                        text = stringResource(R.string.balance_sheet_report),
-                    )
-                }
-            }
         }
     }
 

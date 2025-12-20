@@ -1047,12 +1047,18 @@ private fun EquityChangesStatementItemsScreenContent(
             text = equityChangesStatementName.value,
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.primary,
+            fontWeight = FontWeight.Bold,
         )
         Text(
             text = equityChangesStatementStartDate.value + " - " + equityChangesStatementEndDate.value,
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.primary,
+            fontWeight = FontWeight.Bold,
         )
+        HorizontalDivider(
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+        )
+        Spacer(Modifier.height(10.dp))
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -1060,6 +1066,20 @@ private fun EquityChangesStatementItemsScreenContent(
             modifier = Modifier.fillMaxWidth()
         )
         {
+            TextButton(
+                modifier = Modifier.padding(1.dp),
+                onClick =
+                    {
+
+                    }
+            ) {
+                Icon(
+                    imageVector = ImageVector.vectorResource(R.drawable.convert_to_text_24px),
+                    contentDescription = stringResource(R.string.cash_flows_statement_add),
+                    modifier = Modifier
+                )
+            }
+
             val allTypesAlreadyAdded = stringResource(R.string.equity_changes_statement_all_items_already_added)
             TextButton(
                 modifier = Modifier.padding(1.dp),

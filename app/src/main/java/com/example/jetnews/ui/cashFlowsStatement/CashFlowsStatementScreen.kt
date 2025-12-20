@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 
@@ -1012,12 +1013,19 @@ private fun CashFlowsStatementItemsScreenContent(
                     text = cashFlowsStatementName.value,
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold,
                 )
                 Text(
                     text = cashFlowsStatementStartDate.value + " - " + cashFlowsStatementEndDate.value,
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold,
                 )
+
+                HorizontalDivider(
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                )
+                Spacer(Modifier.height(10.dp))
 
                 var cashFlowsStatementInitialCashBalanceText = cashFlowsStatementInitialCashBalance.value.toScreen()
                 if (!cashFlowsStatementInitialCashBalanceIsCredit.value)
@@ -1040,8 +1048,22 @@ private fun CashFlowsStatementItemsScreenContent(
                         text = stringResource(R.string.cash_flows_statement_initial_balance_cash_value)+" $cashFlowsStatementInitialCashBalanceText",
                         style = TextStyle(fontFamily = FontFamily.SansSerif),
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold,
                     )
 
+                    TextButton(
+                        modifier = Modifier.padding(1.dp),
+                        onClick =
+                            {
+
+                            }
+                    ) {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(R.drawable.convert_to_text_24px),
+                            contentDescription = stringResource(R.string.cash_flows_statement_add),
+                            modifier = Modifier
+                        )
+                    }
                     TextButton(
                         modifier = Modifier.padding(1.dp),
                         onClick =
@@ -1097,11 +1119,13 @@ private fun CashFlowsStatementItemsScreenContent(
                     text = stringResource(R.string.cash_flows_statement_total),
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold,
                 )
                 Text(
                     text = totalOperatingText,
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold,
                 )
                 }
             }
@@ -1140,11 +1164,13 @@ private fun CashFlowsStatementItemsScreenContent(
                         text = stringResource(R.string.cash_flows_statement_total),
                         style = TextStyle(fontFamily = FontFamily.SansSerif),
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold,
                     )
                     Text(
                         text = totalInvestingText,
                         style = TextStyle(fontFamily = FontFamily.SansSerif),
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold,
                     )
                 }
             }
@@ -1184,11 +1210,13 @@ private fun CashFlowsStatementItemsScreenContent(
                         text = stringResource(R.string.cash_flows_statement_total),
                         style = TextStyle(fontFamily = FontFamily.SansSerif),
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold,
                     )
                     Text(
                         text = totalFinancingText,
                         style = TextStyle(fontFamily = FontFamily.SansSerif),
                         color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold,
                     )
                 }
             }
@@ -1217,11 +1245,13 @@ private fun CashFlowsStatementItemsScreenContent(
                         text = stringResource(R.string.cash_flows_statement_increase),
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold,
                     )
                 Text(
                     text = "$ $cashIncreaseText",
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold,
                 )
             }
 
@@ -1235,29 +1265,16 @@ private fun CashFlowsStatementItemsScreenContent(
                     text = stringResource(R.string.cash_flows_statement_final_balance),
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold,
                 )
                 Text(
                     text = "$ $finalBalance",
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold,
                 )
             }
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Button(
-                    onClick = {
-
-                    }
-                ) {
-                    Text(
-                        text = stringResource(R.string.cash_flows_statement_report),
-                    )
-                }
-            }
         }
     }
 
@@ -2324,11 +2341,13 @@ private fun CashFlowsStatementHomeScreenContent(
                                 text = cashFlowsStatement.name,
                                 style = TextStyle(fontFamily = FontFamily.SansSerif),
                                 color = MaterialTheme.colorScheme.primary,
+
                             )
                             Text(
                                 text = fmt.format(cashFlowsStatement.startDate) + " - " + fmt.format(cashFlowsStatement.endDate),
                                 style = TextStyle(fontFamily = FontFamily.SansSerif),
                                 color = MaterialTheme.colorScheme.primary,
+
                             )
                         }
                     }
