@@ -50,6 +50,7 @@
     <string name="close">Close</string>
 
     <string name="fmtDatePattern">dd/MM/yyyy</string>
+    <string name="fmtMMDatePattern">dd/MM</string>
 
     <!-- Home Screen -->
     <string name="home_title">Início</string>

@@ -1358,6 +1358,8 @@ private fun CashFlowsStatementItemRow(
 ){
 
     val fmt = SimpleDateFormat(stringResource(R.string.fmtDatePattern))
+    val fmtMM = SimpleDateFormat(stringResource(R.string.fmtMMDatePattern))
+
 
     var value = "("+item.value.toScreen()+")"
     if (item.isCredit)
@@ -1398,7 +1400,7 @@ private fun CashFlowsStatementItemRow(
             color = MaterialTheme.colorScheme.primary,
         )
         Text(
-            text = fmt.format(item.date),
+            text = fmtMM.format(item.date),
             modifier = Modifier
                 .padding(5.dp),
             style = TextStyle(fontFamily = FontFamily.SansSerif),
@@ -1614,8 +1616,6 @@ private fun CashFlowsStatementItemsAddItemScreenContent(
                 val emptyDescrMsg = stringResource(R.string.cash_flows_statement_Item_empty_result_account)
                 val emptyDateMsg = stringResource(R.string.cash_flows_statement_Item_empty_date)
                 val emptyValueMsg = stringResource(R.string.cash_flows_statement_Item_empty_value)
-
-
 
                 Button(
                     onClick = {
