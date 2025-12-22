@@ -102,16 +102,6 @@ fun AppDrawer(
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
         )
         NavigationDrawerItem(
-            label = { Text(stringResource(id = R.string.explanatory_notes_title)) },
-            icon = { Icon(painterResource(R.drawable.ic_list_alt), null) },
-            selected = currentRoute == JetnewsDestinations.EXPLANATORY_NOTES,
-            onClick = {
-                navigateToExplanatoryNotes()
-                closeDrawer()
-            },
-            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
-        )
-        NavigationDrawerItem(
             label = { Text(stringResource(id = R.string.balance_sheet_title)) },
             icon = { Icon(painterResource(R.drawable.ic_list_alt), null) },
             selected = currentRoute == JetnewsDestinations.BALANCE_SHEET,
@@ -127,6 +117,16 @@ fun AppDrawer(
             selected = currentRoute == JetnewsDestinations.EQUITY_CHANGES_STATEMENT,
             onClick = {
                 navigateToEquityChangesStatement()
+                closeDrawer()
+            },
+            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
+        )
+        NavigationDrawerItem(
+            label = { Text(stringResource(id = R.string.explanatory_notes_title)) },
+            icon = { Icon(painterResource(R.drawable.ic_list_alt), null) },
+            selected = currentRoute == JetnewsDestinations.EXPLANATORY_NOTES,
+            onClick = {
+                navigateToExplanatoryNotes()
                 closeDrawer()
             },
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
