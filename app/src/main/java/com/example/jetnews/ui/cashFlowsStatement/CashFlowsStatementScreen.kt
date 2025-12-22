@@ -1571,7 +1571,7 @@ private fun CashFlowsStatementItemsAddItemScreenContent(
                         Text(
                             text = stringResource(R.string.cash_flows_statement_value),
                         )
-                    }
+                    },modifier = Modifier.fillMaxWidth(0.5f)
                 )
 
                 Row(
@@ -1849,7 +1849,7 @@ private fun CashFlowsStatementItemsEditItemScreenContent(
                         Text(
                             text = stringResource(R.string.cash_flows_statement_value),
                         )
-                    }
+                    },modifier = Modifier.fillMaxWidth(0.5f)
                 )
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
