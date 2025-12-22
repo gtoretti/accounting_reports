@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 
@@ -436,18 +437,18 @@ private fun AccountingAccountsHomeScreenContent(
 ) {
 
     val context = LocalContext.current
-    var isDeleting = remember { mutableStateOf(false) }
-    var isDeletingId = remember { mutableLongStateOf(0) }
-    var isDeletingType = remember { mutableStateOf("") }
-    var isDeletingLevel1 = remember { mutableStateOf("") }
-    var isDeletingLevel2 = remember { mutableStateOf("") }
-    var isDeletingLevel3 = remember { mutableStateOf("") }
-    var isDeletingLevel4 = remember { mutableStateOf("") }
-    var isDeletingDescription = remember { mutableStateOf("") }
-    var accountingAccountTypeFilter = remember { mutableStateOf("Selecione...") }
-    var accountingAccountLevel1Filter = remember { mutableStateOf(ACCOUNTING_ACCOUNTS_ALL) }
-    var accountingAccountLevel2Filter = remember { mutableStateOf(ACCOUNTING_ACCOUNTS_ALL) }
-    var accountingAccountLevel3Filter = remember { mutableStateOf(ACCOUNTING_ACCOUNTS_ALL) }
+    val isDeleting = remember { mutableStateOf(false) }
+    val isDeletingId = remember { mutableLongStateOf(0) }
+    val isDeletingType = remember { mutableStateOf("") }
+    val isDeletingLevel1 = remember { mutableStateOf("") }
+    val isDeletingLevel2 = remember { mutableStateOf("") }
+    val isDeletingLevel3 = remember { mutableStateOf("") }
+    val isDeletingLevel4 = remember { mutableStateOf("") }
+    val isDeletingDescription = remember { mutableStateOf("") }
+    val accountingAccountTypeFilter = remember { mutableStateOf("Selecione...") }
+    val accountingAccountLevel1Filter = remember { mutableStateOf(ACCOUNTING_ACCOUNTS_ALL) }
+    val accountingAccountLevel2Filter = remember { mutableStateOf(ACCOUNTING_ACCOUNTS_ALL) }
+    val accountingAccountLevel3Filter = remember { mutableStateOf(ACCOUNTING_ACCOUNTS_ALL) }
 
     Column(modifier) {
         HorizontalDivider(
@@ -458,7 +459,7 @@ private fun AccountingAccountsHomeScreenContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 5.dp)
-                .verticalScroll(rememberScrollState()),
+                //.verticalScroll(rememberScrollState()),
         ) {
 
             /*
@@ -481,345 +482,357 @@ private fun AccountingAccountsHomeScreenContent(
                 }
             }
 
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+            )
+            Spacer(Modifier.height(10.dp))
 
-            /*
-            Database Searching using selected filters:
-            */
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 5.dp).verticalScroll(rememberScrollState()),
 
-            var accountingAccountsFlow: Flow<List<AccountingAccount>> = MutableStateFlow(emptyList())
+                ) {
 
-            if (accountingAccountTypeFilter.value.isNotEmpty() && accountingAccountTypeFilter.value == ACCOUNTING_ACCOUNTS_TYPE_ASSET) {
-                if (accountingAccountLevel1Filter.value != ACCOUNTING_ACCOUNTS_ALL && accountingAccountLevel2Filter.value != ACCOUNTING_ACCOUNTS_ALL && accountingAccountLevel3Filter.value != ACCOUNTING_ACCOUNTS_ALL) {
-                    accountingAccountsFlow = accountingAccountsViewModel.getAccountingAccounts(
-                        accountingAccountLevel1Filter.value,
-                        accountingAccountLevel2Filter.value,
-                        accountingAccountLevel3Filter.value
-                    )
-                } else
-                    if (accountingAccountLevel1Filter.value != ACCOUNTING_ACCOUNTS_ALL && accountingAccountLevel2Filter.value != ACCOUNTING_ACCOUNTS_ALL) {
+                /*
+                Database result using selected filters:
+                */
+
+                var accountingAccountsFlow: Flow<List<AccountingAccount>> = MutableStateFlow(emptyList())
+
+                if (accountingAccountTypeFilter.value.isNotEmpty() && accountingAccountTypeFilter.value == ACCOUNTING_ACCOUNTS_TYPE_ASSET) {
+                    if (accountingAccountLevel1Filter.value != ACCOUNTING_ACCOUNTS_ALL && accountingAccountLevel2Filter.value != ACCOUNTING_ACCOUNTS_ALL && accountingAccountLevel3Filter.value != ACCOUNTING_ACCOUNTS_ALL) {
                         accountingAccountsFlow = accountingAccountsViewModel.getAccountingAccounts(
                             accountingAccountLevel1Filter.value,
-                            accountingAccountLevel2Filter.value
+                            accountingAccountLevel2Filter.value,
+                            accountingAccountLevel3Filter.value
                         )
                     } else
-                        if (accountingAccountLevel1Filter.value != ACCOUNTING_ACCOUNTS_ALL) {
-                            accountingAccountsFlow = accountingAccountsViewModel.getAccountingAccounts(accountingAccountLevel1Filter.value)
-                        } else {
-                            accountingAccountsFlow = accountingAccountsViewModel.getAccountingAccounts()
-                        }
-            } else {
-                accountingAccountsFlow = accountingAccountsViewModel.getTypeResultAccountingAccounts()
-            }
-
-            val accountingAccounts by accountingAccountsFlow.collectAsStateWithLifecycle(initialValue = emptyList())
-
-            /*
-            Search results displaying, sorted by levels:
-             */
-
-            if (accountingAccountTypeFilter.value.isNotEmpty() && accountingAccountTypeFilter.value == ACCOUNTING_ACCOUNTS_TYPE_ASSET) {
-
-                val level1Ativo = accountingAccounts.filter { it.level1 == ACCOUNTING_ACCOUNTS_LEVEL1_ATIVO }
-
-                if (level1Ativo.isNotEmpty()) {
-                    val level1AtivoExpanded = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(level1AtivoExpanded, ACCOUNTING_ACCOUNTS_LEVEL1_ATIVO, 1)
-                    val level2AtivoCirculante = level1Ativo.filter { it.level2 == ACCOUNTING_ACCOUNTS_LEVEL2_ATIVO_CIRCULANTE }
-
-                    if (level1AtivoExpanded.value) {
-                        if (level2AtivoCirculante.isNotEmpty()) {
-                            val level2AtivoCirculanteExpanded = remember { mutableStateOf(false) }
-                            displayEachExpandableTitleRow(level2AtivoCirculanteExpanded, ACCOUNTING_ACCOUNTS_LEVEL2_ATIVO_CIRCULANTE, 2)
-                            if (level2AtivoCirculanteExpanded.value) {
-
-                                val level3AtivoCirculanteTypes = listOf(
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_CAIXA_E_EQUIVALENTES_DE_CAIXA,
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_CONTAS_A_RECEBER,
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_ESTOQUES,
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_DESPESAS_ANTECIPADAS,
-                                )
-
-                                level3AtivoCirculanteTypes.forEach {
-                                    displayLevel3Group(
-                                        level2AtivoCirculante,
-                                        it,
-                                        isEditing,
-                                        isEditingType,
-                                        isEditingLevel1,
-                                        isEditingLevel2,
-                                        isEditingLevel3,
-                                        isEditingLevel4,
-                                        isEditingDescription,
-                                        isEditingId,
-                                        isDeletingId,
-                                        isDeleting,
-                                        isDeletingType,
-                                        isDeletingLevel1,
-                                        isDeletingLevel2,
-                                        isDeletingLevel3,
-                                        isDeletingLevel4,
-                                        isDeletingDescription
-                                    )
-                                }
-                            }
-                        }
-
-                        val level2AtivoNaoCirculante = level1Ativo.filter { it.level2 == ACCOUNTING_ACCOUNTS_LEVEL2_ATIVO_NAO_CIRCULANTE }
-                        if (level2AtivoNaoCirculante.isNotEmpty()) {
-                            val level2AtivoNaoCirculanteExpanded = remember { mutableStateOf(false) }
-                            displayEachExpandableTitleRow(level2AtivoNaoCirculanteExpanded, ACCOUNTING_ACCOUNTS_LEVEL2_ATIVO_NAO_CIRCULANTE, 2)
-                            if (level2AtivoNaoCirculanteExpanded.value) {
-
-                                val level3AtivoNaoCirculanteTypes = listOf(
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_IMOBILIZADO,
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_INVESTIMENTOS_DE_LONGO_PRAZO,
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_ATIVOS_INTANGIVEIS,
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_ATIVOS_REALIZAVEIS_A_LONGO_PRAZO,
-                                )
-
-                                level3AtivoNaoCirculanteTypes.forEach {
-                                    displayLevel3Group(
-                                        level2AtivoNaoCirculante,
-                                        it,
-                                        isEditing,
-                                        isEditingType,
-                                        isEditingLevel1,
-                                        isEditingLevel2,
-                                        isEditingLevel3,
-                                        isEditingLevel4,
-                                        isEditingDescription,
-                                        isEditingId,
-                                        isDeletingId,
-                                        isDeleting,
-                                        isDeletingType,
-                                        isDeletingLevel1,
-                                        isDeletingLevel2,
-                                        isDeletingLevel3,
-                                        isDeletingLevel4,
-                                        isDeletingDescription
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
-
-                val level1Passivo = accountingAccounts.filter { it.level1 == ACCOUNTING_ACCOUNTS_LEVEL1_PASSIVO }
-                if (level1Passivo.isNotEmpty()) {
-                    val level1PassivoExpanded = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(level1PassivoExpanded, ACCOUNTING_ACCOUNTS_LEVEL1_PASSIVO, 1)
-
-                    if (level1PassivoExpanded.value) {
-                        val level2PassivoCirculante = level1Passivo.filter { it.level2 == ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_CIRCULANTE }
-                        if (level2PassivoCirculante.isNotEmpty()) {
-                            val level2PassivoCirculanteExpanded = remember { mutableStateOf(false) }
-                            displayEachExpandableTitleRow(level2PassivoCirculanteExpanded, ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_CIRCULANTE, 2)
-                            if (level2PassivoCirculanteExpanded.value) {
-                                val level3PassivoCirculante = listOf(
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_CIRCULANTE_FINANCEIRO,
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_CIRCULANTE_OPERACIONAL,
-                                )
-
-                                level3PassivoCirculante.forEach {
-                                    displayLevel3Group(
-                                        level2PassivoCirculante,
-                                        it,
-                                        isEditing,
-                                        isEditingType,
-                                        isEditingLevel1,
-                                        isEditingLevel2,
-                                        isEditingLevel3,
-                                        isEditingLevel4,
-                                        isEditingDescription,
-                                        isEditingId,
-                                        isDeletingId,
-                                        isDeleting,
-                                        isDeletingType,
-                                        isDeletingLevel1,
-                                        isDeletingLevel2,
-                                        isDeletingLevel3,
-                                        isDeletingLevel4,
-                                        isDeletingDescription
-                                    )
-                                }
-                            }
-                        }
-
-                        val level2PassivoNaoCirculante = level1Passivo.filter { it.level2 == ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_NAO_CIRCULANTE }
-                        if (level2PassivoNaoCirculante.isNotEmpty()) {
-                            val level2PassivoNaoCirculanteExpanded = remember { mutableStateOf(false) }
-                            displayEachExpandableTitleRow(
-                                level2PassivoNaoCirculanteExpanded,
-                                ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_NAO_CIRCULANTE,
-                                2
+                        if (accountingAccountLevel1Filter.value != ACCOUNTING_ACCOUNTS_ALL && accountingAccountLevel2Filter.value != ACCOUNTING_ACCOUNTS_ALL) {
+                            accountingAccountsFlow = accountingAccountsViewModel.getAccountingAccounts(
+                                accountingAccountLevel1Filter.value,
+                                accountingAccountLevel2Filter.value
                             )
-                            if (level2PassivoNaoCirculanteExpanded.value) {
+                        } else
+                            if (accountingAccountLevel1Filter.value != ACCOUNTING_ACCOUNTS_ALL) {
+                                accountingAccountsFlow = accountingAccountsViewModel.getAccountingAccounts(accountingAccountLevel1Filter.value)
+                            } else {
+                                accountingAccountsFlow = accountingAccountsViewModel.getAccountingAccounts()
+                            }
+                } else {
+                    accountingAccountsFlow = accountingAccountsViewModel.getTypeResultAccountingAccounts()
+                }
 
-                                val level3PassivoNaoCirculante = listOf(
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_EMPRESTIMOS_E_FINANCIAMENTOS_DE_LONGO_PRAZO,
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_DEBENTURES,
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_OBRIGACOES_FISCAIS_E_TRABALHISTAS_DE_LONGO_PRAZO,
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_PROVISOES_PARA_CONTINGENCIAS,
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_ARRENDAMENTO_MERCANTIL_FINANCEIRO,
-                                )
+                val accountingAccounts by accountingAccountsFlow.collectAsStateWithLifecycle(initialValue = emptyList())
 
-                                level3PassivoNaoCirculante.forEach {
-                                    displayLevel3Group(
-                                        level2PassivoNaoCirculante,
-                                        it,
-                                        isEditing,
-                                        isEditingType,
-                                        isEditingLevel1,
-                                        isEditingLevel2,
-                                        isEditingLevel3,
-                                        isEditingLevel4,
-                                        isEditingDescription,
-                                        isEditingId,
-                                        isDeletingId,
-                                        isDeleting,
-                                        isDeletingType,
-                                        isDeletingLevel1,
-                                        isDeletingLevel2,
-                                        isDeletingLevel3,
-                                        isDeletingLevel4,
-                                        isDeletingDescription
+                /*
+                Search results displaying, sorted by levels:
+                 */
+
+                if (accountingAccountTypeFilter.value.isNotEmpty() && accountingAccountTypeFilter.value == ACCOUNTING_ACCOUNTS_TYPE_ASSET) {
+
+                    val level1Ativo = accountingAccounts.filter { it.level1 == ACCOUNTING_ACCOUNTS_LEVEL1_ATIVO }
+
+                    if (level1Ativo.isNotEmpty()) {
+                        val level1AtivoExpanded = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(level1AtivoExpanded, ACCOUNTING_ACCOUNTS_LEVEL1_ATIVO, 1)
+                        val level2AtivoCirculante = level1Ativo.filter { it.level2 == ACCOUNTING_ACCOUNTS_LEVEL2_ATIVO_CIRCULANTE }
+
+                        if (level1AtivoExpanded.value) {
+                            if (level2AtivoCirculante.isNotEmpty()) {
+                                val level2AtivoCirculanteExpanded = remember { mutableStateOf(false) }
+                                displayEachExpandableTitleRow(level2AtivoCirculanteExpanded, ACCOUNTING_ACCOUNTS_LEVEL2_ATIVO_CIRCULANTE, 2)
+                                if (level2AtivoCirculanteExpanded.value) {
+
+                                    val level3AtivoCirculanteTypes = listOf(
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_CAIXA_E_EQUIVALENTES_DE_CAIXA,
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_CONTAS_A_RECEBER,
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_ESTOQUES,
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_DESPESAS_ANTECIPADAS,
                                     )
+
+                                    level3AtivoCirculanteTypes.forEach {
+                                        displayLevel3Group(
+                                            level2AtivoCirculante,
+                                            it,
+                                            isEditing,
+                                            isEditingType,
+                                            isEditingLevel1,
+                                            isEditingLevel2,
+                                            isEditingLevel3,
+                                            isEditingLevel4,
+                                            isEditingDescription,
+                                            isEditingId,
+                                            isDeletingId,
+                                            isDeleting,
+                                            isDeletingType,
+                                            isDeletingLevel1,
+                                            isDeletingLevel2,
+                                            isDeletingLevel3,
+                                            isDeletingLevel4,
+                                            isDeletingDescription
+                                        )
+                                    }
+                                }
+                            }
+
+                            val level2AtivoNaoCirculante = level1Ativo.filter { it.level2 == ACCOUNTING_ACCOUNTS_LEVEL2_ATIVO_NAO_CIRCULANTE }
+                            if (level2AtivoNaoCirculante.isNotEmpty()) {
+                                val level2AtivoNaoCirculanteExpanded = remember { mutableStateOf(false) }
+                                displayEachExpandableTitleRow(level2AtivoNaoCirculanteExpanded, ACCOUNTING_ACCOUNTS_LEVEL2_ATIVO_NAO_CIRCULANTE, 2)
+                                if (level2AtivoNaoCirculanteExpanded.value) {
+
+                                    val level3AtivoNaoCirculanteTypes = listOf(
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_IMOBILIZADO,
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_INVESTIMENTOS_DE_LONGO_PRAZO,
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_ATIVOS_INTANGIVEIS,
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_ATIVOS_REALIZAVEIS_A_LONGO_PRAZO,
+                                    )
+
+                                    level3AtivoNaoCirculanteTypes.forEach {
+                                        displayLevel3Group(
+                                            level2AtivoNaoCirculante,
+                                            it,
+                                            isEditing,
+                                            isEditingType,
+                                            isEditingLevel1,
+                                            isEditingLevel2,
+                                            isEditingLevel3,
+                                            isEditingLevel4,
+                                            isEditingDescription,
+                                            isEditingId,
+                                            isDeletingId,
+                                            isDeleting,
+                                            isDeletingType,
+                                            isDeletingLevel1,
+                                            isDeletingLevel2,
+                                            isDeletingLevel3,
+                                            isDeletingLevel4,
+                                            isDeletingDescription
+                                        )
+                                    }
                                 }
                             }
                         }
+                    }
 
-                        val level2PassivoPatrimonioLiquido =
-                            level1Passivo.filter { it.level2 == ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_PATRIMONIO_LIQUIDO }
-                        if (level2PassivoPatrimonioLiquido.isNotEmpty()) {
-                            val level2PassivoPatrimonioLiquidoExpanded = remember { mutableStateOf(false) }
-                            displayEachExpandableTitleRow(
-                                level2PassivoPatrimonioLiquidoExpanded,
-                                ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_PATRIMONIO_LIQUIDO, 2
-                            )
-                            if (level2PassivoPatrimonioLiquidoExpanded.value) {
+                    val level1Passivo = accountingAccounts.filter { it.level1 == ACCOUNTING_ACCOUNTS_LEVEL1_PASSIVO }
+                    if (level1Passivo.isNotEmpty()) {
+                        val level1PassivoExpanded = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(level1PassivoExpanded, ACCOUNTING_ACCOUNTS_LEVEL1_PASSIVO, 1)
 
-                                val level3PatrimonioLiquidoypes = listOf(
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_CAPITAL_SOCIAL,
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_RESERVAS_DE_CAPITAL,
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_AJUSTES_DE_AVALIACAO_PATRIMONIAL,
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_RESERVAS_DE_LUCROS,
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_ACOES_EM_TESOURARIA,
-                                    ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_PREJUIZOS_ACUMULADOS
-                                )
-
-                                level3PatrimonioLiquidoypes.forEach {
-                                    displayLevel3Group(
-                                        level1Passivo,
-                                        it,
-                                        isEditing,
-                                        isEditingType,
-                                        isEditingLevel1,
-                                        isEditingLevel2,
-                                        isEditingLevel3,
-                                        isEditingLevel4,
-                                        isEditingDescription,
-                                        isEditingId,
-                                        isDeletingId,
-                                        isDeleting,
-                                        isDeletingType,
-                                        isDeletingLevel1,
-                                        isDeletingLevel2,
-                                        isDeletingLevel3,
-                                        isDeletingLevel4,
-                                        isDeletingDescription
+                        if (level1PassivoExpanded.value) {
+                            val level2PassivoCirculante = level1Passivo.filter { it.level2 == ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_CIRCULANTE }
+                            if (level2PassivoCirculante.isNotEmpty()) {
+                                val level2PassivoCirculanteExpanded = remember { mutableStateOf(false) }
+                                displayEachExpandableTitleRow(level2PassivoCirculanteExpanded, ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_CIRCULANTE, 2)
+                                if (level2PassivoCirculanteExpanded.value) {
+                                    val level3PassivoCirculante = listOf(
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_CIRCULANTE_FINANCEIRO,
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_CIRCULANTE_OPERACIONAL,
                                     )
+
+                                    level3PassivoCirculante.forEach {
+                                        displayLevel3Group(
+                                            level2PassivoCirculante,
+                                            it,
+                                            isEditing,
+                                            isEditingType,
+                                            isEditingLevel1,
+                                            isEditingLevel2,
+                                            isEditingLevel3,
+                                            isEditingLevel4,
+                                            isEditingDescription,
+                                            isEditingId,
+                                            isDeletingId,
+                                            isDeleting,
+                                            isDeletingType,
+                                            isDeletingLevel1,
+                                            isDeletingLevel2,
+                                            isDeletingLevel3,
+                                            isDeletingLevel4,
+                                            isDeletingDescription
+                                        )
+                                    }
+                                }
+                            }
+
+                            val level2PassivoNaoCirculante = level1Passivo.filter { it.level2 == ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_NAO_CIRCULANTE }
+                            if (level2PassivoNaoCirculante.isNotEmpty()) {
+                                val level2PassivoNaoCirculanteExpanded = remember { mutableStateOf(false) }
+                                displayEachExpandableTitleRow(
+                                    level2PassivoNaoCirculanteExpanded,
+                                    ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_NAO_CIRCULANTE,
+                                    2
+                                )
+                                if (level2PassivoNaoCirculanteExpanded.value) {
+
+                                    val level3PassivoNaoCirculante = listOf(
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_EMPRESTIMOS_E_FINANCIAMENTOS_DE_LONGO_PRAZO,
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_DEBENTURES,
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_OBRIGACOES_FISCAIS_E_TRABALHISTAS_DE_LONGO_PRAZO,
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_PROVISOES_PARA_CONTINGENCIAS,
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_ARRENDAMENTO_MERCANTIL_FINANCEIRO,
+                                    )
+
+                                    level3PassivoNaoCirculante.forEach {
+                                        displayLevel3Group(
+                                            level2PassivoNaoCirculante,
+                                            it,
+                                            isEditing,
+                                            isEditingType,
+                                            isEditingLevel1,
+                                            isEditingLevel2,
+                                            isEditingLevel3,
+                                            isEditingLevel4,
+                                            isEditingDescription,
+                                            isEditingId,
+                                            isDeletingId,
+                                            isDeleting,
+                                            isDeletingType,
+                                            isDeletingLevel1,
+                                            isDeletingLevel2,
+                                            isDeletingLevel3,
+                                            isDeletingLevel4,
+                                            isDeletingDescription
+                                        )
+                                    }
+                                }
+                            }
+
+                            val level2PassivoPatrimonioLiquido =
+                                level1Passivo.filter { it.level2 == ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_PATRIMONIO_LIQUIDO }
+                            if (level2PassivoPatrimonioLiquido.isNotEmpty()) {
+                                val level2PassivoPatrimonioLiquidoExpanded = remember { mutableStateOf(false) }
+                                displayEachExpandableTitleRow(
+                                    level2PassivoPatrimonioLiquidoExpanded,
+                                    ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_PATRIMONIO_LIQUIDO, 2
+                                )
+                                if (level2PassivoPatrimonioLiquidoExpanded.value) {
+
+                                    val level3PatrimonioLiquidoypes = listOf(
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_CAPITAL_SOCIAL,
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_RESERVAS_DE_CAPITAL,
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_AJUSTES_DE_AVALIACAO_PATRIMONIAL,
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_RESERVAS_DE_LUCROS,
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_ACOES_EM_TESOURARIA,
+                                        ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_PREJUIZOS_ACUMULADOS
+                                    )
+
+                                    level3PatrimonioLiquidoypes.forEach {
+                                        displayLevel3Group(
+                                            level1Passivo,
+                                            it,
+                                            isEditing,
+                                            isEditingType,
+                                            isEditingLevel1,
+                                            isEditingLevel2,
+                                            isEditingLevel3,
+                                            isEditingLevel4,
+                                            isEditingDescription,
+                                            isEditingId,
+                                            isDeletingId,
+                                            isDeleting,
+                                            isDeletingType,
+                                            isDeletingLevel1,
+                                            isDeletingLevel2,
+                                            isDeletingLevel3,
+                                            isDeletingLevel4,
+                                            isDeletingDescription
+                                        )
+                                    }
                                 }
                             }
                         }
                     }
-                }
-            }else if (accountingAccountTypeFilter.value.isNotEmpty() && accountingAccountTypeFilter.value == ACCOUNTING_ACCOUNTS_TYPE_RESULT) {
+                }else if (accountingAccountTypeFilter.value.isNotEmpty() && accountingAccountTypeFilter.value == ACCOUNTING_ACCOUNTS_TYPE_RESULT) {
 
-                val level1Operating = accountingAccounts.filter { it.level1 == ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_OPERATING }
-                if (level1Operating.isNotEmpty()) {
-                    val level1OperatingExpanded = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(level1OperatingExpanded, ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_OPERATING, 1)
-                    if (level1OperatingExpanded.value){
-                        level1Operating.forEach { accountingAccount ->
-                            displayEachAccountingAccountLine(
-                                isEditing,
-                                isEditingType,
-                                isEditingLevel1,
-                                isEditingLevel2,
-                                isEditingLevel3,
-                                isEditingLevel4,
-                                isEditingDescription,
-                                isEditingId,
-                                isDeletingId,
-                                isDeleting,
-                                isDeletingType,
-                                isDeletingLevel1,
-                                isDeletingLevel2,
-                                isDeletingLevel3,
-                                isDeletingLevel4,
-                                isDeletingDescription,
-                                accountingAccount)
+                    val level1Operating = accountingAccounts.filter { it.level1 == ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_OPERATING }
+                    if (level1Operating.isNotEmpty()) {
+                        val level1OperatingExpanded = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(level1OperatingExpanded, ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_OPERATING, 1)
+                        if (level1OperatingExpanded.value){
+                            level1Operating.forEach { accountingAccount ->
+                                displayEachAccountingAccountLine(
+                                    isEditing,
+                                    isEditingType,
+                                    isEditingLevel1,
+                                    isEditingLevel2,
+                                    isEditingLevel3,
+                                    isEditingLevel4,
+                                    isEditingDescription,
+                                    isEditingId,
+                                    isDeletingId,
+                                    isDeleting,
+                                    isDeletingType,
+                                    isDeletingLevel1,
+                                    isDeletingLevel2,
+                                    isDeletingLevel3,
+                                    isDeletingLevel4,
+                                    isDeletingDescription,
+                                    accountingAccount)
+                            }
                         }
                     }
-                }
 
-                val level1Investing = accountingAccounts.filter { it.level1 == ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_INVESTING }
-                if (level1Investing.isNotEmpty()) {
-                    val level1InvestingExpanded = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(level1InvestingExpanded, ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_INVESTING, 1)
-                    if (level1InvestingExpanded.value){
-                        level1Investing.forEach { accountingAccount ->
-                            displayEachAccountingAccountLine(
-                                isEditing,
-                                isEditingType,
-                                isEditingLevel1,
-                                isEditingLevel2,
-                                isEditingLevel3,
-                                isEditingLevel4,
-                                isEditingDescription,
-                                isEditingId,
-                                isDeletingId,
-                                isDeleting,
-                                isDeletingType,
-                                isDeletingLevel1,
-                                isDeletingLevel2,
-                                isDeletingLevel3,
-                                isDeletingLevel4,
-                                isDeletingDescription,
-                                accountingAccount)
+                    val level1Investing = accountingAccounts.filter { it.level1 == ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_INVESTING }
+                    if (level1Investing.isNotEmpty()) {
+                        val level1InvestingExpanded = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(level1InvestingExpanded, ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_INVESTING, 1)
+                        if (level1InvestingExpanded.value){
+                            level1Investing.forEach { accountingAccount ->
+                                displayEachAccountingAccountLine(
+                                    isEditing,
+                                    isEditingType,
+                                    isEditingLevel1,
+                                    isEditingLevel2,
+                                    isEditingLevel3,
+                                    isEditingLevel4,
+                                    isEditingDescription,
+                                    isEditingId,
+                                    isDeletingId,
+                                    isDeleting,
+                                    isDeletingType,
+                                    isDeletingLevel1,
+                                    isDeletingLevel2,
+                                    isDeletingLevel3,
+                                    isDeletingLevel4,
+                                    isDeletingDescription,
+                                    accountingAccount)
+                            }
                         }
                     }
-                }
 
-                val level1Financing = accountingAccounts.filter { it.level1 == ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_FINANCING }
-                if (level1Financing.isNotEmpty()) {
-                    val level1FinancingExpanded = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(level1FinancingExpanded, ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_FINANCING, 1)
-                    if (level1FinancingExpanded.value){
-                        level1Financing.forEach { accountingAccount ->
-                            displayEachAccountingAccountLine(
-                                isEditing,
-                                isEditingType,
-                                isEditingLevel1,
-                                isEditingLevel2,
-                                isEditingLevel3,
-                                isEditingLevel4,
-                                isEditingDescription,
-                                isEditingId,
-                                isDeletingId,
-                                isDeleting,
-                                isDeletingType,
-                                isDeletingLevel1,
-                                isDeletingLevel2,
-                                isDeletingLevel3,
-                                isDeletingLevel4,
-                                isDeletingDescription,
-                                accountingAccount)
+                    val level1Financing = accountingAccounts.filter { it.level1 == ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_FINANCING }
+                    if (level1Financing.isNotEmpty()) {
+                        val level1FinancingExpanded = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(level1FinancingExpanded, ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_FINANCING, 1)
+                        if (level1FinancingExpanded.value){
+                            level1Financing.forEach { accountingAccount ->
+                                displayEachAccountingAccountLine(
+                                    isEditing,
+                                    isEditingType,
+                                    isEditingLevel1,
+                                    isEditingLevel2,
+                                    isEditingLevel3,
+                                    isEditingLevel4,
+                                    isEditingDescription,
+                                    isEditingId,
+                                    isDeletingId,
+                                    isDeleting,
+                                    isDeletingType,
+                                    isDeletingLevel1,
+                                    isDeletingLevel2,
+                                    isDeletingLevel3,
+                                    isDeletingLevel4,
+                                    isDeletingDescription,
+                                    accountingAccount)
+                            }
                         }
                     }
                 }
             }
-
         }
     }
     when {
