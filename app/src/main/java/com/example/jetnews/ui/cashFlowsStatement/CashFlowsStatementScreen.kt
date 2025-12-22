@@ -2153,12 +2153,15 @@ fun CashFlowsStatementItemsEditInitialCashBalanceDialog(
                 isItemsPageEditInitialCashBalance.value = false
             },
             modifier = Modifier
-                .width(800.dp)
-                .height(500.dp),
+                .width(800.dp),
+                //.height(500.dp),
 
             title = {
                 Text(
                     text = stringResource(R.string.cash_flows_statement_change_initial_balance),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Center
                 )
             },
             text = {
@@ -2169,13 +2172,6 @@ fun CashFlowsStatementItemsEditInitialCashBalanceDialog(
                         .fillMaxWidth()
                         .verticalScroll(rememberScrollState()),
                 ) {
-                    Text(
-                        text = isItemsName.value
-                    )
-                    Text(
-                        text = isItemsStartDate.value + " - " + isItemsEndDate.value
-                    )
-
                         OutlinedTextField(
                             value = cashBalance.value,
                             onValueChange = {
@@ -2385,7 +2381,6 @@ private fun CashFlowsStatementHomeScreenContent(
                                 text = fmt.format(cashFlowsStatement.startDate) + " - " + fmt.format(cashFlowsStatement.endDate),
                                 style = TextStyle(fontFamily = FontFamily.SansSerif),
                                 color = MaterialTheme.colorScheme.primary,
-
                             )
                         }
                     }
@@ -2718,30 +2713,26 @@ fun CashFlowsStatementDeleteDialog(
                 isDeleting.value = false
             },
             modifier = Modifier
-                .width(550.dp)
-                .height(500.dp),
+                .width(550.dp),
+                //.height(300.dp)
 
             title = {
                 Text(
                     text = stringResource(R.string.cash_flows_statement_delete_cash_flows_statement),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Center
                 )
             },
             text = {
-                Column(
-                    horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.spacedBy(2.dp)
 
-                ) {
-
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                    ){
                         Text(
-                            text = isDeletingName.value
+                            text = isDeletingName.value,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            textAlign = TextAlign.Center
                         )
-                    }
 
-                }
             },
             confirmButton = {
 
@@ -2749,7 +2740,7 @@ fun CashFlowsStatementDeleteDialog(
             }, dismissButton = {
 
                 Row(
-                    verticalAlignment = Alignment.CenterVertically,
+                    verticalAlignment = Alignment.Bottom,
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier.fillMaxWidth()
                 ) {
@@ -2814,12 +2805,15 @@ fun CashFlowsStatementItemDeleteDialog(
                 isDeletingCashFlowStatementItem.value = false
             },
             modifier = Modifier
-                .width(550.dp)
-                .height(500.dp),
+                .width(550.dp),
+                //.height(500.dp),
 
             title = {
                 Text(
                     text = stringResource(R.string.cash_flows_statement_delete_statement),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Center
                 )
             },
             text = {
@@ -2829,18 +2823,21 @@ fun CashFlowsStatementItemDeleteDialog(
 
                 ) {
                     Text(
-                        text = isDeletingCashFlowStatementItemType.value
-                    )
-                    Text(
-                        text = isDeletingCashFlowStatementItemDescription.value
+                        text = isDeletingCashFlowStatementItemDescription.value,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                     if (isDeletingCashFlowStatementItemIsCredit.value)
                     Text(
-                        text = isDeletingCashFlowStatementItemValue.value.toScreen()
+                        text = isDeletingCashFlowStatementItemValue.value.absoluteValue.toScreen(),
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                     else
                         Text(
-                            text = "("+isDeletingCashFlowStatementItemValue.value.absoluteValue.toScreen()+")"
+                            text = "("+isDeletingCashFlowStatementItemValue.value.absoluteValue.toScreen()+")",
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
                         )
                 }
             },
