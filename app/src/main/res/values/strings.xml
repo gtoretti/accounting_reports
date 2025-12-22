@@ -162,6 +162,7 @@
     <string name="balance_sheet_cancel">Cancelar</string>
     <string name="balance_sheet_save">Salvar</string>
     <string name="balance_sheet_delete">Excluir</string>
+    <string name="balance_sheet_delete_balance">Excluir Balanço Patrimonial</string>
     <string name="balance_sheet_delete_account">Excluir Conta Patrimonial do Balanço Patrimonial</string>
     <string name="balance_sheet_add">Adicionar</string>
     <string name="balance_sheet_total">Total:</string>

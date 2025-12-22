@@ -3001,12 +3001,15 @@ fun EquityChangesStatementDeleteDialog(
                 isDeleting.value = false
             },
             modifier = Modifier
-                .width(550.dp)
-                .height(500.dp),
+                .width(550.dp),
+                //.height(500.dp),
 
             title = {
                 Text(
-                    text = stringResource(R.string.cash_flows_statement_delete_cash_flows_statement),
+                    text = stringResource(R.string.equity_changes_statement_delete),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Center
                 )
             },
             text = {
@@ -3016,13 +3019,12 @@ fun EquityChangesStatementDeleteDialog(
 
                 ) {
 
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                    ){
                         Text(
-                            text = isDeletingName.value
+                            text = isDeletingName.value,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
                         )
-                    }
+
 
                 }
             },
@@ -3094,12 +3096,15 @@ fun EquityChangesStatementItemDeleteDialog(
                 isDeletingEquityChangesStatementItem.value = false
             },
             modifier = Modifier
-                .width(550.dp)
-                .height(500.dp),
+                .width(550.dp),
+                //.height(500.dp),
 
             title = {
                 Text(
                     text = stringResource(R.string.equity_changes_statement_item_delete_title),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Center
                 )
             },
             text = {
@@ -3109,7 +3114,9 @@ fun EquityChangesStatementItemDeleteDialog(
 
                 ) {
                     Text(
-                        text = isDeletingEquityChangesStatementItemType.value
+                        text = isDeletingEquityChangesStatementItemType.value,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
             },

@@ -2591,30 +2591,27 @@ fun PeriodResultStatementDeleteDialog(
                 isDeleting.value = false
             },
             modifier = Modifier
-                .width(550.dp)
-                .height(500.dp),
+                .width(550.dp),
+                //.height(500.dp),
 
             title = {
                 Text(
                     text = stringResource(R.string.cash_flows_statement_delete_cash_flows_statement),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Center
                 )
             },
             text = {
-                Column(
-                    horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.spacedBy(2.dp)
 
-                ) {
 
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                    ){
                         Text(
-                            text = isDeletingName.value
+                            text = isDeletingName.value,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
                         )
-                    }
 
-                }
+
             },
             confirmButton = {
 
@@ -2686,12 +2683,15 @@ fun PeriodResultStatementItemDeleteDialog(
                 isDeletingPeriodResultStatementItem.value = false
             },
             modifier = Modifier
-                .width(550.dp)
-                .height(500.dp),
+                .width(550.dp),
+                //.height(500.dp),
 
             title = {
                 Text(
                     text = stringResource(R.string.cash_flows_statement_delete_statement),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Center
                 )
             },
             text = {
@@ -2701,14 +2701,20 @@ fun PeriodResultStatementItemDeleteDialog(
 
                 ) {
                     Text(
-                        text = isDeletingPeriodResultStatementItemType.value
+                        text = isDeletingPeriodResultStatementItemType.value,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                     Text(
-                        text = isDeletingPeriodResultStatementItemDescription.value
+                        text = isDeletingPeriodResultStatementItemDescription.value,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
 
                         Text(
-                            text = isDeletingPeriodResultStatementItemValue.value.toScreen()
+                            text = isDeletingPeriodResultStatementItemValue.value.toScreen(),
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
                         )
 
                 }

@@ -67,6 +67,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -646,12 +647,15 @@ fun ExplanatoryNoteDeleteDialog(
                 isDeleting.value = false
             },
             modifier = Modifier
-                .width(550.dp)
-                .height(500.dp),
+                .width(550.dp),
+                //.height(500.dp),
 
             title = {
                 Text(
                     text = "Excluir Nota Explicativa:",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Center
                 )
             },
             text = {
@@ -660,21 +664,12 @@ fun ExplanatoryNoteDeleteDialog(
                     verticalArrangement = Arrangement.spacedBy(2.dp)
 
                 ) {
+                        Text(
+                            text = isDeletingIndex.value,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                        )
 
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                    ){
-                        Text(
-                            text = isDeletingIndex.value
-                        )
-                    }
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                    ){
-                        Text(
-                            text = isDeletingContent.value
-                        )
-                    }
 
                 }
             },

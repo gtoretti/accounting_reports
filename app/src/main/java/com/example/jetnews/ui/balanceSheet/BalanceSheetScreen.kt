@@ -2886,12 +2886,15 @@ fun BalanceSheetDeleteDialog(
                 isDeleting.value = false
             },
             modifier = Modifier
-                .width(550.dp)
-                .height(500.dp),
+                .width(550.dp),
+                //.height(500.dp),
 
             title = {
                 Text(
-                    text = stringResource(R.string.balance_sheet_delete),
+                    text = stringResource(R.string.balance_sheet_delete_balance),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Center
                 )
             },
             text = {
@@ -2900,15 +2903,11 @@ fun BalanceSheetDeleteDialog(
                     verticalArrangement = Arrangement.spacedBy(2.dp)
 
                 ) {
-
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                    ){
                         Text(
-                            text = isDeletingName.value
+                            text = isDeletingName.value,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
                         )
-                    }
-
                 }
             },
             confirmButton = {
@@ -2980,12 +2979,15 @@ fun BalanceSheetItemDeleteDialog(
                 isBalanceSheetItemsDeleteItemDialog.value = false
             },
             modifier = Modifier
-                .width(550.dp)
-                .height(500.dp),
+                .width(550.dp),
+                //.height(500.dp),
 
             title = {
                 Text(
                     text = stringResource(R.string.balance_sheet_delete_account),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Center
                 )
             },
             text = {
@@ -2995,10 +2997,14 @@ fun BalanceSheetItemDeleteDialog(
 
                 ) {
                     Text(
-                        text = balanceSheetItemLevel4Description.value
+                        text = balanceSheetItemLevel4Description.value,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
                     Text(
-                        text = balanceSheetItemValue.value.toScreen()
+                        text = balanceSheetItemValue.value.toScreen(),
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
                     )
 
                 }
