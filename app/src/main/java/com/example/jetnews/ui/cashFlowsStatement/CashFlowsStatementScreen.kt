@@ -1001,7 +1001,7 @@ private fun CashFlowsStatementItemsScreenContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 5.dp)
-                .verticalScroll(rememberScrollState()),
+                //.verticalScroll(rememberScrollState()),
         ) {
 
             Column(
@@ -1050,6 +1050,19 @@ private fun CashFlowsStatementItemsScreenContent(
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold,
                     )
+                    TextButton(
+                        modifier = Modifier.padding(1.dp),
+                        onClick =
+                            {
+                                isItemsPageEditInitialCashBalance.value=true
+                            }
+                    ) {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(R.drawable.edit_24px),
+                            contentDescription = stringResource(R.string.cash_flows_statement_add),
+                            modifier = Modifier
+                        )
+                    }
 
                     TextButton(
                         modifier = Modifier.padding(1.dp),
@@ -1079,202 +1092,227 @@ private fun CashFlowsStatementItemsScreenContent(
                     }
                 }
             }
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+            )
+            Spacer(Modifier.height(10.dp))
+
 
             var totalOperating = 0.0
             var totalInvesting = 0.0
             var totalFinancing = 0.0
 
-            val operatingExpanded = remember { mutableStateOf(false) }
-            displayEachExpandableTitleRow(operatingExpanded, CASH_FLOWS_STATEMENT_TYPE_OPERATING,0)
-            val operatingItems = cashFlowItems.filter { it.type == ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_OPERATING }
-            operatingItems.forEach { operating->
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 5.dp).verticalScroll(rememberScrollState()),
 
-                if (operating.isCredit)
-                    totalOperating+=operating.value
-                else
-                    totalOperating-=operating.value
+                ) {
+
+                val operatingExpanded = remember { mutableStateOf(false) }
+                displayEachExpandableTitleRow(operatingExpanded, CASH_FLOWS_STATEMENT_TYPE_OPERATING,0)
+                val operatingItems = cashFlowItems.filter { it.type == ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_OPERATING }
+                operatingItems.forEach { operating->
+
+                    if (operating.isCredit)
+                        totalOperating+=operating.value
+                    else
+                        totalOperating-=operating.value
+                    if (operatingExpanded.value){
+                        CashFlowsStatementItemRow(operating,
+                            isItemsPageDeleteItem,
+                            isCashFlowsStatementItemsEditItemScreen,
+                            cashFlowsStatementItemId,
+                            cashFlowsStatementItemType,
+                            cashFlowsStatementItemDescription,
+                            cashFlowsStatementItemDate,
+                            cashFlowsStatementItemValue,
+                            cashFlowsStatementItemIsCredit)
+                    }
+                }
                 if (operatingExpanded.value){
-                    CashFlowsStatementItemRow(operating,
-                        isItemsPageDeleteItem,
-                        isCashFlowsStatementItemsEditItemScreen,
-                        cashFlowsStatementItemId,
-                        cashFlowsStatementItemType,
-                        cashFlowsStatementItemDescription,
-                        cashFlowsStatementItemDate,
-                        cashFlowsStatementItemValue,
-                        cashFlowsStatementItemIsCredit)
+                    var totalOperatingText = totalOperating.toScreen()
+                    if (totalOperating<0.0)
+                        totalOperatingText = "(" + totalOperating.absoluteValue.toScreen() + ")"
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .fillMaxWidth(0.82f)
+                    ){
+                        Text(
+                            text = stringResource(R.string.cash_flows_statement_total),
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                        Text(
+                            text = totalOperatingText,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                    )
+                    Spacer(Modifier.height(10.dp))
                 }
-            }
-            if (operatingExpanded.value){
-                var totalOperatingText = totalOperating.toScreen()
-                if (totalOperating<0.0)
-                    totalOperatingText = "(" + totalOperating.absoluteValue.toScreen() + ")"
-                Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .fillMaxWidth(0.82f)
-                ){
-                Text(
-                    text = stringResource(R.string.cash_flows_statement_total),
-                    style = TextStyle(fontFamily = FontFamily.SansSerif),
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold,
-                )
-                Text(
-                    text = totalOperatingText,
-                    style = TextStyle(fontFamily = FontFamily.SansSerif),
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold,
-                )
-                }
-            }
 
-            val investingExpanded = remember { mutableStateOf(false) }
-            val investingItems = cashFlowItems.filter { it.type == ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_INVESTING }
-            displayEachExpandableTitleRow(investingExpanded, CASH_FLOWS_STATEMENT_TYPE_INVESTING,0)
-            investingItems.forEach { investing->
-                if (investing.isCredit)
-                    totalInvesting+=investing.value
-                else
-                    totalInvesting-=investing.value
+                val investingExpanded = remember { mutableStateOf(false) }
+                val investingItems = cashFlowItems.filter { it.type == ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_INVESTING }
+                displayEachExpandableTitleRow(investingExpanded, CASH_FLOWS_STATEMENT_TYPE_INVESTING,0)
+                investingItems.forEach { investing->
+                    if (investing.isCredit)
+                        totalInvesting+=investing.value
+                    else
+                        totalInvesting-=investing.value
+                    if (investingExpanded.value){
+                        CashFlowsStatementItemRow(investing,
+                            isItemsPageDeleteItem,
+                            isCashFlowsStatementItemsEditItemScreen,
+                            cashFlowsStatementItemId,
+                            cashFlowsStatementItemType,
+                            cashFlowsStatementItemDescription,
+                            cashFlowsStatementItemDate,
+                            cashFlowsStatementItemValue,
+                            cashFlowsStatementItemIsCredit)
+                    }
+                }
                 if (investingExpanded.value){
-                    CashFlowsStatementItemRow(investing,
-                        isItemsPageDeleteItem,
-                        isCashFlowsStatementItemsEditItemScreen,
-                        cashFlowsStatementItemId,
-                        cashFlowsStatementItemType,
-                        cashFlowsStatementItemDescription,
-                        cashFlowsStatementItemDate,
-                        cashFlowsStatementItemValue,
-                        cashFlowsStatementItemIsCredit)
-                }
-            }
-            if (investingExpanded.value){
-                var totalInvestingText = totalInvesting.toScreen()
-                if (totalInvesting<0.0)
-                    totalInvestingText = "(" + totalInvesting.absoluteValue.toScreen() + ")"
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier
-                        .fillMaxWidth(0.82f)
-                ){
-                    Text(
-                        text = stringResource(R.string.cash_flows_statement_total),
-                        style = TextStyle(fontFamily = FontFamily.SansSerif),
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
+                    var totalInvestingText = totalInvesting.toScreen()
+                    if (totalInvesting<0.0)
+                        totalInvestingText = "(" + totalInvesting.absoluteValue.toScreen() + ")"
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .fillMaxWidth(0.82f)
+                    ){
+                        Text(
+                            text = stringResource(R.string.cash_flows_statement_total),
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                        Text(
+                            text = totalInvestingText,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
                     )
-                    Text(
-                        text = totalInvestingText,
-                        style = TextStyle(fontFamily = FontFamily.SansSerif),
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                    )
+                    Spacer(Modifier.height(10.dp))
                 }
-            }
 
-            val financingExpanded = remember { mutableStateOf(false) }
-            val financingItems = cashFlowItems.filter { it.type == ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_FINANCING }
-            displayEachExpandableTitleRow(financingExpanded, CASH_FLOWS_STATEMENT_TYPE_FINANCING,0)
-            financingItems.forEach { financing->
-                if (financing.isCredit)
-                    totalFinancing+=financing.value
-                else
-                    totalFinancing-=financing.value
+                val financingExpanded = remember { mutableStateOf(false) }
+                val financingItems = cashFlowItems.filter { it.type == ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_FINANCING }
+                displayEachExpandableTitleRow(financingExpanded, CASH_FLOWS_STATEMENT_TYPE_FINANCING,0)
+                financingItems.forEach { financing->
+                    if (financing.isCredit)
+                        totalFinancing+=financing.value
+                    else
+                        totalFinancing-=financing.value
+                    if (financingExpanded.value){
+                        CashFlowsStatementItemRow(financing,
+                            isItemsPageDeleteItem,
+                            isCashFlowsStatementItemsEditItemScreen,
+                            cashFlowsStatementItemId,
+                            cashFlowsStatementItemType,
+                            cashFlowsStatementItemDescription,
+                            cashFlowsStatementItemDate,
+                            cashFlowsStatementItemValue,
+                            cashFlowsStatementItemIsCredit)
+                    }
+                }
                 if (financingExpanded.value){
-                    CashFlowsStatementItemRow(financing,
-                        isItemsPageDeleteItem,
-                        isCashFlowsStatementItemsEditItemScreen,
-                        cashFlowsStatementItemId,
-                        cashFlowsStatementItemType,
-                        cashFlowsStatementItemDescription,
-                        cashFlowsStatementItemDate,
-                        cashFlowsStatementItemValue,
-                        cashFlowsStatementItemIsCredit)
+                    var totalFinancingText = totalFinancing.toScreen()
+                    if (totalFinancing<0.0)
+                        totalFinancingText = "(" + totalFinancing.absoluteValue.toScreen() + ")"
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .fillMaxWidth(0.82f)
+                    ){
+                        Text(
+                            text = stringResource(R.string.cash_flows_statement_total),
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                        Text(
+                            text = totalFinancingText,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                    )
+                    Spacer(Modifier.height(10.dp))
                 }
-            }
-            if (financingExpanded.value){
-                var totalFinancingText = totalFinancing.toScreen()
-                if (totalFinancing<0.0)
-                    totalFinancingText = "(" + totalFinancing.absoluteValue.toScreen() + ")"
+
+                val cashIncreaseVal = (totalOperating + totalInvesting + totalFinancing)
+                var cashIncreaseText = cashIncreaseVal.toScreen()
+                if (cashIncreaseVal<0.0)
+                    cashIncreaseText = "(" + cashIncreaseVal.absoluteValue.toScreen() + ")"
+
+                var signedCashFlowsStatementInitialCashBalance = cashFlowsStatementInitialCashBalance.value
+                if (!cashFlowsStatementInitialCashBalanceIsCredit.value)
+                    signedCashFlowsStatementInitialCashBalance = -(signedCashFlowsStatementInitialCashBalance.absoluteValue)
+
+                val finalBalanceValue = (totalOperating + totalInvesting + totalFinancing + signedCashFlowsStatementInitialCashBalance)
+                var finalBalance = finalBalanceValue.toScreen()
+                if (finalBalanceValue<0.0)
+                    finalBalance = "(" + finalBalanceValue.absoluteValue.toScreen() + ")"
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
                         .fillMaxWidth(0.82f)
-                ){
+                ) {
                     Text(
-                        text = stringResource(R.string.cash_flows_statement_total),
+                        text = stringResource(R.string.cash_flows_statement_increase),
                         style = TextStyle(fontFamily = FontFamily.SansSerif),
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold,
                     )
                     Text(
-                        text = totalFinancingText,
+                        text = "$ $cashIncreaseText",
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
+                        .fillMaxWidth(0.82f)
+                ) {
+                    Text(
+                        text = stringResource(R.string.cash_flows_statement_final_balance),
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Text(
+                        text = "$ $finalBalance",
                         style = TextStyle(fontFamily = FontFamily.SansSerif),
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold,
                     )
                 }
             }
-
-            val cashIncreaseVal = (totalOperating + totalInvesting + totalFinancing)
-            var cashIncreaseText = cashIncreaseVal.toScreen()
-            if (cashIncreaseVal<0.0)
-                cashIncreaseText = "(" + cashIncreaseVal.absoluteValue.toScreen() + ")"
-
-            var signedCashFlowsStatementInitialCashBalance = cashFlowsStatementInitialCashBalance.value
-            if (!cashFlowsStatementInitialCashBalanceIsCredit.value)
-                signedCashFlowsStatementInitialCashBalance = -(signedCashFlowsStatementInitialCashBalance.absoluteValue)
-
-            val finalBalanceValue = (totalOperating + totalInvesting + totalFinancing + signedCashFlowsStatementInitialCashBalance)
-            var finalBalance = finalBalanceValue.toScreen()
-            if (finalBalanceValue<0.0)
-                finalBalance = "(" + finalBalanceValue.absoluteValue.toScreen() + ")"
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .fillMaxWidth(0.82f)
-            ) {
-                Text(
-                        text = stringResource(R.string.cash_flows_statement_increase),
-                    style = TextStyle(fontFamily = FontFamily.SansSerif),
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold,
-                    )
-                Text(
-                    text = "$ $cashIncreaseText",
-                    style = TextStyle(fontFamily = FontFamily.SansSerif),
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold,
-                )
-            }
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .fillMaxWidth(0.82f)
-            ) {
-                Text(
-                    text = stringResource(R.string.cash_flows_statement_final_balance),
-                    style = TextStyle(fontFamily = FontFamily.SansSerif),
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold,
-                )
-                Text(
-                    text = "$ $finalBalance",
-                    style = TextStyle(fontFamily = FontFamily.SansSerif),
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold,
-                )
-            }
-
         }
     }
 

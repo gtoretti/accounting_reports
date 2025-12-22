@@ -1271,7 +1271,7 @@ private fun BalanceSheetItemsScreenContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 5.dp)
-                .verticalScroll(rememberScrollState()),
+                //.verticalScroll(rememberScrollState()),
         ) {
 
             Column(
@@ -1396,97 +1396,32 @@ private fun BalanceSheetItemsScreenContent(
                 }
             }
 
-            val assetsExpanded = remember { mutableStateOf(false) }
-            displayEachExpandableTitleRow(assetsExpanded, ACCOUNTING_ACCOUNTS_LEVEL1_ATIVO,0)
-            if (assetsExpanded.value){
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+            )
+            Spacer(Modifier.height(10.dp))
 
-                val assetsCurrentExpanded = remember { mutableStateOf(false) }
-                displayEachExpandableTitleRow(assetsCurrentExpanded, ACCOUNTING_ACCOUNTS_LEVEL2_ATIVO_CIRCULANTE,2)
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 5.dp).verticalScroll(rememberScrollState()),
 
-                if (assetsCurrentExpanded.value){
+                ) {
+                val assetsExpanded = remember { mutableStateOf(false) }
+                displayEachExpandableTitleRow(assetsExpanded, ACCOUNTING_ACCOUNTS_LEVEL1_ATIVO,0)
+                if (assetsExpanded.value){
 
-                    val assetsCurrentExpanded1 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(assetsCurrentExpanded1, ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_CAIXA_E_EQUIVALENTES_DE_CAIXA,3)
-                    if (assetsCurrentExpanded1.value){
-                        assetsCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_CAIXA_E_EQUIVALENTES_DE_CAIXA }.forEach { asset->
-                            BalanceSheetItemRow(asset,
-                                isBalanceSheetItemsDeleteItemDialog,
-                                isBalanceSheetItemsEditItemScreen,
-                                balanceSheetItemId,
-                                balanceSheetItemLevel1,
-                                balanceSheetItemLevel2,
-                                balanceSheetItemLevel3,
-                                balanceSheetItemLevel4Description,
-                                balanceSheetItemValue)
-                        }
-                    }
+                    val assetsCurrentExpanded = remember { mutableStateOf(false) }
+                    displayEachExpandableTitleRow(assetsCurrentExpanded, ACCOUNTING_ACCOUNTS_LEVEL2_ATIVO_CIRCULANTE,2)
 
+                    if (assetsCurrentExpanded.value){
 
-                    val assetsCurrentExpanded2 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(assetsCurrentExpanded2, ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_CONTAS_A_RECEBER,3)
-                    if (assetsCurrentExpanded2.value){
-                        assetsCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_CONTAS_A_RECEBER }.forEach { asset->
-                            BalanceSheetItemRow(asset,
-                                isBalanceSheetItemsDeleteItemDialog,
-                                isBalanceSheetItemsEditItemScreen,
-                                balanceSheetItemId,
-                                balanceSheetItemLevel1,
-                                balanceSheetItemLevel2,
-                                balanceSheetItemLevel3,
-                                balanceSheetItemLevel4Description,
-                                balanceSheetItemValue)
-                        }
-                    }
-
-                    val assetsCurrentExpanded3 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(assetsCurrentExpanded3, ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_ESTOQUES,3)
-                    if (assetsCurrentExpanded3.value){
-                        assetsCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_ESTOQUES }.forEach { asset->
-                            BalanceSheetItemRow(asset,
-                                isBalanceSheetItemsDeleteItemDialog,
-                                isBalanceSheetItemsEditItemScreen,
-                                balanceSheetItemId,
-                                balanceSheetItemLevel1,
-                                balanceSheetItemLevel2,
-                                balanceSheetItemLevel3,
-                                balanceSheetItemLevel4Description,
-                                balanceSheetItemValue)
-                        }
-                    }
-
-
-                    val assetsCurrentExpanded4 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(assetsCurrentExpanded4, ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_DESPESAS_ANTECIPADAS,3)
-                    if (assetsCurrentExpanded4.value){
-                        assetsCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_DESPESAS_ANTECIPADAS }.forEach { asset->
-                            BalanceSheetItemRow(asset,
-                                isBalanceSheetItemsDeleteItemDialog,
-                                isBalanceSheetItemsEditItemScreen,
-                                balanceSheetItemId,
-                                balanceSheetItemLevel1,
-                                balanceSheetItemLevel2,
-                                balanceSheetItemLevel3,
-                                balanceSheetItemLevel4Description,
-                                balanceSheetItemValue)
-                        }
-                    }
-                }
-
-                val assetsNonCurrentExpanded = remember { mutableStateOf(false) }
-                displayEachExpandableTitleRow(assetsNonCurrentExpanded, ACCOUNTING_ACCOUNTS_LEVEL2_ATIVO_NAO_CIRCULANTE,2)
-                if (assetsNonCurrentExpanded.value) {
-
-                    val assetsNonCurrentExpanded1 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(
-                        assetsNonCurrentExpanded1,
-                        ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_ATIVOS_REALIZAVEIS_A_LONGO_PRAZO,
-                        3
-                    )
-                    if (assetsNonCurrentExpanded1.value) {
-                        assetsNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_ATIVOS_REALIZAVEIS_A_LONGO_PRAZO }
-                            .forEach { asset ->
-                                BalanceSheetItemRow(
-                                    asset,
+                        val assetsCurrentExpanded1 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(assetsCurrentExpanded1, ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_CAIXA_E_EQUIVALENTES_DE_CAIXA,3)
+                        if (assetsCurrentExpanded1.value){
+                            assetsCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_CAIXA_E_EQUIVALENTES_DE_CAIXA }.forEach { asset->
+                                BalanceSheetItemRow(asset,
                                     isBalanceSheetItemsDeleteItemDialog,
                                     isBalanceSheetItemsEditItemScreen,
                                     balanceSheetItemId,
@@ -1494,21 +1429,73 @@ private fun BalanceSheetItemsScreenContent(
                                     balanceSheetItemLevel2,
                                     balanceSheetItemLevel3,
                                     balanceSheetItemLevel4Description,
-                                    balanceSheetItemValue
-                                )
+                                    balanceSheetItemValue)
                             }
+                        }
+
+
+                        val assetsCurrentExpanded2 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(assetsCurrentExpanded2, ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_CONTAS_A_RECEBER,3)
+                        if (assetsCurrentExpanded2.value){
+                            assetsCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_CONTAS_A_RECEBER }.forEach { asset->
+                                BalanceSheetItemRow(asset,
+                                    isBalanceSheetItemsDeleteItemDialog,
+                                    isBalanceSheetItemsEditItemScreen,
+                                    balanceSheetItemId,
+                                    balanceSheetItemLevel1,
+                                    balanceSheetItemLevel2,
+                                    balanceSheetItemLevel3,
+                                    balanceSheetItemLevel4Description,
+                                    balanceSheetItemValue)
+                            }
+                        }
+
+                        val assetsCurrentExpanded3 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(assetsCurrentExpanded3, ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_ESTOQUES,3)
+                        if (assetsCurrentExpanded3.value){
+                            assetsCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_ESTOQUES }.forEach { asset->
+                                BalanceSheetItemRow(asset,
+                                    isBalanceSheetItemsDeleteItemDialog,
+                                    isBalanceSheetItemsEditItemScreen,
+                                    balanceSheetItemId,
+                                    balanceSheetItemLevel1,
+                                    balanceSheetItemLevel2,
+                                    balanceSheetItemLevel3,
+                                    balanceSheetItemLevel4Description,
+                                    balanceSheetItemValue)
+                            }
+                        }
+
+
+                        val assetsCurrentExpanded4 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(assetsCurrentExpanded4, ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_DESPESAS_ANTECIPADAS,3)
+                        if (assetsCurrentExpanded4.value){
+                            assetsCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_CIRCULANTE_DESPESAS_ANTECIPADAS }.forEach { asset->
+                                BalanceSheetItemRow(asset,
+                                    isBalanceSheetItemsDeleteItemDialog,
+                                    isBalanceSheetItemsEditItemScreen,
+                                    balanceSheetItemId,
+                                    balanceSheetItemLevel1,
+                                    balanceSheetItemLevel2,
+                                    balanceSheetItemLevel3,
+                                    balanceSheetItemLevel4Description,
+                                    balanceSheetItemValue)
+                            }
+                        }
                     }
 
+                    val assetsNonCurrentExpanded = remember { mutableStateOf(false) }
+                    displayEachExpandableTitleRow(assetsNonCurrentExpanded, ACCOUNTING_ACCOUNTS_LEVEL2_ATIVO_NAO_CIRCULANTE,2)
+                    if (assetsNonCurrentExpanded.value) {
 
-                    val assetsNonCurrentExpanded2 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(
-                        assetsNonCurrentExpanded2,
-                        ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_INVESTIMENTOS_DE_LONGO_PRAZO,
-                        3
-                    )
-                    if (assetsNonCurrentExpanded2.value) {
-                        if (assetsNonCurrentExpanded2.value) {
-                            assetsNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_INVESTIMENTOS_DE_LONGO_PRAZO }
+                        val assetsNonCurrentExpanded1 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(
+                            assetsNonCurrentExpanded1,
+                            ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_ATIVOS_REALIZAVEIS_A_LONGO_PRAZO,
+                            3
+                        )
+                        if (assetsNonCurrentExpanded1.value) {
+                            assetsNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_ATIVOS_REALIZAVEIS_A_LONGO_PRAZO }
                                 .forEach { asset ->
                                     BalanceSheetItemRow(
                                         asset,
@@ -1523,37 +1510,39 @@ private fun BalanceSheetItemsScreenContent(
                                     )
                                 }
                         }
-                    }
 
 
-                    val assetsNonCurrentExpanded3 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(assetsNonCurrentExpanded3, ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_IMOBILIZADO, 3)
-                    if (assetsNonCurrentExpanded3.value) {
-                        assetsNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_IMOBILIZADO }
-                            .forEach { asset ->
-                                BalanceSheetItemRow(
-                                    asset,
-                                    isBalanceSheetItemsDeleteItemDialog,
-                                    isBalanceSheetItemsEditItemScreen,
-                                    balanceSheetItemId,
-                                    balanceSheetItemLevel1,
-                                    balanceSheetItemLevel2,
-                                    balanceSheetItemLevel3,
-                                    balanceSheetItemLevel4Description,
-                                    balanceSheetItemValue
-                                )
-                            }
-                    }
-
-                    val assetsNonCurrentExpanded4 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(
-                            assetsNonCurrentExpanded4,
-                            ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_ATIVOS_INTANGIVEIS,
+                        val assetsNonCurrentExpanded2 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(
+                            assetsNonCurrentExpanded2,
+                            ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_INVESTIMENTOS_DE_LONGO_PRAZO,
                             3
-                    )
-                    if (assetsNonCurrentExpanded4.value) {
-                        assetsNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_ATIVOS_INTANGIVEIS }
-                            .forEach { asset ->
+                        )
+                        if (assetsNonCurrentExpanded2.value) {
+                            if (assetsNonCurrentExpanded2.value) {
+                                assetsNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_INVESTIMENTOS_DE_LONGO_PRAZO }
+                                    .forEach { asset ->
+                                        BalanceSheetItemRow(
+                                            asset,
+                                            isBalanceSheetItemsDeleteItemDialog,
+                                            isBalanceSheetItemsEditItemScreen,
+                                            balanceSheetItemId,
+                                            balanceSheetItemLevel1,
+                                            balanceSheetItemLevel2,
+                                            balanceSheetItemLevel3,
+                                            balanceSheetItemLevel4Description,
+                                            balanceSheetItemValue
+                                        )
+                                    }
+                            }
+                        }
+
+
+                        val assetsNonCurrentExpanded3 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(assetsNonCurrentExpanded3, ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_IMOBILIZADO, 3)
+                        if (assetsNonCurrentExpanded3.value) {
+                            assetsNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_IMOBILIZADO }
+                                .forEach { asset ->
                                     BalanceSheetItemRow(
                                         asset,
                                         isBalanceSheetItemsDeleteItemDialog,
@@ -1565,44 +1554,91 @@ private fun BalanceSheetItemsScreenContent(
                                         balanceSheetItemLevel4Description,
                                         balanceSheetItemValue
                                     )
-                            }
+                                }
+                        }
+
+                        val assetsNonCurrentExpanded4 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(
+                            assetsNonCurrentExpanded4,
+                            ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_ATIVOS_INTANGIVEIS,
+                            3
+                        )
+                        if (assetsNonCurrentExpanded4.value) {
+                            assetsNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_ATIVO_NAO_CIRCULANTE_ATIVOS_INTANGIVEIS }
+                                .forEach { asset ->
+                                    BalanceSheetItemRow(
+                                        asset,
+                                        isBalanceSheetItemsDeleteItemDialog,
+                                        isBalanceSheetItemsEditItemScreen,
+                                        balanceSheetItemId,
+                                        balanceSheetItemLevel1,
+                                        balanceSheetItemLevel2,
+                                        balanceSheetItemLevel3,
+                                        balanceSheetItemLevel4Description,
+                                        balanceSheetItemValue
+                                    )
+                                }
+                        }
+
                     }
-
                 }
-            }
 
-            val liabilitiesExpanded = remember { mutableStateOf(false) }
-            displayEachExpandableTitleRow(liabilitiesExpanded, ACCOUNTING_ACCOUNTS_LEVEL1_PASSIVO,0)
-            if (liabilitiesExpanded.value){
+                val liabilitiesExpanded = remember { mutableStateOf(false) }
+                displayEachExpandableTitleRow(liabilitiesExpanded, ACCOUNTING_ACCOUNTS_LEVEL1_PASSIVO,0)
+                if (liabilitiesExpanded.value){
 
-                val liabilitiesCurrentExpanded = remember { mutableStateOf(false) }
-                displayEachExpandableTitleRow(liabilitiesCurrentExpanded, ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_CIRCULANTE,2)
-                if (liabilitiesCurrentExpanded.value){
+                    val liabilitiesCurrentExpanded = remember { mutableStateOf(false) }
+                    displayEachExpandableTitleRow(liabilitiesCurrentExpanded, ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_CIRCULANTE,2)
+                    if (liabilitiesCurrentExpanded.value){
 
 
-                    val liabilitiesCurrentExpanded1 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(liabilitiesCurrentExpanded1, ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_CIRCULANTE_FINANCEIRO,3)
-                    if (liabilitiesCurrentExpanded1.value){
-                        liabilitiesCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_CIRCULANTE_FINANCEIRO }
-                            .forEach { asset ->
-                            BalanceSheetItemRow(asset,
-                                isBalanceSheetItemsDeleteItemDialog,
-                                isBalanceSheetItemsEditItemScreen,
-                                balanceSheetItemId,
-                                balanceSheetItemLevel1,
-                                balanceSheetItemLevel2,
-                                balanceSheetItemLevel3,
-                                balanceSheetItemLevel4Description,
-                                balanceSheetItemValue)
+                        val liabilitiesCurrentExpanded1 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(liabilitiesCurrentExpanded1, ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_CIRCULANTE_FINANCEIRO,3)
+                        if (liabilitiesCurrentExpanded1.value){
+                            liabilitiesCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_CIRCULANTE_FINANCEIRO }
+                                .forEach { asset ->
+                                    BalanceSheetItemRow(asset,
+                                        isBalanceSheetItemsDeleteItemDialog,
+                                        isBalanceSheetItemsEditItemScreen,
+                                        balanceSheetItemId,
+                                        balanceSheetItemLevel1,
+                                        balanceSheetItemLevel2,
+                                        balanceSheetItemLevel3,
+                                        balanceSheetItemLevel4Description,
+                                        balanceSheetItemValue)
+                                }
+                        }
+
+
+                        val liabilitiesCurrentExpanded2 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(liabilitiesCurrentExpanded2, ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_CIRCULANTE_OPERACIONAL,3)
+                        if (liabilitiesCurrentExpanded2.value){
+                            liabilitiesCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_CIRCULANTE_OPERACIONAL }
+                                .forEach { asset ->
+                                    BalanceSheetItemRow(asset,
+                                        isBalanceSheetItemsDeleteItemDialog,
+                                        isBalanceSheetItemsEditItemScreen,
+                                        balanceSheetItemId,
+                                        balanceSheetItemLevel1,
+                                        balanceSheetItemLevel2,
+                                        balanceSheetItemLevel3,
+                                        balanceSheetItemLevel4Description,
+                                        balanceSheetItemValue)
+                                }
                         }
                     }
 
+                    val liabilitiesNonCurrentExpanded = remember { mutableStateOf(false) }
+                    displayEachExpandableTitleRow(liabilitiesNonCurrentExpanded, ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_NAO_CIRCULANTE,2)
 
-                    val liabilitiesCurrentExpanded2 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(liabilitiesCurrentExpanded2, ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_CIRCULANTE_OPERACIONAL,3)
-                    if (liabilitiesCurrentExpanded2.value){
-                        liabilitiesCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_CIRCULANTE_OPERACIONAL }
-                            .forEach { asset ->
+                    if (liabilitiesNonCurrentExpanded.value){
+
+
+                        val liabilitiesNonCurrentExpanded1 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(liabilitiesNonCurrentExpanded1,
+                            ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_EMPRESTIMOS_E_FINANCIAMENTOS_DE_LONGO_PRAZO,3)
+                        if (liabilitiesNonCurrentExpanded1.value){
+                            liabilitiesNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_EMPRESTIMOS_E_FINANCIAMENTOS_DE_LONGO_PRAZO }.forEach { asset->
                                 BalanceSheetItemRow(asset,
                                     isBalanceSheetItemsDeleteItemDialog,
                                     isBalanceSheetItemsEditItemScreen,
@@ -1613,213 +1649,189 @@ private fun BalanceSheetItemsScreenContent(
                                     balanceSheetItemLevel4Description,
                                     balanceSheetItemValue)
                             }
-                    }
-                }
-
-                val liabilitiesNonCurrentExpanded = remember { mutableStateOf(false) }
-                displayEachExpandableTitleRow(liabilitiesNonCurrentExpanded, ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_NAO_CIRCULANTE,2)
-
-                if (liabilitiesNonCurrentExpanded.value){
+                        }
 
 
-                    val liabilitiesNonCurrentExpanded1 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(liabilitiesNonCurrentExpanded1,
-                        ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_EMPRESTIMOS_E_FINANCIAMENTOS_DE_LONGO_PRAZO,3)
-                    if (liabilitiesNonCurrentExpanded1.value){
-                        liabilitiesNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_EMPRESTIMOS_E_FINANCIAMENTOS_DE_LONGO_PRAZO }.forEach { asset->
-                            BalanceSheetItemRow(asset,
-                                isBalanceSheetItemsDeleteItemDialog,
-                                isBalanceSheetItemsEditItemScreen,
-                                balanceSheetItemId,
-                                balanceSheetItemLevel1,
-                                balanceSheetItemLevel2,
-                                balanceSheetItemLevel3,
-                                balanceSheetItemLevel4Description,
-                                balanceSheetItemValue)
+                        val liabilitiesNonCurrentExpanded2 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(liabilitiesNonCurrentExpanded2,
+                            ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_DEBENTURES,3)
+                        if (liabilitiesNonCurrentExpanded2.value){
+                            liabilitiesNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_DEBENTURES }.forEach { asset->
+                                BalanceSheetItemRow(asset,
+                                    isBalanceSheetItemsDeleteItemDialog,
+                                    isBalanceSheetItemsEditItemScreen,
+                                    balanceSheetItemId,
+                                    balanceSheetItemLevel1,
+                                    balanceSheetItemLevel2,
+                                    balanceSheetItemLevel3,
+                                    balanceSheetItemLevel4Description,
+                                    balanceSheetItemValue)
+                            }
+                        }
+
+
+                        val liabilitiesNonCurrentExpanded3 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(liabilitiesNonCurrentExpanded3,
+                            ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_OBRIGACOES_FISCAIS_E_TRABALHISTAS_DE_LONGO_PRAZO,3)
+                        if (liabilitiesNonCurrentExpanded3.value){
+                            liabilitiesNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_OBRIGACOES_FISCAIS_E_TRABALHISTAS_DE_LONGO_PRAZO }.forEach { asset->
+                                BalanceSheetItemRow(asset,
+                                    isBalanceSheetItemsDeleteItemDialog,
+                                    isBalanceSheetItemsEditItemScreen,
+                                    balanceSheetItemId,
+                                    balanceSheetItemLevel1,
+                                    balanceSheetItemLevel2,
+                                    balanceSheetItemLevel3,
+                                    balanceSheetItemLevel4Description,
+                                    balanceSheetItemValue)
+                            }
+                        }
+
+
+                        val liabilitiesNonCurrentExpanded4 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(liabilitiesNonCurrentExpanded4,
+                            ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_PROVISOES_PARA_CONTINGENCIAS,3)
+                        if (liabilitiesNonCurrentExpanded4.value){
+                            liabilitiesNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_PROVISOES_PARA_CONTINGENCIAS }.forEach { asset->
+                                BalanceSheetItemRow(asset,
+                                    isBalanceSheetItemsDeleteItemDialog,
+                                    isBalanceSheetItemsEditItemScreen,
+                                    balanceSheetItemId,
+                                    balanceSheetItemLevel1,
+                                    balanceSheetItemLevel2,
+                                    balanceSheetItemLevel3,
+                                    balanceSheetItemLevel4Description,
+                                    balanceSheetItemValue)
+                            }
+                        }
+
+
+                        val liabilitiesNonCurrentExpanded5 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(liabilitiesNonCurrentExpanded5,
+                            ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_ARRENDAMENTO_MERCANTIL_FINANCEIRO,3)
+                        if (liabilitiesNonCurrentExpanded5.value){
+                            liabilitiesNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_ARRENDAMENTO_MERCANTIL_FINANCEIRO }.forEach { asset->
+                                BalanceSheetItemRow(asset,
+                                    isBalanceSheetItemsDeleteItemDialog,
+                                    isBalanceSheetItemsEditItemScreen,
+                                    balanceSheetItemId,
+                                    balanceSheetItemLevel1,
+                                    balanceSheetItemLevel2,
+                                    balanceSheetItemLevel3,
+                                    balanceSheetItemLevel4Description,
+                                    balanceSheetItemValue)
+                            }
                         }
                     }
 
+                    val netWorthExpanded = remember { mutableStateOf(false) }
+                    displayEachExpandableTitleRow(netWorthExpanded, ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_PATRIMONIO_LIQUIDO,2)
+                    if (netWorthExpanded.value) {
 
-                    val liabilitiesNonCurrentExpanded2 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(liabilitiesNonCurrentExpanded2,
-                        ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_DEBENTURES,3)
-                    if (liabilitiesNonCurrentExpanded2.value){
-                        liabilitiesNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_DEBENTURES }.forEach { asset->
-                            BalanceSheetItemRow(asset,
-                                isBalanceSheetItemsDeleteItemDialog,
-                                isBalanceSheetItemsEditItemScreen,
-                                balanceSheetItemId,
-                                balanceSheetItemLevel1,
-                                balanceSheetItemLevel2,
-                                balanceSheetItemLevel3,
-                                balanceSheetItemLevel4Description,
-                                balanceSheetItemValue)
+                        val netWorthExpanded1 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(netWorthExpanded1,
+                            ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_CAPITAL_SOCIAL,3)
+                        if (netWorthExpanded1.value){
+                            netWorth.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_PATRIMONIO_LIQUIDO }.forEach { asset->
+                                BalanceSheetItemRow(asset,
+                                    isBalanceSheetItemsDeleteItemDialog,
+                                    isBalanceSheetItemsEditItemScreen,
+                                    balanceSheetItemId,
+                                    balanceSheetItemLevel1,
+                                    balanceSheetItemLevel2,
+                                    balanceSheetItemLevel3,
+                                    balanceSheetItemLevel4Description,
+                                    balanceSheetItemValue)
+                            }
                         }
-                    }
 
-
-                    val liabilitiesNonCurrentExpanded3 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(liabilitiesNonCurrentExpanded3,
-                        ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_OBRIGACOES_FISCAIS_E_TRABALHISTAS_DE_LONGO_PRAZO,3)
-                    if (liabilitiesNonCurrentExpanded3.value){
-                        liabilitiesNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_OBRIGACOES_FISCAIS_E_TRABALHISTAS_DE_LONGO_PRAZO }.forEach { asset->
-                            BalanceSheetItemRow(asset,
-                                isBalanceSheetItemsDeleteItemDialog,
-                                isBalanceSheetItemsEditItemScreen,
-                                balanceSheetItemId,
-                                balanceSheetItemLevel1,
-                                balanceSheetItemLevel2,
-                                balanceSheetItemLevel3,
-                                balanceSheetItemLevel4Description,
-                                balanceSheetItemValue)
+                        val netWorthExpanded2 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(netWorthExpanded2,
+                            ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_RESERVAS_DE_CAPITAL,3)
+                        if (netWorthExpanded2.value){
+                            netWorth.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_RESERVAS_DE_CAPITAL }.forEach { asset->
+                                BalanceSheetItemRow(asset,
+                                    isBalanceSheetItemsDeleteItemDialog,
+                                    isBalanceSheetItemsEditItemScreen,
+                                    balanceSheetItemId,
+                                    balanceSheetItemLevel1,
+                                    balanceSheetItemLevel2,
+                                    balanceSheetItemLevel3,
+                                    balanceSheetItemLevel4Description,
+                                    balanceSheetItemValue)
+                            }
                         }
-                    }
 
-
-                    val liabilitiesNonCurrentExpanded4 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(liabilitiesNonCurrentExpanded4,
-                        ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_PROVISOES_PARA_CONTINGENCIAS,3)
-                    if (liabilitiesNonCurrentExpanded4.value){
-                        liabilitiesNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_PROVISOES_PARA_CONTINGENCIAS }.forEach { asset->
-                            BalanceSheetItemRow(asset,
-                                isBalanceSheetItemsDeleteItemDialog,
-                                isBalanceSheetItemsEditItemScreen,
-                                balanceSheetItemId,
-                                balanceSheetItemLevel1,
-                                balanceSheetItemLevel2,
-                                balanceSheetItemLevel3,
-                                balanceSheetItemLevel4Description,
-                                balanceSheetItemValue)
+                        val netWorthExpanded3 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(netWorthExpanded3,
+                            ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_AJUSTES_DE_AVALIACAO_PATRIMONIAL,3)
+                        if (netWorthExpanded3.value){
+                            netWorth.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_AJUSTES_DE_AVALIACAO_PATRIMONIAL }.forEach { asset->
+                                BalanceSheetItemRow(asset,
+                                    isBalanceSheetItemsDeleteItemDialog,
+                                    isBalanceSheetItemsEditItemScreen,
+                                    balanceSheetItemId,
+                                    balanceSheetItemLevel1,
+                                    balanceSheetItemLevel2,
+                                    balanceSheetItemLevel3,
+                                    balanceSheetItemLevel4Description,
+                                    balanceSheetItemValue)
+                            }
                         }
-                    }
 
-
-                    val liabilitiesNonCurrentExpanded5 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(liabilitiesNonCurrentExpanded5,
-                        ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_ARRENDAMENTO_MERCANTIL_FINANCEIRO,3)
-                    if (liabilitiesNonCurrentExpanded5.value){
-                        liabilitiesNonCurrent.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PASSIVO_NAO_CIRCULANTE_ARRENDAMENTO_MERCANTIL_FINANCEIRO }.forEach { asset->
-                            BalanceSheetItemRow(asset,
-                                isBalanceSheetItemsDeleteItemDialog,
-                                isBalanceSheetItemsEditItemScreen,
-                                balanceSheetItemId,
-                                balanceSheetItemLevel1,
-                                balanceSheetItemLevel2,
-                                balanceSheetItemLevel3,
-                                balanceSheetItemLevel4Description,
-                                balanceSheetItemValue)
+                        val netWorthExpanded4 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(netWorthExpanded4,
+                            ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_RESERVAS_DE_LUCROS,3)
+                        if (netWorthExpanded4.value){
+                            netWorth.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_RESERVAS_DE_LUCROS }.forEach { asset->
+                                BalanceSheetItemRow(asset,
+                                    isBalanceSheetItemsDeleteItemDialog,
+                                    isBalanceSheetItemsEditItemScreen,
+                                    balanceSheetItemId,
+                                    balanceSheetItemLevel1,
+                                    balanceSheetItemLevel2,
+                                    balanceSheetItemLevel3,
+                                    balanceSheetItemLevel4Description,
+                                    balanceSheetItemValue)
+                            }
                         }
-                    }
-                }
 
-                val netWorthExpanded = remember { mutableStateOf(false) }
-                displayEachExpandableTitleRow(netWorthExpanded, ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_PATRIMONIO_LIQUIDO,2)
-                if (netWorthExpanded.value) {
-
-                    val netWorthExpanded1 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(netWorthExpanded1,
-                    ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_CAPITAL_SOCIAL,3)
-                    if (netWorthExpanded1.value){
-                    netWorth.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL2_PASSIVO_PATRIMONIO_LIQUIDO }.forEach { asset->
-                        BalanceSheetItemRow(asset,
-                            isBalanceSheetItemsDeleteItemDialog,
-                            isBalanceSheetItemsEditItemScreen,
-                            balanceSheetItemId,
-                            balanceSheetItemLevel1,
-                            balanceSheetItemLevel2,
-                            balanceSheetItemLevel3,
-                            balanceSheetItemLevel4Description,
-                            balanceSheetItemValue)
+                        val netWorthExpanded5 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(netWorthExpanded5,
+                            ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_ACOES_EM_TESOURARIA,3)
+                        if (netWorthExpanded5.value){
+                            netWorth.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_ACOES_EM_TESOURARIA }.forEach { asset->
+                                BalanceSheetItemRow(asset,
+                                    isBalanceSheetItemsDeleteItemDialog,
+                                    isBalanceSheetItemsEditItemScreen,
+                                    balanceSheetItemId,
+                                    balanceSheetItemLevel1,
+                                    balanceSheetItemLevel2,
+                                    balanceSheetItemLevel3,
+                                    balanceSheetItemLevel4Description,
+                                    balanceSheetItemValue)
+                            }
                         }
-                    }
 
-                    val netWorthExpanded2 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(netWorthExpanded2,
-                    ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_RESERVAS_DE_CAPITAL,3)
-                    if (netWorthExpanded2.value){
-                    netWorth.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_RESERVAS_DE_CAPITAL }.forEach { asset->
-                        BalanceSheetItemRow(asset,
-                            isBalanceSheetItemsDeleteItemDialog,
-                            isBalanceSheetItemsEditItemScreen,
-                            balanceSheetItemId,
-                            balanceSheetItemLevel1,
-                            balanceSheetItemLevel2,
-                            balanceSheetItemLevel3,
-                            balanceSheetItemLevel4Description,
-                            balanceSheetItemValue)
-                        }
-                    }
-
-                    val netWorthExpanded3 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(netWorthExpanded3,
-                    ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_AJUSTES_DE_AVALIACAO_PATRIMONIAL,3)
-                    if (netWorthExpanded3.value){
-                    netWorth.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_AJUSTES_DE_AVALIACAO_PATRIMONIAL }.forEach { asset->
-                        BalanceSheetItemRow(asset,
-                            isBalanceSheetItemsDeleteItemDialog,
-                            isBalanceSheetItemsEditItemScreen,
-                            balanceSheetItemId,
-                            balanceSheetItemLevel1,
-                            balanceSheetItemLevel2,
-                            balanceSheetItemLevel3,
-                            balanceSheetItemLevel4Description,
-                            balanceSheetItemValue)
-                        }
-                    }
-
-                    val netWorthExpanded4 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(netWorthExpanded4,
-                    ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_RESERVAS_DE_LUCROS,3)
-                    if (netWorthExpanded4.value){
-                    netWorth.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_RESERVAS_DE_LUCROS }.forEach { asset->
-                        BalanceSheetItemRow(asset,
-                            isBalanceSheetItemsDeleteItemDialog,
-                            isBalanceSheetItemsEditItemScreen,
-                            balanceSheetItemId,
-                            balanceSheetItemLevel1,
-                            balanceSheetItemLevel2,
-                            balanceSheetItemLevel3,
-                            balanceSheetItemLevel4Description,
-                            balanceSheetItemValue)
-                        }
-                    }
-
-                    val netWorthExpanded5 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(netWorthExpanded5,
-                    ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_ACOES_EM_TESOURARIA,3)
-                    if (netWorthExpanded5.value){
-                    netWorth.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_ACOES_EM_TESOURARIA }.forEach { asset->
-                        BalanceSheetItemRow(asset,
-                            isBalanceSheetItemsDeleteItemDialog,
-                            isBalanceSheetItemsEditItemScreen,
-                            balanceSheetItemId,
-                            balanceSheetItemLevel1,
-                            balanceSheetItemLevel2,
-                            balanceSheetItemLevel3,
-                            balanceSheetItemLevel4Description,
-                            balanceSheetItemValue)
-                        }
-                    }
-
-                    val netWorthExpanded6 = remember { mutableStateOf(false) }
-                    displayEachExpandableTitleRow(netWorthExpanded6,
-                    ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_PREJUIZOS_ACUMULADOS,3)
-                    if (netWorthExpanded6.value){
-                    netWorth.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_PREJUIZOS_ACUMULADOS }.forEach { asset->
-                        BalanceSheetItemRow(asset,
-                            isBalanceSheetItemsDeleteItemDialog,
-                            isBalanceSheetItemsEditItemScreen,
-                            balanceSheetItemId,
-                            balanceSheetItemLevel1,
-                            balanceSheetItemLevel2,
-                            balanceSheetItemLevel3,
-                            balanceSheetItemLevel4Description,
-                            balanceSheetItemValue)
+                        val netWorthExpanded6 = remember { mutableStateOf(false) }
+                        displayEachExpandableTitleRow(netWorthExpanded6,
+                            ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_PREJUIZOS_ACUMULADOS,3)
+                        if (netWorthExpanded6.value){
+                            netWorth.filter { it.level3 == ACCOUNTING_ACCOUNTS_LEVEL3_PATRIMONIO_LIQUIDO_PREJUIZOS_ACUMULADOS }.forEach { asset->
+                                BalanceSheetItemRow(asset,
+                                    isBalanceSheetItemsDeleteItemDialog,
+                                    isBalanceSheetItemsEditItemScreen,
+                                    balanceSheetItemId,
+                                    balanceSheetItemLevel1,
+                                    balanceSheetItemLevel2,
+                                    balanceSheetItemLevel3,
+                                    balanceSheetItemLevel4Description,
+                                    balanceSheetItemValue)
+                            }
                         }
                     }
                 }
             }
-
         }
     }
 

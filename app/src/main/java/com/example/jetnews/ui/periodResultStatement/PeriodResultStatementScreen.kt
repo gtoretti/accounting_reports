@@ -1108,7 +1108,7 @@ private fun PeriodResultStatementItemsScreenContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 5.dp)
-                .verticalScroll(rememberScrollState()),
+                //.verticalScroll(rememberScrollState()),
         ) {
 
             Column(
@@ -1180,295 +1180,335 @@ private fun PeriodResultStatementItemsScreenContent(
                 }
             }
 
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+            )
+            Spacer(Modifier.height(10.dp))
 
-
-            val operatingExpanded = remember { mutableStateOf(false) }
-            displayEachExpandableTitleRow(operatingExpanded, PERIOD_RESULT_STATEMENT_TYPE_OPERATING,0)
-
-            if (operatingExpanded.value){
-                if (revenueList.isNotEmpty()){
-                    PeriodResultStatementItemRow(revenueList[0],
-                        isItemsPageDeleteItem,
-                        isPeriodResultStatementItemsEditItemScreen,
-                        periodResultStatementItemId,
-                        periodResultStatementItemType,
-                        periodResultStatementItemDescription,
-                        periodResultStatementItemValue)
-                }
-
-                if (costOfSalesList.isNotEmpty()){
-                    PeriodResultStatementItemRow(costOfSalesList[0],
-                        isItemsPageDeleteItem,
-                        isPeriodResultStatementItemsEditItemScreen,
-                        periodResultStatementItemId,
-                        periodResultStatementItemType,
-                        periodResultStatementItemDescription,
-                        periodResultStatementItemValue)
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier
-                        .fillMaxWidth(0.82f)
-                ){
-                    Text(
-                        text = stringResource(R.string.period_results_statement_gross_profit),
-                        style = TextStyle(fontFamily = FontFamily.SansSerif),
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                    )
-                    Text(
-                        text = grossProfitText,
-                        style = TextStyle(fontFamily = FontFamily.SansSerif),
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                    )
-                }
-
-                val otherOperatingRevenuesList = operatingItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_OPERATING_OTHER_OPERATING_REVENUES }
-                if (otherOperatingRevenuesList.isNotEmpty()){
-                    PeriodResultStatementItemRow(otherOperatingRevenuesList[0],
-                        isItemsPageDeleteItem,
-                        isPeriodResultStatementItemsEditItemScreen,
-                        periodResultStatementItemId,
-                        periodResultStatementItemType,
-                        periodResultStatementItemDescription,
-                        periodResultStatementItemValue)
-                }
-
-                if (sellingExpensesList.isNotEmpty()){
-                    PeriodResultStatementItemRow(sellingExpensesList[0],
-                        isItemsPageDeleteItem,
-                        isPeriodResultStatementItemsEditItemScreen,
-                        periodResultStatementItemId,
-                        periodResultStatementItemType,
-                        periodResultStatementItemDescription,
-                        periodResultStatementItemValue)
-                }
-
-                if (researchAndDevelopmentExpensesList.isNotEmpty()){
-                    PeriodResultStatementItemRow(researchAndDevelopmentExpensesList[0],
-                        isItemsPageDeleteItem,
-                        isPeriodResultStatementItemsEditItemScreen,
-                        periodResultStatementItemId,
-                        periodResultStatementItemType,
-                        periodResultStatementItemDescription,
-                        periodResultStatementItemValue)
-                }
-
-                if (generalAndAdministrativeExpensesList.isNotEmpty()){
-                    PeriodResultStatementItemRow(generalAndAdministrativeExpensesList[0],
-                        isItemsPageDeleteItem,
-                        isPeriodResultStatementItemsEditItemScreen,
-                        periodResultStatementItemId,
-                        periodResultStatementItemType,
-                        periodResultStatementItemDescription,
-                        periodResultStatementItemValue)
-                }
-
-                if (goodwillImpairmentLossExpensesList.isNotEmpty()){
-                    PeriodResultStatementItemRow(goodwillImpairmentLossExpensesList[0],
-                        isItemsPageDeleteItem,
-                        isPeriodResultStatementItemsEditItemScreen,
-                        periodResultStatementItemId,
-                        periodResultStatementItemType,
-                        periodResultStatementItemDescription,
-                        periodResultStatementItemValue)
-                }
-
-                if (otherOperatingExpensesList.isNotEmpty()){
-                    PeriodResultStatementItemRow(otherOperatingExpensesList[0],
-                        isItemsPageDeleteItem,
-                        isPeriodResultStatementItemsEditItemScreen,
-                        periodResultStatementItemId,
-                        periodResultStatementItemType,
-                        periodResultStatementItemDescription,
-                        periodResultStatementItemValue)
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier
-                        .fillMaxWidth(0.82f)
-                ){
-                    Text(
-                        text = stringResource(R.string.period_results_statement_operating_profit),
-                        style = TextStyle(fontFamily = FontFamily.SansSerif),
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                    )
-                    Text(
-                        text = operatingProfitText,
-                        style = TextStyle(fontFamily = FontFamily.SansSerif),
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                    )
-                }
-            }
-
-            val investingExpanded = remember { mutableStateOf(false) }
-            displayEachExpandableTitleRow(investingExpanded, PERIOD_RESULT_STATEMENT_TYPE_INVESTING,0)
-            if (investingExpanded.value){
-
-                if (investingProfitSharingList.isNotEmpty()){
-                    PeriodResultStatementItemRow(investingProfitSharingList[0],
-                        isItemsPageDeleteItem,
-                        isPeriodResultStatementItemsEditItemScreen,
-                        periodResultStatementItemId,
-                        periodResultStatementItemType,
-                        periodResultStatementItemDescription,
-                        periodResultStatementItemValue)
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier
-                        .fillMaxWidth(0.82f)
-                ){
-                    Text(
-                        text = stringResource(R.string.period_results_statement_profit_before_financing_and_taxes),
-                        modifier = Modifier
-                            .fillMaxWidth(0.5f),
-                        style = TextStyle(fontFamily = FontFamily.SansSerif),
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                    )
-                    Text(
-                        text = profitBeforeFinancingAndTaxesText,
-                        style = TextStyle(fontFamily = FontFamily.SansSerif),
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                    )
-                }
-            }
-
-            val financingExpanded = remember { mutableStateOf(false) }
-            displayEachExpandableTitleRow(financingExpanded, PERIOD_RESULT_STATEMENT_TYPE_FINANCING,0)
-            if (financingExpanded.value){
-
-                if (interestExpensesOnLoansAndLeaseLiabilitiesList.isNotEmpty()) {
-                    PeriodResultStatementItemRow(interestExpensesOnLoansAndLeaseLiabilitiesList[0],
-                        isItemsPageDeleteItem,
-                        isPeriodResultStatementItemsEditItemScreen,
-                        periodResultStatementItemId,
-                        periodResultStatementItemType,
-                        periodResultStatementItemDescription,
-                        periodResultStatementItemValue,
-                    )
-                }
-
-                if (retirementExpensesList.isNotEmpty()) {
-                    PeriodResultStatementItemRow(retirementExpensesList[0],
-                        isItemsPageDeleteItem,
-                        isPeriodResultStatementItemsEditItemScreen,
-                        periodResultStatementItemId,
-                        periodResultStatementItemType,
-                        periodResultStatementItemDescription,
-                        periodResultStatementItemValue,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier
-                        .fillMaxWidth(0.82f)
-                ){
-                    Text(
-                        text = stringResource(R.string.period_results_statement_profit_before_taxes),
-                        modifier = Modifier
-                            .fillMaxWidth(0.5f),
-                        style = TextStyle(fontFamily = FontFamily.SansSerif),
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                    )
-                    Text(
-                        text = profitBeforeTaxesText,
-                        style = TextStyle(fontFamily = FontFamily.SansSerif),
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                    )
-                }
-            }
-
-            val taxOnProfitExpanded = remember { mutableStateOf(false) }
-            displayEachExpandableTitleRow(taxOnProfitExpanded, PERIOD_RESULT_STATEMENT_TYPE_TAX_ON_PROFIT,0)
-            if (taxOnProfitExpanded.value){
-                if (taxExpensesOnProfitList.isNotEmpty()) {
-                    PeriodResultStatementItemRow(taxExpensesOnProfitList[0],
-                        isItemsPageDeleteItem,
-                        isPeriodResultStatementItemsEditItemScreen,
-                        periodResultStatementItemId,
-                        periodResultStatementItemType,
-                        periodResultStatementItemDescription,
-                        periodResultStatementItemValue,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier
-                        .fillMaxWidth(0.82f)
-                ){
-                    Text(
-                        text = stringResource(R.string.period_results_statement_profit_from_continuing_operations),
-                        modifier = Modifier
-                            .fillMaxWidth(0.5f),
-                        style = TextStyle(fontFamily = FontFamily.SansSerif),
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                    )
-                    Text(
-                        text = profitFromContinuingOperationsText,
-                        style = TextStyle(fontFamily = FontFamily.SansSerif),
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                    )
-                }
-            }
-
-
-            val operationDiscontinuedExpanded = remember { mutableStateOf(false) }
-            displayEachExpandableTitleRow(operationDiscontinuedExpanded, PERIOD_RESULT_STATEMENT_TYPE_OPERATION_DISCONTINUED,0)
-            if (operationDiscontinuedExpanded.value){
-
-                if (lossFromDiscontinuedOperationsList.isNotEmpty()) {
-                    PeriodResultStatementItemRow(lossFromDiscontinuedOperationsList[0],
-                        isItemsPageDeleteItem,
-                        isPeriodResultStatementItemsEditItemScreen,
-                        periodResultStatementItemId,
-                        periodResultStatementItemType,
-                        periodResultStatementItemDescription,
-                        periodResultStatementItemValue,
-                    )
-                }
-            }
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
+            Column(
+                horizontalAlignment = Alignment.Start,
                 modifier = Modifier
-                    .fillMaxWidth(0.82f)
-            ){
-                Text(
-                    text = stringResource(R.string.period_results_statement_net_profit),
-                    modifier = Modifier
-                        .fillMaxWidth(0.5f),
-                    style = TextStyle(fontFamily = FontFamily.SansSerif),
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold,
-                )
-                Text(
-                    text = netProfitText,
-                    style = TextStyle(fontFamily = FontFamily.SansSerif),
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold,
-                )
-            }
+                    .fillMaxWidth()
+                    .padding(horizontal = 5.dp).verticalScroll(rememberScrollState()),
 
+                ) {
+                val operatingExpanded = remember { mutableStateOf(false) }
+                displayEachExpandableTitleRow(operatingExpanded, PERIOD_RESULT_STATEMENT_TYPE_OPERATING,0)
+
+                if (operatingExpanded.value){
+                    if (revenueList.isNotEmpty()){
+                        PeriodResultStatementItemRow(revenueList[0],
+                            isItemsPageDeleteItem,
+                            isPeriodResultStatementItemsEditItemScreen,
+                            periodResultStatementItemId,
+                            periodResultStatementItemType,
+                            periodResultStatementItemDescription,
+                            periodResultStatementItemValue)
+                    }
+
+                    if (costOfSalesList.isNotEmpty()){
+                        PeriodResultStatementItemRow(costOfSalesList[0],
+                            isItemsPageDeleteItem,
+                            isPeriodResultStatementItemsEditItemScreen,
+                            periodResultStatementItemId,
+                            periodResultStatementItemType,
+                            periodResultStatementItemDescription,
+                            periodResultStatementItemValue)
+                    }
+
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                    )
+                    Spacer(Modifier.height(10.dp))
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .fillMaxWidth(0.82f)
+                    ){
+                        Text(
+                            text = stringResource(R.string.period_results_statement_gross_profit),
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                        Text(
+                            text = grossProfitText,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
+
+                    val otherOperatingRevenuesList = operatingItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_OPERATING_OTHER_OPERATING_REVENUES }
+                    if (otherOperatingRevenuesList.isNotEmpty()){
+                        PeriodResultStatementItemRow(otherOperatingRevenuesList[0],
+                            isItemsPageDeleteItem,
+                            isPeriodResultStatementItemsEditItemScreen,
+                            periodResultStatementItemId,
+                            periodResultStatementItemType,
+                            periodResultStatementItemDescription,
+                            periodResultStatementItemValue)
+                    }
+
+                    if (sellingExpensesList.isNotEmpty()){
+                        PeriodResultStatementItemRow(sellingExpensesList[0],
+                            isItemsPageDeleteItem,
+                            isPeriodResultStatementItemsEditItemScreen,
+                            periodResultStatementItemId,
+                            periodResultStatementItemType,
+                            periodResultStatementItemDescription,
+                            periodResultStatementItemValue)
+                    }
+
+                    if (researchAndDevelopmentExpensesList.isNotEmpty()){
+                        PeriodResultStatementItemRow(researchAndDevelopmentExpensesList[0],
+                            isItemsPageDeleteItem,
+                            isPeriodResultStatementItemsEditItemScreen,
+                            periodResultStatementItemId,
+                            periodResultStatementItemType,
+                            periodResultStatementItemDescription,
+                            periodResultStatementItemValue)
+                    }
+
+                    if (generalAndAdministrativeExpensesList.isNotEmpty()){
+                        PeriodResultStatementItemRow(generalAndAdministrativeExpensesList[0],
+                            isItemsPageDeleteItem,
+                            isPeriodResultStatementItemsEditItemScreen,
+                            periodResultStatementItemId,
+                            periodResultStatementItemType,
+                            periodResultStatementItemDescription,
+                            periodResultStatementItemValue)
+                    }
+
+                    if (goodwillImpairmentLossExpensesList.isNotEmpty()){
+                        PeriodResultStatementItemRow(goodwillImpairmentLossExpensesList[0],
+                            isItemsPageDeleteItem,
+                            isPeriodResultStatementItemsEditItemScreen,
+                            periodResultStatementItemId,
+                            periodResultStatementItemType,
+                            periodResultStatementItemDescription,
+                            periodResultStatementItemValue)
+                    }
+
+                    if (otherOperatingExpensesList.isNotEmpty()){
+                        PeriodResultStatementItemRow(otherOperatingExpensesList[0],
+                            isItemsPageDeleteItem,
+                            isPeriodResultStatementItemsEditItemScreen,
+                            periodResultStatementItemId,
+                            periodResultStatementItemType,
+                            periodResultStatementItemDescription,
+                            periodResultStatementItemValue)
+                    }
+
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                    )
+                    Spacer(Modifier.height(10.dp))
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .fillMaxWidth(0.82f)
+                    ){
+                        Text(
+                            text = stringResource(R.string.period_results_statement_operating_profit),
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                        Text(
+                            text = operatingProfitText,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
+                }
+
+                val investingExpanded = remember { mutableStateOf(false) }
+                displayEachExpandableTitleRow(investingExpanded, PERIOD_RESULT_STATEMENT_TYPE_INVESTING,0)
+                if (investingExpanded.value){
+
+                    if (investingProfitSharingList.isNotEmpty()){
+                        PeriodResultStatementItemRow(investingProfitSharingList[0],
+                            isItemsPageDeleteItem,
+                            isPeriodResultStatementItemsEditItemScreen,
+                            periodResultStatementItemId,
+                            periodResultStatementItemType,
+                            periodResultStatementItemDescription,
+                            periodResultStatementItemValue)
+                    }
+
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                    )
+                    Spacer(Modifier.height(10.dp))
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .fillMaxWidth(0.82f)
+                    ){
+                        Text(
+                            text = stringResource(R.string.period_results_statement_profit_before_financing_and_taxes),
+                            modifier = Modifier
+                                .fillMaxWidth(0.5f),
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                        Text(
+                            text = profitBeforeFinancingAndTaxesText,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
+                }
+
+                val financingExpanded = remember { mutableStateOf(false) }
+                displayEachExpandableTitleRow(financingExpanded, PERIOD_RESULT_STATEMENT_TYPE_FINANCING,0)
+                if (financingExpanded.value){
+
+                    if (interestExpensesOnLoansAndLeaseLiabilitiesList.isNotEmpty()) {
+                        PeriodResultStatementItemRow(interestExpensesOnLoansAndLeaseLiabilitiesList[0],
+                            isItemsPageDeleteItem,
+                            isPeriodResultStatementItemsEditItemScreen,
+                            periodResultStatementItemId,
+                            periodResultStatementItemType,
+                            periodResultStatementItemDescription,
+                            periodResultStatementItemValue,
+                        )
+                    }
+
+                    if (retirementExpensesList.isNotEmpty()) {
+                        PeriodResultStatementItemRow(retirementExpensesList[0],
+                            isItemsPageDeleteItem,
+                            isPeriodResultStatementItemsEditItemScreen,
+                            periodResultStatementItemId,
+                            periodResultStatementItemType,
+                            periodResultStatementItemDescription,
+                            periodResultStatementItemValue,
+                        )
+                    }
+
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                    )
+                    Spacer(Modifier.height(10.dp))
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .fillMaxWidth(0.82f)
+                    ){
+                        Text(
+                            text = stringResource(R.string.period_results_statement_profit_before_taxes),
+                            modifier = Modifier
+                                .fillMaxWidth(0.5f),
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                        Text(
+                            text = profitBeforeTaxesText,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
+                }
+
+                val taxOnProfitExpanded = remember { mutableStateOf(false) }
+                displayEachExpandableTitleRow(taxOnProfitExpanded, PERIOD_RESULT_STATEMENT_TYPE_TAX_ON_PROFIT,0)
+                if (taxOnProfitExpanded.value){
+                    if (taxExpensesOnProfitList.isNotEmpty()) {
+                        PeriodResultStatementItemRow(taxExpensesOnProfitList[0],
+                            isItemsPageDeleteItem,
+                            isPeriodResultStatementItemsEditItemScreen,
+                            periodResultStatementItemId,
+                            periodResultStatementItemType,
+                            periodResultStatementItemDescription,
+                            periodResultStatementItemValue,
+                        )
+                    }
+
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                    )
+                    Spacer(Modifier.height(10.dp))
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .fillMaxWidth(0.82f)
+                    ){
+                        Text(
+                            text = stringResource(R.string.period_results_statement_profit_from_continuing_operations),
+                            modifier = Modifier
+                                .fillMaxWidth(0.5f),
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                        Text(
+                            text = profitFromContinuingOperationsText,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
+                }
+
+
+                val operationDiscontinuedExpanded = remember { mutableStateOf(false) }
+                displayEachExpandableTitleRow(operationDiscontinuedExpanded, PERIOD_RESULT_STATEMENT_TYPE_OPERATION_DISCONTINUED,0)
+                if (operationDiscontinuedExpanded.value){
+
+                    if (lossFromDiscontinuedOperationsList.isNotEmpty()) {
+                        PeriodResultStatementItemRow(lossFromDiscontinuedOperationsList[0],
+                            isItemsPageDeleteItem,
+                            isPeriodResultStatementItemsEditItemScreen,
+                            periodResultStatementItemId,
+                            periodResultStatementItemType,
+                            periodResultStatementItemDescription,
+                            periodResultStatementItemValue,
+                        )
+                    }
+                }
+
+                HorizontalDivider(
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                )
+                Spacer(Modifier.height(10.dp))
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
+                        .fillMaxWidth(0.82f)
+                ){
+                    Text(
+                        text = stringResource(R.string.period_results_statement_net_profit),
+                        modifier = Modifier
+                            .fillMaxWidth(0.5f),
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Text(
+                        text = netProfitText,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
+            }
         }
     }
 

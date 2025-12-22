@@ -1106,6 +1106,11 @@ private fun EquityChangesStatementItemsScreenContent(
                 )
             }
         }
+        HorizontalDivider(
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+        )
+        Spacer(Modifier.height(10.dp))
+
         Column(
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
