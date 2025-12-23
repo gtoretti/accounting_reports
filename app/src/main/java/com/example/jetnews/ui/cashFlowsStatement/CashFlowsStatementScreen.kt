@@ -1438,7 +1438,8 @@ private fun CashFlowsStatementItemRow(
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
                     contentDescription = stringResource(R.string.cash_flows_statement_delete),
-                    modifier = Modifier
+                    modifier = Modifier,
+                    tint = Color.Red
                 )
             }
         }
@@ -2417,7 +2418,8 @@ private fun CashFlowsStatementHomeScreenContent(
                         Icon(
                             imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
                             contentDescription = stringResource(R.string.cash_flows_statement_delete),
-                            modifier = Modifier
+                            modifier = Modifier,
+                            tint = Color.Red
                         )
                     }
                 }

@@ -1773,7 +1773,8 @@ fun displayEachAccountingAccountLine(
             Icon(
                 imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
                 contentDescription = "Excluir",
-                modifier = Modifier
+                modifier = Modifier,
+                tint = Color.Red
             )
         }
     }

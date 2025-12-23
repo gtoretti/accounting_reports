@@ -2667,12 +2667,12 @@ private fun EquityChangesStatementHomeScreenContent(
                                 .fillMaxWidth()) {
                             Text(
                                 text = equityChangesStatement.name,
-                                style = MaterialTheme.typography.bodyMedium,
+                                style = TextStyle(fontFamily = FontFamily.SansSerif),
                                 color = MaterialTheme.colorScheme.primary,
                             )
                             Text(
                                 text = fmt.format(equityChangesStatement.startDate) + " - " + fmt.format(equityChangesStatement.endDate),
-                                style = MaterialTheme.typography.bodyMedium,
+                                style = TextStyle(fontFamily = FontFamily.SansSerif),
                                 color = MaterialTheme.colorScheme.primary,
                             )
                         }
@@ -2708,7 +2708,8 @@ private fun EquityChangesStatementHomeScreenContent(
                         Icon(
                             imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
                             contentDescription = stringResource(R.string.cash_flows_statement_delete),
-                            modifier = Modifier
+                            modifier = Modifier,
+                            tint = Color.Red
                         )
                     }
                 }

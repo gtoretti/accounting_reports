@@ -151,6 +151,12 @@
 
     <!-- explanatory_notes -->
     <string name="explanatory_notes_title">Notas Explicativas</string>
+    <string name="explanatory_notes_delete_note">Excluir Nota Explicativa:</string>
+    <string name="explanatory_notes_save">Salvar</string>
+    <string name="explanatory_notes_cancel">Cancelar</string>
+    <string name="explanatory_notes_added_success">Nota Explicativa adicionada com sucesso.</string>
+
+
 
     <!-- Balance Sheet Screen -->
     <string name="balance_sheet_title">Balanço Patrimonial</string>

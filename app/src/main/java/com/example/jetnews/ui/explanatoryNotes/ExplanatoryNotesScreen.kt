@@ -588,6 +588,8 @@ private fun ExplanatoryNotesAddScreenContent(
                 }
             )
 
+            val msgSuccess = stringResource(R.string.explanatory_notes_added_success)
+
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -599,7 +601,7 @@ private fun ExplanatoryNotesAddScreenContent(
                     },
                     ) {
                     Text(
-                        text = "Cancelar",
+                        text = stringResource(R.string.explanatory_notes_cancel),
                         style = TextStyle(
                             fontSize = 14.sp,
                         )
@@ -610,7 +612,7 @@ private fun ExplanatoryNotesAddScreenContent(
                         explanatoryNotesViewModel.saveExplanatoryNote(ExplanatoryNote(0,explanatoryNoteIndex.value,explanatoryNoteContent.value,0))
                         Toast.makeText(
                             context,
-                            "Nota Explicativa adicionada com sucesso.",
+                            msgSuccess,
                             Toast.LENGTH_SHORT,
                         ).show()
                         isAdding.value=false
@@ -618,7 +620,7 @@ private fun ExplanatoryNotesAddScreenContent(
 
                     ) {
                     Text(
-                        text = "Salvar",
+                        text = stringResource(R.string.explanatory_notes_save),
                         style = TextStyle(
                             fontSize = 14.sp,
                         )
@@ -652,7 +654,7 @@ fun ExplanatoryNoteDeleteDialog(
 
             title = {
                 Text(
-                    text = "Excluir Nota Explicativa:",
+                    text =  stringResource(R.string.explanatory_notes_delete_note),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.primary,
                     textAlign = TextAlign.Center

@@ -1931,7 +1931,8 @@ private fun BalanceSheetItemRow(
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
                     contentDescription = stringResource(R.string.balance_sheet_delete),
-                    modifier = Modifier
+                    modifier = Modifier,
+                    tint = Color.Red
                 )
             }
         }
@@ -2672,7 +2673,8 @@ private fun BalanceSheetHomeScreenContent(
                         Icon(
                             imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
                             contentDescription = stringResource(R.string.balance_sheet_delete),
-                            modifier = Modifier
+                            modifier = Modifier,
+                            tint = Color.Red
                         )
                     }
                 }
