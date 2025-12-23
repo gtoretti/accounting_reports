@@ -78,6 +78,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 
 
 import androidx.compose.ui.unit.dp
@@ -999,7 +1000,7 @@ private fun AccountingAccountAddScreenContent(
                 placeholder = { Text("") },
                 label = {
                     Text(
-                        text = "Conta Sintética:",
+                        text = stringResource(R.string.accounting_accounts_synthetic),
                     )
                 }
             )
@@ -1014,7 +1015,7 @@ private fun AccountingAccountAddScreenContent(
                 placeholder = { Text("") },
                 label = {
                     Text(
-                        text = "Conta Analítica:",
+                        text = stringResource(R.string.accounting_accounts_analytic),
                     )
                 }
             )
@@ -1031,18 +1032,20 @@ private fun AccountingAccountAddScreenContent(
 
                     ) {
                     Text(
-                        text = "Cancelar",
+                        text = stringResource(R.string.accounting_accounts_cancel),
                         style = TextStyle(
                             fontSize = 14.sp,
                         )
                     )
                 }
+
+                val addedMsg = stringResource(R.string.accounting_accounts_added_success)
                 Button(
                     onClick = {
                         accountingAccountsViewModel.saveAccountingAccount(AccountingAccount(0, accountingAccountType.value, accountingAccountlevel1.value,accountingAccountlevel2.value,accountingAccountlevel3.value,accountingAccountlevel4.value,description.value,0))
                         Toast.makeText(
                             context,
-                            "Conta contábil adicionada com sucesso.",
+                            addedMsg,
                             Toast.LENGTH_SHORT,
                         ).show()
                         isAdding.value=false
@@ -1050,7 +1053,7 @@ private fun AccountingAccountAddScreenContent(
 
                     ) {
                     Text(
-                        text = "Salvar",
+                        text = stringResource(R.string.accounting_accounts_save),
                         style = TextStyle(
                             fontSize = 14.sp,
                         )
@@ -1127,7 +1130,7 @@ private fun AccountingAccountsEditScreenContent(
                 placeholder = { Text("") },
                 label = {
                     Text(
-                        text = "Conta Sintética:",
+                        text = stringResource(R.string.accounting_accounts_synthetic),
                     )
                 }
             )
@@ -1142,7 +1145,7 @@ private fun AccountingAccountsEditScreenContent(
                 placeholder = { Text("") },
                 label = {
                     Text(
-                        text = "Conta Analítica:",
+                        text = stringResource(R.string.accounting_accounts_analytic),
                     )
                 }
             )
@@ -1172,18 +1175,20 @@ private fun AccountingAccountsEditScreenContent(
 
                     ) {
                     Text(
-                        text = "Cancelar",
+                        text = stringResource(R.string.accounting_accounts_cancel),
                         style = TextStyle(
                             fontSize = 14.sp,
                         )
                     )
                 }
+
+                val chgMsg = stringResource(R.string.accounting_accounts_changed_success)
                 Button(
                     onClick = {
                         accountingAccountsViewModel.saveAccountingAccount(AccountingAccount(isEditingId.value, type.value, level1.value,level2.value,level3.value,level4.value, description.value,0))
                         Toast.makeText(
                             context,
-                            "Conta contábil modificada com sucesso.",
+                            chgMsg,
                             Toast.LENGTH_SHORT,
                         ).show()
                         isEditing.value=false
@@ -1204,7 +1209,7 @@ private fun AccountingAccountsEditScreenContent(
 
                     ) {
                     Text(
-                        text = "Salvar",
+                        text = stringResource(R.string.accounting_accounts_save),
                         style = TextStyle(
                             fontSize = 14.sp,
                         )
@@ -1236,12 +1241,15 @@ fun AccountingAccountsDeleteDialog(
                 isDeleting.value = false
             },
             modifier = Modifier
-                .width(550.dp)
-                .height(500.dp),
+                .width(550.dp),
+                //.height(500.dp),
 
             title = {
                 Text(
-                    text = "Excluir Conta Contábil:",
+                    text = stringResource(R.string.accounting_accounts_delete_title),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Center
                 )
             },
             text = {
@@ -1254,7 +1262,9 @@ fun AccountingAccountsDeleteDialog(
                         verticalAlignment = Alignment.CenterVertically,
                     ){
                         Text(
-                            text = isDeletingType.value
+                            text = isDeletingType.value,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
                         )
                     }
 
@@ -1263,21 +1273,27 @@ fun AccountingAccountsDeleteDialog(
                             verticalAlignment = Alignment.CenterVertically,
                         ){
                             Text(
-                                text = isDeletingLevel1.value
+                                text = isDeletingLevel1.value,
+                                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                                color = MaterialTheme.colorScheme.primary,
                             )
                         }
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                         ){
                             Text(
-                                text = isDeletingLevel2.value
+                                text = isDeletingLevel2.value,
+                                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                                color = MaterialTheme.colorScheme.primary,
                             )
                         }
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                         ){
                             Text(
-                                text = isDeletingLevel3.value
+                                text = isDeletingLevel3.value,
+                                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                                color = MaterialTheme.colorScheme.primary,
                             )
                         }
                     }
@@ -1287,14 +1303,18 @@ fun AccountingAccountsDeleteDialog(
                         verticalAlignment = Alignment.CenterVertically,
                     ){
                         Text(
-                            text = isDeletingLevel4.value
+                            text = isDeletingLevel4.value,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
                         )
                     }
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                     ){
                         Text(
-                            text = isDeletingDescription.value
+                            text = isDeletingDescription.value,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
                         )
                     }
 
@@ -1323,13 +1343,14 @@ fun AccountingAccountsDeleteDialog(
                         }
                     ) {
                         Text(
-                            text = "Cancelar",
+                            text = stringResource(R.string.accounting_accounts_cancel),
                             style = TextStyle(
                                 fontSize = 14.sp,
                             )
                         )
                     }
 
+                    val deleteMsg=stringResource(R.string.accounting_accounts_deleted_success)
                     Button(
                         onClick = {
                             accountingAccountsViewModel.deleteAccountingAccount(AccountingAccount(isDeletingId.value, isDeletingType.value, isDeletingLevel1.value,isDeletingLevel2.value,isDeletingLevel3.value,isDeletingLevel4.value,isDeletingDescription.value,0))
@@ -1343,13 +1364,13 @@ fun AccountingAccountsDeleteDialog(
                             isDeletingDescription.value = ""
                             Toast.makeText(
                                 context,
-                                "Conta contábil excluída com sucesso.",
+                                deleteMsg,
                                 Toast.LENGTH_SHORT,
                             ).show()
                         },
                     ) {
                         Text(
-                            text = "Excluir",
+                            text = stringResource(R.string.accounting_accounts_delete),
                             style = TextStyle(
                                 fontSize = 14.sp,
                             )
@@ -1417,7 +1438,7 @@ fun TypeDropdownMenu(typeDropdownMenu: MutableState<String>, typeList: List<Stri
                         }
                     }
                     Text(
-                        text = "Tipo:",
+                        text = stringResource(R.string.accounting_accounts_type),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold
@@ -1486,7 +1507,7 @@ fun Level1DropdownMenu(level1DropdownMenu: MutableState<String>,level2DropdownMe
                         }
                     }
                     Text(
-                        text = "Conta Patrimonial:",
+                        text = stringResource(R.string.accounting_accounts_account_asset),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold
@@ -1554,7 +1575,7 @@ fun Level1TypeResultDropdownMenu(level1DropdownMenu: MutableState<String>, level
                         }
                     }
                     Text(
-                        text = "Subtipo:",
+                        text =  stringResource(R.string.accounting_accounts_subtype),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold
@@ -1622,7 +1643,7 @@ fun Level2DropdownMenu(level2DropdownMenu: MutableState<String>,level3DropdownMe
                         }
                     }
                     Text(
-                        text = "Liquidez:",
+                        text = stringResource(R.string.accounting_accounts_currency),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold
@@ -1691,7 +1712,7 @@ fun Level3DropdownMenu(level3DropdownMenu: MutableState<String>, level3List: Lis
                         }
                     }
                     Text(
-                        text = "Subtipo:",
+                        text = stringResource(R.string.accounting_accounts_subtype),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold
@@ -1757,6 +1778,27 @@ fun displayEachAccountingAccountLine(
         }
 
         TextButton(
+            modifier = Modifier.padding(1.dp),
+            onClick =
+                {
+                    isEditing.value=true
+                    isEditingType.value=accountingAccount.type
+                    isEditingLevel1.value=accountingAccount.level1
+                    isEditingLevel2.value=accountingAccount.level2
+                    isEditingLevel3.value=accountingAccount.level3
+                    isEditingLevel4.value=accountingAccount.level4
+                    isEditingDescription.value=accountingAccount.description
+                    isEditingId.value=accountingAccount.accountingAccountId
+                }
+        ) {
+            Icon(
+                imageVector = ImageVector.vectorResource(R.drawable.edit_24px),
+                contentDescription = stringResource(R.string.cash_flows_statement_add),
+                modifier = Modifier
+            )
+        }
+
+        TextButton(
             modifier = Modifier.padding(3.dp),
             onClick =
                 {
@@ -1772,7 +1814,7 @@ fun displayEachAccountingAccountLine(
         ) {
             Icon(
                 imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
-                contentDescription = "Excluir",
+                contentDescription = stringResource(R.string.accounting_accounts_delete),
                 modifier = Modifier,
                 tint = Color.Red
             )

@@ -367,7 +367,7 @@ private fun ExplanatoryNoteEditScreenContent(
                 placeholder = { Text("") },
                 label = {
                     Text(
-                        text = "Índice/Título:",
+                        text = stringResource(R.string.explanatory_notes_index),
                     )
                 }
             )
@@ -381,7 +381,7 @@ private fun ExplanatoryNoteEditScreenContent(
                 modifier = Modifier.fillMaxWidth().height(250.dp),singleLine = false,
                 label = {
                     Text(
-                        text = "Texto:",
+                        text = stringResource(R.string.explanatory_notes_text),
                     )
                 }
             )
@@ -403,7 +403,7 @@ private fun ExplanatoryNoteEditScreenContent(
 
                     ) {
                     Text(
-                        text = "Cancelar",
+                        text = stringResource(R.string.explanatory_notes_cancel),
                         style = TextStyle(
                             fontSize = 14.sp,
                         )
@@ -427,7 +427,7 @@ private fun ExplanatoryNoteEditScreenContent(
 
                     ) {
                     Text(
-                        text = "Salvar",
+                        text = stringResource(R.string.explanatory_notes_save),
                         style = TextStyle(
                             fontSize = 14.sp,
                         )
@@ -452,10 +452,10 @@ private fun ExplanatoryNotesHomeScreenContent(
 ) {
 
     val context = LocalContext.current
-    var isDeleting = remember { mutableStateOf(false) }
-    var isDeletingId = remember { mutableLongStateOf(0) }
-    var isDeletingIndex = remember { mutableStateOf("") }
-    var isDeletingContent = remember { mutableStateOf("") }
+    val isDeleting = remember { mutableStateOf(false) }
+    val isDeletingId = remember { mutableLongStateOf(0) }
+    val isDeletingIndex = remember { mutableStateOf("") }
+    val isDeletingContent = remember { mutableStateOf("") }
 
     Column(modifier) {
         HorizontalDivider(
@@ -503,6 +503,22 @@ private fun ExplanatoryNotesHomeScreenContent(
                         )
                     }
 
+                    TextButton(
+                        modifier = Modifier.padding(1.dp),
+                        onClick =
+                            {
+                                isEditing.value=true
+                                isEditingIndex.value=explanatoryNote.index
+                                isEditingContent.value=explanatoryNote.content
+                                isEditingId.value=explanatoryNote.explanatoryNoteId
+                            }
+                    ) {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(R.drawable.edit_24px),
+                            contentDescription = stringResource(R.string.cash_flows_statement_add),
+                            modifier = Modifier
+                        )
+                    }
 
                     TextButton(
                         modifier = Modifier.padding(3.dp),
@@ -516,8 +532,9 @@ private fun ExplanatoryNotesHomeScreenContent(
                     ) {
                         Icon(
                             imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
-                            contentDescription = "Excluir",
-                            modifier = Modifier
+                            contentDescription = stringResource(R.string.explanatory_notes_delete),
+                            modifier = Modifier,
+                            tint = Color.Red
                         )
                     }
                 }

@@ -2243,16 +2243,12 @@ private fun PeriodResultStatementHomeScreenContent(
                         )
                 ) {
 
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Start,
-                        modifier = Modifier.fillMaxWidth(0.7f)
-                            .padding(horizontal = 10.dp)
-                    ) {
+
+
                         Column(
                             horizontalAlignment = Alignment.Start,
                             modifier = Modifier
-                                .fillMaxWidth()) {
+                                ) {
                             Text(
                                 text = periodResultStatement.name,
                                 style = TextStyle(fontFamily = FontFamily.SansSerif),
@@ -2266,41 +2262,60 @@ private fun PeriodResultStatementHomeScreenContent(
 
                             )
                         }
-                    }
 
-                    TextButton(
-                        modifier = Modifier.padding(3.dp),
-                        onClick =
-                            {
-                                isPeriodResultStatementItemsScreen.value = true
-                                periodResultStatementId.value = periodResultStatement.periodResultStatementId
-                                periodResultStatementName.value = periodResultStatement.name
-                                periodResultStatementStartDate.value = fmt.format(periodResultStatement.startDate)
-                                periodResultStatementEndDate.value = fmt.format(periodResultStatement.endDate)
-                            }
-                    ) {
-                        Icon(
-                            imageVector = ImageVector.vectorResource(R.drawable.format_list_bulleted_24px),
-                            contentDescription = stringResource(R.string.cash_flows_statement_items),
-                            modifier = Modifier
-                        )
-                    }
+                    Row( horizontalArrangement = Arrangement.End) {
+                        TextButton(
+                            modifier = Modifier.padding(1.dp),
+                            onClick =
+                                {
+                                    isPeriodResultStatementEditScreen.value=true
+                                    periodResultStatementName.value=periodResultStatement.name
+                                    periodResultStatementId.value=periodResultStatement.periodResultStatementId
+                                    periodResultStatementStartDate.value = fmt.format(periodResultStatement.startDate)
+                                    periodResultStatementEndDate.value = fmt.format(periodResultStatement.endDate)
+                                }
+                        ) {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(R.drawable.edit_24px),
+                                contentDescription = stringResource(R.string.cash_flows_statement_add),
+                                modifier = Modifier
+                            )
+                        }
 
-                    TextButton(
-                        modifier = Modifier.padding(3.dp),
-                        onClick =
-                            {
-                                isDeleting.value = true
-                                periodResultStatementId.value = periodResultStatement.periodResultStatementId
-                                periodResultStatementName.value = periodResultStatement.name
-                            }
-                    ) {
-                        Icon(
-                            imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
-                            contentDescription = stringResource(R.string.cash_flows_statement_delete),
-                            modifier = Modifier,
-                            tint = Color.Red
-                        )
+                        TextButton(
+                            modifier = Modifier.padding(3.dp),
+                            onClick =
+                                {
+                                    isPeriodResultStatementItemsScreen.value = true
+                                    periodResultStatementId.value = periodResultStatement.periodResultStatementId
+                                    periodResultStatementName.value = periodResultStatement.name
+                                    periodResultStatementStartDate.value = fmt.format(periodResultStatement.startDate)
+                                    periodResultStatementEndDate.value = fmt.format(periodResultStatement.endDate)
+                                }
+                        ) {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(R.drawable.format_list_bulleted_24px),
+                                contentDescription = stringResource(R.string.cash_flows_statement_items),
+                                modifier = Modifier
+                            )
+                        }
+
+                        TextButton(
+                            modifier = Modifier.padding(3.dp),
+                            onClick =
+                                {
+                                    isDeleting.value = true
+                                    periodResultStatementId.value = periodResultStatement.periodResultStatementId
+                                    periodResultStatementName.value = periodResultStatement.name
+                                }
+                        ) {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
+                                contentDescription = stringResource(R.string.cash_flows_statement_delete),
+                                modifier = Modifier,
+                                tint = Color.Red
+                            )
+                        }
                     }
                 }
             }

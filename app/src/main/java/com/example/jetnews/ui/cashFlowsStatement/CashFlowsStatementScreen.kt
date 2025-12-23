@@ -2362,16 +2362,11 @@ private fun CashFlowsStatementHomeScreenContent(
                         )
                 ) {
 
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Start,
-                        modifier = Modifier.fillMaxWidth(0.7f)
-                            .padding(horizontal = 10.dp)
-                    ) {
+
                         Column(
                             horizontalAlignment = Alignment.Start,
-                            modifier = Modifier
-                                .fillMaxWidth()) {
+                            modifier = Modifier,)
+                                 {
                             Text(
                                 text = cashFlowsStatement.name,
                                 style = TextStyle(fontFamily = FontFamily.SansSerif),
@@ -2384,11 +2379,29 @@ private fun CashFlowsStatementHomeScreenContent(
                                 color = MaterialTheme.colorScheme.primary,
                             )
                         }
-                    }
 
-                    TextButton(
-                        modifier = Modifier.padding(3.dp),
+                    Row( horizontalArrangement = Arrangement.End){
+                        TextButton(
+                        modifier = Modifier.padding(1.dp),
                         onClick =
+                            {
+                                isCashFlowsStatementEditScreen.value=true
+                                cashFlowsStatementName.value=cashFlowsStatement.name
+                                cashFlowsStatementId.value=cashFlowsStatement.cashFlowStatementId
+                                cashFlowsStatementStartDate.value = fmt.format(cashFlowsStatement.startDate)
+                                cashFlowsStatementEndDate.value = fmt.format(cashFlowsStatement.endDate)
+                            }
+                        ) {
+                            Icon(
+                            imageVector = ImageVector.vectorResource(R.drawable.edit_24px),
+                            contentDescription = stringResource(R.string.cash_flows_statement_add),
+                            modifier = Modifier
+                            )
+                        }
+
+                        TextButton(
+                            modifier = Modifier.padding(3.dp),
+                            onClick =
                             {
                                 isCashFlowsStatementItemsScreen.value = true
                                 cashFlowsStatementId.value = cashFlowsStatement.cashFlowStatementId
@@ -2398,15 +2411,15 @@ private fun CashFlowsStatementHomeScreenContent(
                                 cashFlowsStatementInitialCashBalance.value = cashFlowsStatement.initialCashBalance
                                 cashFlowsStatementInitialCashBalanceIsCredit.value = cashFlowsStatement.initialCashBalanceIsCredit
                             }
-                    ) {
-                        Icon(
+                        ) {
+                            Icon(
                             imageVector = ImageVector.vectorResource(R.drawable.format_list_bulleted_24px),
                             contentDescription = stringResource(R.string.cash_flows_statement_items),
                             modifier = Modifier
-                        )
-                    }
+                            )
+                        }
 
-                    TextButton(
+                        TextButton(
                         modifier = Modifier.padding(3.dp),
                         onClick =
                             {
@@ -2414,13 +2427,14 @@ private fun CashFlowsStatementHomeScreenContent(
                                 cashFlowsStatementId.value = cashFlowsStatement.cashFlowStatementId
                                 cashFlowsStatementName.value = cashFlowsStatement.name
                             }
-                    ) {
+                        ) {
                         Icon(
                             imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
                             contentDescription = stringResource(R.string.cash_flows_statement_delete),
                             modifier = Modifier,
                             tint = Color.Red
-                        )
+                            )
+                        }
                     }
                 }
             }

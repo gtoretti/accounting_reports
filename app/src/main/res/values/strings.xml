@@ -63,6 +63,19 @@
 
     <!-- Accounting Accounts Screen -->
     <string name="accounting_accounts_title">Plano de Contas Contábeis</string>
+    <string name="accounting_accounts_save">Salvar</string>
+    <string name="accounting_accounts_cancel">Cancelar</string>
+    <string name="accounting_accounts_currency">Liquidez:</string>
+    <string name="accounting_accounts_added_success">Conta contábil adicionada com sucesso.</string>
+    <string name="accounting_accounts_changed_success">Conta contábil modificada com sucesso.</string>
+    <string name="accounting_accounts_analytic">Conta Analítica:</string>
+    <string name="accounting_accounts_synthetic">Conta Sintética:</string>
+    <string name="accounting_accounts_delete_title">Excluir Conta Contábil:</string>
+    <string name="accounting_accounts_delete">Excluir</string>
+    <string name="accounting_accounts_deleted_success">Conta contábil excluída com sucesso.</string>
+    <string name="accounting_accounts_type">Tipo:</string>
+    <string name="accounting_accounts_account_asset">Conta Patrimonial:</string>
+    <string name="accounting_accounts_subtype">Subtipo:</string>
 
     <!-- cash_flows_statement -->
     <string name="cash_flows_statement_title">Demonstração dos Fluxos de Caixa</string>
@@ -153,9 +166,11 @@
     <string name="explanatory_notes_title">Notas Explicativas</string>
     <string name="explanatory_notes_delete_note">Excluir Nota Explicativa:</string>
     <string name="explanatory_notes_save">Salvar</string>
+    <string name="explanatory_notes_delete">Excluir</string>
     <string name="explanatory_notes_cancel">Cancelar</string>
     <string name="explanatory_notes_added_success">Nota Explicativa adicionada com sucesso.</string>
-
+    <string name="explanatory_notes_text">Texto:</string>
+    <string name="explanatory_notes_index">Índice/Título:</string>
 
 
     <!-- Balance Sheet Screen -->

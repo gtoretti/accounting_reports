@@ -2621,16 +2621,10 @@ private fun BalanceSheetHomeScreenContent(
                         )
                 ) {
 
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Start,
-                        modifier = Modifier.fillMaxWidth(0.7f)
-                            .padding(horizontal = 10.dp)
-                    ) {
                         Column(
                             horizontalAlignment = Alignment.Start,
                             modifier = Modifier
-                                .fillMaxWidth()) {
+                                ) {
                             Text(
                                 text = balanceSheet.name,
                                 style = TextStyle(fontFamily = FontFamily.SansSerif),
@@ -2642,40 +2636,58 @@ private fun BalanceSheetHomeScreenContent(
                                 color = MaterialTheme.colorScheme.primary,
                             )
                         }
-                    }
 
-                    TextButton(
-                        modifier = Modifier.padding(3.dp),
-                        onClick =
-                            {
-                                isBalanceSheetItemsScreen.value = true
-                                balanceSheetId.value = balanceSheet.balanceSheetId
-                                balanceSheetName.value = balanceSheet.name
-                                balanceSheetDate.value = fmt.format(balanceSheet.date)
-                            }
-                    ) {
-                        Icon(
-                            imageVector = ImageVector.vectorResource(R.drawable.format_list_bulleted_24px),
-                            contentDescription = stringResource(R.string.balance_sheet_items),
-                            modifier = Modifier
-                        )
-                    }
+                    Row( horizontalArrangement = Arrangement.End) {
+                        TextButton(
+                            modifier = Modifier.padding(1.dp),
+                            onClick =
+                                {
+                                    isBalanceSheetEditScreen.value = true
+                                    balanceSheetName.value = balanceSheet.name
+                                    balanceSheetId.value = balanceSheet.balanceSheetId
+                                    balanceSheetDate.value = fmt.format(balanceSheet.date)
+                                }
+                        ) {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(R.drawable.edit_24px),
+                                contentDescription = stringResource(R.string.cash_flows_statement_add),
+                                modifier = Modifier
+                            )
+                        }
 
-                    TextButton(
-                        modifier = Modifier.padding(3.dp),
-                        onClick =
-                            {
-                                isDeleting.value = true
-                                balanceSheetId.value = balanceSheet.balanceSheetId
-                                balanceSheetName.value = balanceSheet.name
-                            }
-                    ) {
-                        Icon(
-                            imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
-                            contentDescription = stringResource(R.string.balance_sheet_delete),
-                            modifier = Modifier,
-                            tint = Color.Red
-                        )
+                        TextButton(
+                            modifier = Modifier.padding(3.dp),
+                            onClick =
+                                {
+                                    isBalanceSheetItemsScreen.value = true
+                                    balanceSheetId.value = balanceSheet.balanceSheetId
+                                    balanceSheetName.value = balanceSheet.name
+                                    balanceSheetDate.value = fmt.format(balanceSheet.date)
+                                }
+                        ) {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(R.drawable.format_list_bulleted_24px),
+                                contentDescription = stringResource(R.string.balance_sheet_items),
+                                modifier = Modifier
+                            )
+                        }
+
+                        TextButton(
+                            modifier = Modifier.padding(3.dp),
+                            onClick =
+                                {
+                                    isDeleting.value = true
+                                    balanceSheetId.value = balanceSheet.balanceSheetId
+                                    balanceSheetName.value = balanceSheet.name
+                                }
+                        ) {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
+                                contentDescription = stringResource(R.string.balance_sheet_delete),
+                                modifier = Modifier,
+                                tint = Color.Red
+                            )
+                        }
                     }
                 }
             }

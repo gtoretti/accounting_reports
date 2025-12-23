@@ -2655,16 +2655,11 @@ private fun EquityChangesStatementHomeScreenContent(
                         )
                 ) {
 
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Start,
-                        modifier = Modifier.fillMaxWidth(0.7f)
-                            .padding(horizontal = 10.dp)
-                    ) {
+
                         Column(
                             horizontalAlignment = Alignment.Start,
                             modifier = Modifier
-                                .fillMaxWidth()) {
+                                ) {
                             Text(
                                 text = equityChangesStatement.name,
                                 style = TextStyle(fontFamily = FontFamily.SansSerif),
@@ -2676,41 +2671,60 @@ private fun EquityChangesStatementHomeScreenContent(
                                 color = MaterialTheme.colorScheme.primary,
                             )
                         }
-                    }
 
-                    TextButton(
-                        modifier = Modifier.padding(3.dp),
-                        onClick =
-                            {
-                                isEquityChangesStatementItemsScreen.value = true
-                                equityChangesStatementId.value = equityChangesStatement.equityChangesStatementId
-                                equityChangesStatementName.value = equityChangesStatement.name
-                                equityChangesStatementStartDate.value = fmt.format(equityChangesStatement.startDate)
-                                equityChangesStatementEndDate.value = fmt.format(equityChangesStatement.endDate)
-                            }
-                    ) {
-                        Icon(
-                            imageVector = ImageVector.vectorResource(R.drawable.format_list_bulleted_24px),
-                            contentDescription = stringResource(R.string.cash_flows_statement_items),
-                            modifier = Modifier
-                        )
-                    }
+                    Row( horizontalArrangement = Arrangement.End) {
+                        TextButton(
+                            modifier = Modifier.padding(1.dp),
+                            onClick =
+                                {
+                                    isEquityChangesStatementEditScreen.value = true
+                                    equityChangesStatementName.value = equityChangesStatement.name
+                                    equityChangesStatementId.value = equityChangesStatement.equityChangesStatementId
+                                    equityChangesStatementStartDate.value = fmt.format(equityChangesStatement.startDate)
+                                    equityChangesStatementEndDate.value = fmt.format(equityChangesStatement.endDate)
+                                }
+                        ) {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(R.drawable.edit_24px),
+                                contentDescription = stringResource(R.string.cash_flows_statement_add),
+                                modifier = Modifier
+                            )
+                        }
 
-                    TextButton(
-                        modifier = Modifier.padding(3.dp),
-                        onClick =
-                            {
-                                isDeleting.value = true
-                                equityChangesStatementId.value = equityChangesStatement.equityChangesStatementId
-                                equityChangesStatementName.value = equityChangesStatement.name
-                            }
-                    ) {
-                        Icon(
-                            imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
-                            contentDescription = stringResource(R.string.cash_flows_statement_delete),
-                            modifier = Modifier,
-                            tint = Color.Red
-                        )
+                        TextButton(
+                            modifier = Modifier.padding(3.dp),
+                            onClick =
+                                {
+                                    isEquityChangesStatementItemsScreen.value = true
+                                    equityChangesStatementId.value = equityChangesStatement.equityChangesStatementId
+                                    equityChangesStatementName.value = equityChangesStatement.name
+                                    equityChangesStatementStartDate.value = fmt.format(equityChangesStatement.startDate)
+                                    equityChangesStatementEndDate.value = fmt.format(equityChangesStatement.endDate)
+                                }
+                        ) {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(R.drawable.format_list_bulleted_24px),
+                                contentDescription = stringResource(R.string.cash_flows_statement_items),
+                                modifier = Modifier
+                            )
+                        }
+
+                        TextButton(
+                            modifier = Modifier.padding(3.dp),
+                            onClick =
+                                {
+                                    isDeleting.value = true
+                                    equityChangesStatementId.value = equityChangesStatement.equityChangesStatementId
+                                    equityChangesStatementName.value = equityChangesStatement.name
+                                }
+                        ) {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
+                                contentDescription = stringResource(R.string.cash_flows_statement_delete),
+                                modifier = Modifier,
+                                tint = Color.Red
+                            )
+                        }
                     }
                 }
             }
