@@ -90,11 +90,11 @@ fun ExplanatoryNotesScreen(
     openDrawer: () -> Unit,
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
-    var isAdding = remember { mutableStateOf(false) }
-    var isEditing = remember { mutableStateOf(false) }
-    var isEditingIndex = remember { mutableStateOf("") }
-    var isEditingContent = remember { mutableStateOf("") }
-    var isEditingId = remember { mutableLongStateOf(0) }
+    val isAdding = remember { mutableStateOf(false) }
+    val isEditing = remember { mutableStateOf(false) }
+    val isEditingIndex = remember { mutableStateOf("") }
+    val isEditingContent = remember { mutableStateOf("") }
+    val isEditingId = remember { mutableLongStateOf(0) }
 
     when {
         isAdding.value -> {
@@ -222,7 +222,7 @@ fun AssetEvolutionAddScreen(
     isAdding: MutableState<Boolean>
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
-    val context = LocalContext.current
+
     Scaffold(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
@@ -342,8 +342,8 @@ private fun ExplanatoryNoteEditScreenContent(
     isEditingId: MutableState<Long>,
 ) {
 
-    var explanatoryIndex = remember { mutableStateOf(isEditingIndex.value) }
-    var explanatoryContent = remember { mutableStateOf(isEditingContent.value) }
+    val explanatoryIndex = remember { mutableStateOf(isEditingIndex.value) }
+    val explanatoryContent = remember { mutableStateOf(isEditingContent.value) }
     val context = LocalContext.current
 
     Column(modifier) {
@@ -561,8 +561,8 @@ private fun ExplanatoryNotesAddScreenContent(
     isAdding: MutableState<Boolean>
 ) {
 
-    var explanatoryNoteIndex = remember { mutableStateOf("") }
-    var explanatoryNoteContent = remember { mutableStateOf("") }
+    val explanatoryNoteIndex = remember { mutableStateOf("") }
+    val explanatoryNoteContent = remember { mutableStateOf("") }
     val context = LocalContext.current
 
     Column(modifier) {

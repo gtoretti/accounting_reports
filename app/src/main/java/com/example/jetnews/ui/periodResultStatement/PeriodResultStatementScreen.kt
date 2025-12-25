@@ -89,6 +89,8 @@ import com.example.jetnews.data.periodResultStatement.PeriodResultStatement
 import com.example.jetnews.data.periodResultStatement.PeriodResultStatementItem
 import com.example.jetnews.ui.accountingAccounts.displayEachExpandableTitleRow
 import com.example.jetnews.ui.utils.DatePickerModal
+import com.example.jetnews.ui.utils.getLightGreenColor
+import com.example.jetnews.ui.utils.getLightRedColor
 import com.example.jetnews.ui.utils.screenToDouble
 import com.example.jetnews.ui.utils.toScreen
 import com.example.jetnews.utils.PERIOD_RESULT_STATEMENT_TYPE_FINANCING
@@ -1108,11 +1110,11 @@ private fun PeriodResultStatementItemsScreenContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 5.dp)
-                //.verticalScroll(rememberScrollState()),
+
         ) {
 
             Column(
-                horizontalAlignment = Alignment.Start,
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth())
             {
@@ -1120,7 +1122,7 @@ private fun PeriodResultStatementItemsScreenContent(
                     text = periodResultStatementName.value,
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold,
+                    fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = periodResultStatementStartDate.value + " - " + periodResultStatementEndDate.value,
@@ -1131,7 +1133,12 @@ private fun PeriodResultStatementItemsScreenContent(
                 HorizontalDivider(
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
                 )
-                Spacer(Modifier.height(10.dp))
+            }
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier
+                    .fillMaxWidth())
+            {
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -1149,7 +1156,8 @@ private fun PeriodResultStatementItemsScreenContent(
                         Icon(
                             imageVector = ImageVector.vectorResource(R.drawable.convert_to_text_24px),
                             contentDescription = stringResource(R.string.cash_flows_statement_add),
-                            modifier = Modifier
+                            modifier = Modifier,
+                            tint = getLightRedColor()
                         )
                     }
 
@@ -1174,7 +1182,8 @@ private fun PeriodResultStatementItemsScreenContent(
                         Icon(
                             imageVector = ImageVector.vectorResource(R.drawable.forms_add_on_24px),
                             contentDescription = stringResource(R.string.cash_flows_statement_add),
-                            modifier = Modifier
+                            modifier = Modifier,
+                            tint = getLightGreenColor()
                         )
                     }
                 }
@@ -1183,7 +1192,6 @@ private fun PeriodResultStatementItemsScreenContent(
             HorizontalDivider(
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
             )
-            Spacer(Modifier.height(10.dp))
 
             Column(
                 horizontalAlignment = Alignment.Start,
@@ -1224,7 +1232,7 @@ private fun PeriodResultStatementItemsScreenContent(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier
-                            .fillMaxWidth(0.82f)
+                            .fillMaxWidth()
                     ){
                         Text(
                             text = stringResource(R.string.period_results_statement_gross_profit),
@@ -1310,7 +1318,7 @@ private fun PeriodResultStatementItemsScreenContent(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier
-                            .fillMaxWidth(0.82f)
+                            .fillMaxWidth()
                     ){
                         Text(
                             text = stringResource(R.string.period_results_statement_operating_profit),
@@ -1350,7 +1358,7 @@ private fun PeriodResultStatementItemsScreenContent(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier
-                            .fillMaxWidth(0.82f)
+                            .fillMaxWidth()
                     ){
                         Text(
                             text = stringResource(R.string.period_results_statement_profit_before_financing_and_taxes),
@@ -1404,7 +1412,7 @@ private fun PeriodResultStatementItemsScreenContent(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier
-                            .fillMaxWidth(0.82f)
+                            .fillMaxWidth()
                     ){
                         Text(
                             text = stringResource(R.string.period_results_statement_profit_before_taxes),
@@ -1446,7 +1454,7 @@ private fun PeriodResultStatementItemsScreenContent(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier
-                            .fillMaxWidth(0.82f)
+                            .fillMaxWidth()
                     ){
                         Text(
                             text = stringResource(R.string.period_results_statement_profit_from_continuing_operations),
@@ -1491,7 +1499,7 @@ private fun PeriodResultStatementItemsScreenContent(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
-                        .fillMaxWidth(0.82f)
+                        .fillMaxWidth()
                 ){
                     Text(
                         text = stringResource(R.string.period_results_statement_net_profit),
@@ -1543,7 +1551,7 @@ private fun PeriodResultStatementItemRow(
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Start,
+        horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .fillMaxWidth()
     )
@@ -1553,7 +1561,7 @@ private fun PeriodResultStatementItemRow(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
-                .fillMaxWidth(0.82f)
+
                 .selectable(
                     selected = false,
                     onClick = {
@@ -1566,31 +1574,49 @@ private fun PeriodResultStatementItemRow(
                     role = Role.Button
                 )
         ) {
-            Text(
-                text = item.description,
-                modifier = Modifier
-                    .fillMaxWidth(0.4f),
-                style = TextStyle(fontFamily = FontFamily.SansSerif),
-                color = MaterialTheme.colorScheme.primary,
-            )
 
-            Text(
-                text = value,
-                modifier = Modifier
-                    .fillMaxWidth(0.75f),
-                textAlign = TextAlign.End,
-                style = TextStyle(fontFamily = FontFamily.SansSerif),
-                color = MaterialTheme.colorScheme.primary,
-            )
+            Column() {
+                Text(
+                    text = item.description,
+                    modifier = Modifier,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Start
+                )
+
+                Text(
+                    text = value,
+                    modifier = Modifier,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.End,
+                    fontWeight = FontWeight.Bold
+                )
+
+            }
         }
 
         Row(
-            verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.End,
-            modifier = Modifier
-                .fillMaxWidth()
-        )
-        {
+        ){
+            TextButton(
+                modifier = Modifier.padding(1.dp),
+                onClick =
+                    {
+                        isPeriodResultStatementItemsEditItemScreen.value=true
+                        periodResultStatementItemId.value=item.periodResultStatementItemId
+                        periodResultStatementItemType.value=item.type
+                        periodResultStatementItemDescription.value=item.description
+                        periodResultStatementItemValue.value=item.value.absoluteValue
+                    }
+            ) {
+                Icon(
+                    imageVector = ImageVector.vectorResource(R.drawable.edit_24px),
+                    contentDescription = stringResource(R.string.cash_flows_statement_add),
+                    modifier = Modifier,
+                )
+            }
+
             TextButton(
                 modifier = Modifier.padding(3.dp),
                 onClick =

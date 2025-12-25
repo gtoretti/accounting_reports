@@ -92,6 +92,8 @@ import com.example.jetnews.ui.accountingAccounts.AccountingAccountsViewModel
 import com.example.jetnews.ui.accountingAccounts.displayEachExpandableTitleRow
 import com.example.jetnews.ui.accountingAccounts.getResultTypes
 import com.example.jetnews.ui.utils.DatePickerModal
+import com.example.jetnews.ui.utils.getLightGreenColor
+import com.example.jetnews.ui.utils.getLightRedColor
 import com.example.jetnews.ui.utils.screenToDouble
 import com.example.jetnews.ui.utils.toScreen
 import com.example.jetnews.utils.ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_FINANCING
@@ -1001,11 +1003,11 @@ private fun CashFlowsStatementItemsScreenContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 5.dp)
-                //.verticalScroll(rememberScrollState()),
+
         ) {
 
             Column(
-                horizontalAlignment = Alignment.Start,
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth())
             {
@@ -1025,7 +1027,8 @@ private fun CashFlowsStatementItemsScreenContent(
                 HorizontalDivider(
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
                 )
-                Spacer(Modifier.height(10.dp))
+            }
+
 
                 var cashFlowsStatementInitialCashBalanceText = cashFlowsStatementInitialCashBalance.value.toScreen()
                 if (!cashFlowsStatementInitialCashBalanceIsCredit.value)
@@ -1074,7 +1077,8 @@ private fun CashFlowsStatementItemsScreenContent(
                         Icon(
                             imageVector = ImageVector.vectorResource(R.drawable.convert_to_text_24px),
                             contentDescription = stringResource(R.string.cash_flows_statement_add),
-                            modifier = Modifier
+                            modifier = Modifier,
+                            tint = getLightRedColor()
                         )
                     }
                     TextButton(
@@ -1087,15 +1091,16 @@ private fun CashFlowsStatementItemsScreenContent(
                         Icon(
                             imageVector = ImageVector.vectorResource(R.drawable.forms_add_on_24px),
                             contentDescription = stringResource(R.string.cash_flows_statement_add),
-                            modifier = Modifier
+                            modifier = Modifier,
+                            tint = getLightGreenColor()
                         )
                     }
                 }
-            }
+
             HorizontalDivider(
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
             )
-            Spacer(Modifier.height(10.dp))
+
 
 
             var totalOperating = 0.0
@@ -1139,7 +1144,7 @@ private fun CashFlowsStatementItemsScreenContent(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier
-                            .fillMaxWidth(0.82f)
+                            .fillMaxWidth()
                     ){
                         Text(
                             text = stringResource(R.string.cash_flows_statement_total),
@@ -1188,7 +1193,7 @@ private fun CashFlowsStatementItemsScreenContent(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier
-                            .fillMaxWidth(0.82f)
+                            .fillMaxWidth()
                     ){
                         Text(
                             text = stringResource(R.string.cash_flows_statement_total),
@@ -1238,7 +1243,7 @@ private fun CashFlowsStatementItemsScreenContent(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier
-                            .fillMaxWidth(0.82f)
+                            .fillMaxWidth()
                     ){
                         Text(
                             text = stringResource(R.string.cash_flows_statement_total),
@@ -1277,7 +1282,7 @@ private fun CashFlowsStatementItemsScreenContent(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
-                        .fillMaxWidth(0.82f)
+                        .fillMaxWidth()
                 ) {
                     Text(
                         text = stringResource(R.string.cash_flows_statement_increase),
@@ -1286,7 +1291,7 @@ private fun CashFlowsStatementItemsScreenContent(
                         fontWeight = FontWeight.Bold,
                     )
                     Text(
-                        text = "$ $cashIncreaseText",
+                        text = " $cashIncreaseText",
                         style = TextStyle(fontFamily = FontFamily.SansSerif),
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold,
@@ -1297,7 +1302,7 @@ private fun CashFlowsStatementItemsScreenContent(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
-                        .fillMaxWidth(0.82f)
+                        .fillMaxWidth()
                 ) {
                     Text(
                         text = stringResource(R.string.cash_flows_statement_final_balance),
@@ -1306,7 +1311,7 @@ private fun CashFlowsStatementItemsScreenContent(
                         fontWeight = FontWeight.Bold,
                     )
                     Text(
-                        text = "$ $finalBalance",
+                        text = " $finalBalance",
                         style = TextStyle(fontFamily = FontFamily.SansSerif),
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold,
@@ -1367,7 +1372,7 @@ private fun CashFlowsStatementItemRow(
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Start,
+        horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .fillMaxWidth()
         )
@@ -1377,7 +1382,7 @@ private fun CashFlowsStatementItemRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
-            .fillMaxWidth(0.82f)
+
             .selectable(
                 selected = false,
                 onClick = {
@@ -1392,39 +1397,66 @@ private fun CashFlowsStatementItemRow(
                 role = Role.Button
             )
     ) {
-        Text(
-            text = item.description,
-            modifier = Modifier
-                .fillMaxWidth(0.4f),
-            style = TextStyle(fontFamily = FontFamily.SansSerif),
-            color = MaterialTheme.colorScheme.primary,
-        )
-        Text(
-            text = fmtMM.format(item.date),
-            modifier = Modifier
-                .padding(5.dp),
-            style = TextStyle(fontFamily = FontFamily.SansSerif),
-            color = MaterialTheme.colorScheme.primary,
-        )
-        Text(
-            text = value,
-            modifier = Modifier
-                .fillMaxWidth(0.75f),
-            textAlign = TextAlign.End,
-            style = TextStyle(fontFamily = FontFamily.SansSerif),
-            color = MaterialTheme.colorScheme.primary,
-        )
+
+        Column(
+            horizontalAlignment = Alignment.Start,
+        ) {
+            Text(
+                text = item.description,
+                modifier = Modifier,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+            )
+            Text(
+                text = value,
+                modifier = Modifier,
+                textAlign = TextAlign.End,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Bold
+            )
+
+        }
     }
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.End,
             modifier = Modifier
-                .fillMaxWidth()
         )
         {
+            Text(
+                text = fmt.format(item.date),
+                modifier = Modifier
+                    .padding(5.dp),
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+            )
+
+
             TextButton(
-                modifier = Modifier.padding(3.dp),
+                modifier = Modifier.padding(1.dp),
+                onClick =
+                    {
+                        isCashFlowsStatementItemsEditItemScreen.value=true
+                        cashFlowStatementItemId.value=item.cashFlowStatementItemId
+                        cashFlowStatementItemType.value=item.type
+                        cashFlowStatementItemDescription.value=item.description
+                        cashFlowsStatementItemDate.value = fmt.format(item.date)
+                        cashFlowStatementItemValue.value=item.value
+                        cashFlowStatementItemValueIsCredit.value=item.isCredit
+                    }
+            ) {
+                Icon(
+                    imageVector = ImageVector.vectorResource(R.drawable.edit_24px),
+                    contentDescription = stringResource(R.string.cash_flows_statement_add),
+                    modifier = Modifier,
+
+                )
+            }
+
+            TextButton(
+                modifier = Modifier.padding(1.dp),
                 onClick =
                     {
                         isCashFlowsStatementItemsDeleteItemDialog.value = true

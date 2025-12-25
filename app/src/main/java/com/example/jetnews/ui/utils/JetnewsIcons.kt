@@ -202,7 +202,7 @@ fun getLightRedColor(): androidx.compose.ui.graphics.Color {
     if (isDarkTheme())
         return androidx.compose.ui.graphics.Color(0xFF480101)
     else
-        return androidx.compose.ui.graphics.Color(0xFFFC6868)
+        return androidx.compose.ui.graphics.Color(0xFFA91010)
 }
 
 @Composable

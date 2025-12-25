@@ -105,6 +105,8 @@ import com.example.jetnews.R
 import com.example.jetnews.data.equityChangesStatement.EquityChangesStatement
 import com.example.jetnews.data.equityChangesStatement.EquityChangesStatementItem
 import com.example.jetnews.ui.utils.DatePickerModal
+import com.example.jetnews.ui.utils.getLightGreenColor
+import com.example.jetnews.ui.utils.getLightRedColor
 import com.example.jetnews.ui.utils.screenToDouble
 import com.example.jetnews.ui.utils.toScreen
 import com.example.jetnews.ui.utils.toScreenParenthesis
@@ -1043,18 +1045,26 @@ private fun EquityChangesStatementItemsScreenContent(
         HorizontalDivider(
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
         )
-        Text(
-            text = equityChangesStatementName.value,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.primary,
-            fontWeight = FontWeight.Bold,
-        )
-        Text(
-            text = equityChangesStatementStartDate.value + " - " + equityChangesStatementEndDate.value,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.primary,
-            fontWeight = FontWeight.Bold,
-        )
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxWidth())
+        {
+            Text(
+                text = equityChangesStatementName.value,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Bold,
+            )
+            Text(
+                text = equityChangesStatementStartDate.value + " - " + equityChangesStatementEndDate.value,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Bold,
+            )
+        }
+
         HorizontalDivider(
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
         )
@@ -1077,7 +1087,8 @@ private fun EquityChangesStatementItemsScreenContent(
                     Icon(
                         imageVector = ImageVector.vectorResource(R.drawable.convert_to_text_24px),
                         contentDescription = stringResource(R.string.cash_flows_statement_add),
-                        modifier = Modifier
+                        modifier = Modifier,
+                        tint = getLightRedColor()
                     )
                 }
             }
@@ -1102,7 +1113,8 @@ private fun EquityChangesStatementItemsScreenContent(
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.forms_add_on_24px),
                     contentDescription = stringResource(R.string.cash_flows_statement_add),
-                    modifier = Modifier
+                    modifier = Modifier,
+                    tint = getLightGreenColor()
                 )
             }
         }

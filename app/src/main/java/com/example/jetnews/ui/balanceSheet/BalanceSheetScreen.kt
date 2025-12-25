@@ -1271,11 +1271,11 @@ private fun BalanceSheetItemsScreenContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 5.dp)
-                //.verticalScroll(rememberScrollState()),
+
         ) {
 
             Column(
-                horizontalAlignment = Alignment.Start,
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth())
             {
@@ -1378,7 +1378,8 @@ private fun BalanceSheetItemsScreenContent(
                     Icon(
                         imageVector = ImageVector.vectorResource(R.drawable.convert_to_text_24px),
                         contentDescription = stringResource(R.string.cash_flows_statement_add),
-                        modifier = Modifier
+                        modifier = Modifier,
+                        tint = getLightRedColor()
                     )
                 }
                 TextButton(
@@ -1391,7 +1392,8 @@ private fun BalanceSheetItemsScreenContent(
                     Icon(
                         imageVector = ImageVector.vectorResource(R.drawable.forms_add_on_24px),
                         contentDescription = stringResource(R.string.cash_flows_statement_add),
-                        modifier = Modifier
+                        modifier = Modifier,
+                        tint = getLightGreenColor()
                     )
                 }
             }

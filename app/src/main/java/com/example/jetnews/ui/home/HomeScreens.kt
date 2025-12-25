@@ -675,8 +675,7 @@ private fun HomeTopAppBar(
     scrollBehavior: TopAppBarScrollBehavior? =
         TopAppBarDefaults.enterAlwaysScrollBehavior(topAppBarState),
 ) {
-    val context = LocalContext.current
-    val title = stringResource(id = R.string.app_name)
+
     CenterAlignedTopAppBar(
         title = {
             Text(
