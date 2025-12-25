@@ -95,6 +95,7 @@ import com.example.jetnews.ui.utils.DatePickerModal
 import com.example.jetnews.ui.utils.getLightGreenColor
 import com.example.jetnews.ui.utils.getLightRedColor
 import com.example.jetnews.ui.utils.screenToDouble
+import com.example.jetnews.ui.utils.toDisplay
 import com.example.jetnews.ui.utils.toScreen
 import com.example.jetnews.utils.ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_FINANCING
 import com.example.jetnews.utils.ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_INVESTING
@@ -1030,7 +1031,7 @@ private fun CashFlowsStatementItemsScreenContent(
             }
 
 
-                var cashFlowsStatementInitialCashBalanceText = cashFlowsStatementInitialCashBalance.value.toScreen()
+                var cashFlowsStatementInitialCashBalanceText = cashFlowsStatementInitialCashBalance.value.toDisplay()
                 if (!cashFlowsStatementInitialCashBalanceIsCredit.value)
                     cashFlowsStatementInitialCashBalanceText = "("+cashFlowsStatementInitialCashBalance.value.absoluteValue+")"
 
@@ -1137,9 +1138,9 @@ private fun CashFlowsStatementItemsScreenContent(
                     }
                 }
                 if (operatingExpanded.value){
-                    var totalOperatingText = totalOperating.toScreen()
+                    var totalOperatingText = totalOperating.toDisplay()
                     if (totalOperating<0.0)
-                        totalOperatingText = "(" + totalOperating.absoluteValue.toScreen() + ")"
+                        totalOperatingText = "(" + totalOperating.absoluteValue.toDisplay() + ")"
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -1186,9 +1187,9 @@ private fun CashFlowsStatementItemsScreenContent(
                     }
                 }
                 if (investingExpanded.value){
-                    var totalInvestingText = totalInvesting.toScreen()
+                    var totalInvestingText = totalInvesting.toDisplay()
                     if (totalInvesting<0.0)
-                        totalInvestingText = "(" + totalInvesting.absoluteValue.toScreen() + ")"
+                        totalInvestingText = "(" + totalInvesting.absoluteValue.toDisplay() + ")"
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -1235,9 +1236,9 @@ private fun CashFlowsStatementItemsScreenContent(
                     }
                 }
                 if (financingExpanded.value){
-                    var totalFinancingText = totalFinancing.toScreen()
+                    var totalFinancingText = totalFinancing.toDisplay()
                     if (totalFinancing<0.0)
-                        totalFinancingText = "(" + totalFinancing.absoluteValue.toScreen() + ")"
+                        totalFinancingText = "(" + totalFinancing.absoluteValue.toDisplay() + ")"
 
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -1265,18 +1266,18 @@ private fun CashFlowsStatementItemsScreenContent(
                 }
 
                 val cashIncreaseVal = (totalOperating + totalInvesting + totalFinancing)
-                var cashIncreaseText = cashIncreaseVal.toScreen()
+                var cashIncreaseText = cashIncreaseVal.toDisplay()
                 if (cashIncreaseVal<0.0)
-                    cashIncreaseText = "(" + cashIncreaseVal.absoluteValue.toScreen() + ")"
+                    cashIncreaseText = "(" + cashIncreaseVal.absoluteValue.toDisplay() + ")"
 
                 var signedCashFlowsStatementInitialCashBalance = cashFlowsStatementInitialCashBalance.value
                 if (!cashFlowsStatementInitialCashBalanceIsCredit.value)
                     signedCashFlowsStatementInitialCashBalance = -(signedCashFlowsStatementInitialCashBalance.absoluteValue)
 
                 val finalBalanceValue = (totalOperating + totalInvesting + totalFinancing + signedCashFlowsStatementInitialCashBalance)
-                var finalBalance = finalBalanceValue.toScreen()
+                var finalBalance = finalBalanceValue.toDisplay()
                 if (finalBalanceValue<0.0)
-                    finalBalance = "(" + finalBalanceValue.absoluteValue.toScreen() + ")"
+                    finalBalance = "(" + finalBalanceValue.absoluteValue.toDisplay() + ")"
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -1366,9 +1367,9 @@ private fun CashFlowsStatementItemRow(
     val fmtMM = SimpleDateFormat(stringResource(R.string.fmtMMDatePattern))
 
 
-    var value = "("+item.value.toScreen()+")"
+    var value = "("+item.value.toDisplay()+")"
     if (item.isCredit)
-        value = item.value.toScreen()
+        value = item.value.toDisplay()
 
     Row(
         verticalAlignment = Alignment.CenterVertically,

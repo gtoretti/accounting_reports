@@ -38,6 +38,9 @@ import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import com.example.jetnews.R
 import java.math.RoundingMode
+import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.Locale
 import kotlin.math.absoluteValue
 
 @Composable
@@ -232,7 +235,7 @@ fun getRedTextColor(): androidx.compose.ui.graphics.Color {
 fun String.screenToDouble(): Double {
     try{
         if (this.trim().isEmpty()) return 0.0
-            var ret = this.replace(".", "")
+        var ret = this.replace(".", "")
         ret = ret.replace(",", ".")
         return ret.toDouble()
     }catch (e: Exception){
@@ -244,9 +247,16 @@ fun Double.toScreen(): String {
     return this.toBigDecimal().setScale(2, RoundingMode.UP).toString().replace(".", ",")
 }
 
+fun Double.toDisplay(): String {
+    var ret = this.toScreen()
+    var intPart= ret.substring(0,ret.length-3)
+    val brFormatter = NumberFormat.getInstance(Locale("pt", "BR"))
+    return brFormatter.format(intPart.toLong()) + ret.substring(ret.length-3,ret.length)
+}
+
 fun Double.toScreenParenthesis(): String {
     if (this>=0.0)
-        return this.absoluteValue.toBigDecimal().setScale(2, RoundingMode.UP).toString().replace(".", ",")
+        return this.toDisplay()
     else
-        return "("+this.absoluteValue.toBigDecimal().setScale(2, RoundingMode.UP).toString().replace(".", ",")+")"
+        return "("+this.toDisplay()+")"
 }

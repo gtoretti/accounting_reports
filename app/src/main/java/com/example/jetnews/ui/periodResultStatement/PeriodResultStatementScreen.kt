@@ -92,6 +92,7 @@ import com.example.jetnews.ui.utils.DatePickerModal
 import com.example.jetnews.ui.utils.getLightGreenColor
 import com.example.jetnews.ui.utils.getLightRedColor
 import com.example.jetnews.ui.utils.screenToDouble
+import com.example.jetnews.ui.utils.toDisplay
 import com.example.jetnews.ui.utils.toScreen
 import com.example.jetnews.utils.PERIOD_RESULT_STATEMENT_TYPE_FINANCING
 import com.example.jetnews.utils.PERIOD_RESULT_STATEMENT_TYPE_FINANCING_INTEREST_EXPENSES_ON_LOANS_AND_LEASE_LIABILITIES
@@ -991,9 +992,9 @@ private fun PeriodResultStatementItemsScreenContent(
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_COST_OF_SALES)
     }
 
-    var grossProfitText = grossProfit.toScreen()
+    var grossProfitText = grossProfit.toDisplay()
     if (grossProfit<0.0)
-        grossProfitText = "(" + grossProfit.absoluteValue.toScreen() + ")"
+        grossProfitText = "(" + grossProfit.absoluteValue.toDisplay() + ")"
 
     operatingProfit = grossProfit
 
@@ -1033,9 +1034,9 @@ private fun PeriodResultStatementItemsScreenContent(
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_OTHER_OPERATING_EXPENSES)
     }
 
-    var operatingProfitText = operatingProfit.toScreen()
+    var operatingProfitText = operatingProfit.toDisplay()
     if (operatingProfit<0.0)
-        operatingProfitText = "(" + operatingProfit.absoluteValue.toScreen() + ")"
+        operatingProfitText = "(" + operatingProfit.absoluteValue.toDisplay() + ")"
 
     profitBeforeFinancingAndTaxes = operatingProfit
 
@@ -1047,9 +1048,9 @@ private fun PeriodResultStatementItemsScreenContent(
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_INVESTING_PROFIT_SHARING_AND_GAINS_FROM_SALE_OF_INTERESTS_IN_ASSOCIATES_AND_JOINT_VENTURES)
     }
 
-    var profitBeforeFinancingAndTaxesText = profitBeforeFinancingAndTaxes.toScreen()
+    var profitBeforeFinancingAndTaxesText = profitBeforeFinancingAndTaxes.toDisplay()
     if (profitBeforeFinancingAndTaxes<0.0)
-        profitBeforeFinancingAndTaxesText = "(" + profitBeforeFinancingAndTaxes.absoluteValue.toScreen() + ")"
+        profitBeforeFinancingAndTaxesText = "(" + profitBeforeFinancingAndTaxes.absoluteValue.toDisplay() + ")"
 
     profitBeforeTaxes = profitBeforeFinancingAndTaxes
 
@@ -1067,9 +1068,9 @@ private fun PeriodResultStatementItemsScreenContent(
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_FINANCING_INTEREST_EXPENSES_ON_RETIREMENT_LIABILITIES_AND_PROVISIONS)
     }
 
-    var profitBeforeTaxesText = profitBeforeTaxes.toScreen()
+    var profitBeforeTaxesText = profitBeforeTaxes.toDisplay()
     if (profitBeforeTaxes<0.0)
-        profitBeforeTaxesText = "(" + profitBeforeTaxes.absoluteValue.toScreen() + ")"
+        profitBeforeTaxesText = "(" + profitBeforeTaxes.absoluteValue.toDisplay() + ")"
 
     profitFromContinuingOperations = profitBeforeTaxes
 
@@ -1081,9 +1082,9 @@ private fun PeriodResultStatementItemsScreenContent(
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_TAX_ON_PROFIT_TAX_EXPENSES_ON_PROFIT)
     }
 
-    var profitFromContinuingOperationsText = profitFromContinuingOperations.toScreen()
+    var profitFromContinuingOperationsText = profitFromContinuingOperations.toDisplay()
     if (profitFromContinuingOperations<0.0)
-        profitFromContinuingOperationsText = "(" + profitFromContinuingOperations.absoluteValue.toScreen() + ")"
+        profitFromContinuingOperationsText = "(" + profitFromContinuingOperations.absoluteValue.toDisplay() + ")"
 
     netProfit = profitFromContinuingOperations
 
@@ -1095,9 +1096,9 @@ private fun PeriodResultStatementItemsScreenContent(
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_OPERATION_DISCONTINUED_LOSS_FROM_DISCONTINUED_OPERATIONS)
     }
 
-    var netProfitText = netProfit.toScreen()
+    var netProfitText = netProfit.toDisplay()
     if (netProfit<0.0)
-        netProfitText = "(" + netProfit.absoluteValue.toScreen() + ")"
+        netProfitText = "(" + netProfit.absoluteValue.toDisplay() + ")"
 
 
     Column(modifier) {
@@ -1545,9 +1546,9 @@ private fun PeriodResultStatementItemRow(
     periodResultStatementItemDescription: MutableState<String>,
     periodResultStatementItemValue: MutableState<Double>,
 ){
-    var value = item.value.toScreen()
+    var value = item.value.toDisplay()
     if (item.value<0.0)
-        value = "("+item.value.absoluteValue.toScreen()+")"
+        value = "("+item.value.absoluteValue.toDisplay()+")"
 
     Row(
         verticalAlignment = Alignment.CenterVertically,

@@ -106,6 +106,7 @@ import com.example.jetnews.ui.utils.getLightRedColor
 import com.example.jetnews.ui.utils.getPhoneColor
 import com.example.jetnews.ui.utils.getRedTextColor
 import com.example.jetnews.ui.utils.screenToDouble
+import com.example.jetnews.ui.utils.toDisplay
 import com.example.jetnews.ui.utils.toScreen
 import com.example.jetnews.utils.ACCOUNTING_ACCOUNTS_LEVEL1_ATIVO
 import com.example.jetnews.utils.ACCOUNTING_ACCOUNTS_LEVEL1_PASSIVO
@@ -1901,7 +1902,7 @@ private fun BalanceSheetItemRow(
 
 
         Text(
-            text = item.value.toScreen(),
+            text = item.value.toDisplay(),
             modifier = Modifier
                 .fillMaxWidth(0.75f),
             textAlign = TextAlign.End,
