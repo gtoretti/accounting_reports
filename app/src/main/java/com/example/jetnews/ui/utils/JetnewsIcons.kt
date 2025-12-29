@@ -248,8 +248,8 @@ fun Double.toScreen(): String {
 }
 
 fun Double.toDisplay(): String {
-    var ret = this.toScreen()
-    var intPart= ret.substring(0,ret.length-3)
+    val ret = this.toScreen()
+    val intPart= ret.substring(0,ret.length-3)
     val brFormatter = NumberFormat.getInstance(Locale("pt", "BR"))
     return brFormatter.format(intPart.toLong()) + ret.substring(ret.length-3,ret.length)
 }

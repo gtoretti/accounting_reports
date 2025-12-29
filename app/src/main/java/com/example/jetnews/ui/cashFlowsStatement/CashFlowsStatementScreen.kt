@@ -17,6 +17,13 @@
 package com.example.jetnews.ui.cashFlowsStatement
 
 import android.content.Context
+import android.content.ContextWrapper
+import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.Typeface
+import android.graphics.pdf.PdfDocument
+import android.icu.util.Calendar
+import android.os.Environment
 import android.widget.Toast
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -70,6 +77,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.vector.ImageVector
 
 import androidx.compose.ui.platform.LocalContext
@@ -84,6 +92,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.FileProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.jetnews.R
 import com.example.jetnews.data.cashFlowsStatement.CashFlowStatement
@@ -103,6 +112,8 @@ import com.example.jetnews.utils.ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_OPERATIN
 import com.example.jetnews.utils.CASH_FLOWS_STATEMENT_TYPE_FINANCING
 import com.example.jetnews.utils.CASH_FLOWS_STATEMENT_TYPE_INVESTING
 import com.example.jetnews.utils.CASH_FLOWS_STATEMENT_TYPE_OPERATING
+import java.io.File
+import java.io.FileOutputStream
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -1072,7 +1083,7 @@ private fun CashFlowsStatementItemsScreenContent(
                         modifier = Modifier.padding(1.dp),
                         onClick =
                             {
-
+                                generatePDF(context,"teste","startDate","endDate")
                             }
                     ) {
                         Icon(
@@ -1364,9 +1375,6 @@ private fun CashFlowsStatementItemRow(
 ){
 
     val fmt = SimpleDateFormat(stringResource(R.string.fmtDatePattern))
-    val fmtMM = SimpleDateFormat(stringResource(R.string.fmtMMDatePattern))
-
-
     var value = "("+item.value.toDisplay()+")"
     if (item.isCredit)
         value = item.value.toDisplay()
@@ -2942,4 +2950,71 @@ fun CashFlowsStatementItemDeleteDialog(
             }
         )
     }
+}
+
+fun generatePDF(context: Context, name: String, startDate: String, endDate: String){
+
+    val fmt = SimpleDateFormat("dd/MM/yyyy")
+    val fmtFileName = SimpleDateFormat("dd_MM_yyyy_HH_mm")
+
+    val filename = "DFC_"+fmtFileName.format(Calendar.getInstance().time)
+
+    val pdfDocument: PdfDocument = PdfDocument()
+
+    /**Dimension For A4 Size Paper**/
+    val pageHeight = 842
+    val pageWidth = 595
+    val paragraph = 50F
+
+    var page = 1
+
+    val myPageInfo: PdfDocument.PageInfo? = PdfDocument.PageInfo.Builder(pageWidth, pageHeight, page).create()
+    val myPage: PdfDocument.Page = pdfDocument.startPage(myPageInfo)
+    val canvas: Canvas = myPage.canvas
+
+    val headerStyle: android.graphics.Paint = android.graphics.Paint()
+    headerStyle.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL))
+    headerStyle.textSize = 15F
+    headerStyle.setColor(android.graphics.Color.BLUE)
+    canvas.drawText("Demonstração dos Fluxos de Caixa", 185F, 50F, headerStyle)
+
+    val nameStyle: android.graphics.Paint = android.graphics.Paint()
+    nameStyle.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL))
+    nameStyle.textSize = 15F
+    nameStyle.setColor(android.graphics.Color.BLUE)
+    canvas.drawText(name, paragraph, 100F, nameStyle)
+
+    val periodTitle: android.graphics.Paint = android.graphics.Paint()
+    periodTitle.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD))
+    periodTitle.textSize = 12F
+    periodTitle.color = android.graphics.Color.BLACK
+    canvas.drawText("Período: $startDate - $endDate", paragraph, 150F, periodTitle)
+
+    var y = 200F
+
+
+
+    pdfDocument.finishPage(myPage)
+
+    val contextWrapper = ContextWrapper(context)
+    val documentDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+    val file = File(documentDirectory, "$filename.pdf")
+
+    try {
+        pdfDocument.writeTo(FileOutputStream(file))
+        val fileURI = FileProvider.getUriForFile(
+            context,
+            context.applicationContext.packageName + ".provider",
+            file
+        )
+
+        val browserIntent = Intent(Intent.ACTION_VIEW, fileURI)
+        browserIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        context.startActivity(browserIntent)
+
+    } catch (e: kotlin.Exception) {
+        Toast.makeText(context, "Erro ao gerar arquivo PDF.", Toast.LENGTH_SHORT).show()
+    }
+    pdfDocument.close()
+
 }
