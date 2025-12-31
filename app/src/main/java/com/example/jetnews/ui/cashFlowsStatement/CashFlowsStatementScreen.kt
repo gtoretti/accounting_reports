@@ -16,14 +16,18 @@
 
 package com.example.jetnews.ui.cashFlowsStatement
 
+import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Canvas
 import android.graphics.Typeface
 import android.graphics.pdf.PdfDocument
 import android.icu.util.Calendar
 import android.os.Environment
+import android.provider.ContactsContract
 import android.widget.Toast
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -92,6 +96,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.jetnews.R
@@ -101,6 +107,7 @@ import com.example.jetnews.ui.accountingAccounts.AccountingAccountsViewModel
 import com.example.jetnews.ui.accountingAccounts.displayEachExpandableTitleRow
 import com.example.jetnews.ui.accountingAccounts.getResultTypes
 import com.example.jetnews.ui.utils.DatePickerModal
+import com.example.jetnews.ui.utils.getLightBlueColor
 import com.example.jetnews.ui.utils.getLightGreenColor
 import com.example.jetnews.ui.utils.getLightRedColor
 import com.example.jetnews.ui.utils.screenToDouble
@@ -112,8 +119,15 @@ import com.example.jetnews.utils.ACCOUNTING_ACCOUNTS_TYPE_RESULT_LEVEL1_OPERATIN
 import com.example.jetnews.utils.CASH_FLOWS_STATEMENT_TYPE_FINANCING
 import com.example.jetnews.utils.CASH_FLOWS_STATEMENT_TYPE_INVESTING
 import com.example.jetnews.utils.CASH_FLOWS_STATEMENT_TYPE_OPERATING
+import org.apache.poi.hssf.usermodel.HSSFCellStyle
+import org.apache.poi.hssf.usermodel.HSSFWorkbook
+import org.apache.poi.ss.usermodel.IndexedColors
+import org.apache.poi.ss.usermodel.Workbook
+
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
+
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -122,6 +136,7 @@ import kotlin.Long
 import kotlin.String
 import kotlin.math.absoluteValue
 import kotlin.text.isEmpty
+
 
 
 
@@ -179,7 +194,8 @@ fun CashFlowsStatementScreen(
                 cashFlowsStatementName,
                 cashFlowsStatementId,
                 cashFlowsStatementStartDate,
-                cashFlowsStatementEndDate
+                cashFlowsStatementEndDate,
+                cashFlowsStatementInitialCashBalance
             )
         }
         isCashFlowsStatementItemsEditItemScreen.value -> {
@@ -414,6 +430,7 @@ fun CashFlowsStatementEditScreen(
     cashFlowsStatementId: MutableState<Long>,
     cashFlowsStatementStartDate: MutableState<String>,
     cashFlowsStatementEndDate: MutableState<String>,
+    cashFlowsStatementInitialCashBalance: MutableState<Double>,
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -460,6 +477,7 @@ fun CashFlowsStatementEditScreen(
             cashFlowsStatementId,
             cashFlowsStatementStartDate,
             cashFlowsStatementEndDate,
+            cashFlowsStatementInitialCashBalance
         )
     }
 }
@@ -715,6 +733,7 @@ private fun CashFlowsStatementEditScreenContent(
     cashFlowsStatementId: MutableState<Long>,
     cashFlowsStatementStartDate: MutableState<String>,
     cashFlowsStatementEndDate: MutableState<String>,
+    cashFlowsStatementInitialCashBalance: MutableState<Double>,
 ) {
 
     val name = remember { mutableStateOf(cashFlowsStatementName.value) }
@@ -856,6 +875,7 @@ private fun CashFlowsStatementEditScreenContent(
                         cashFlowsStatementId.value=0
                         startDate.value = ""
                         endDate.value = ""
+                        cashFlowsStatementInitialCashBalance.value=0.0
                         openStartDateEditDialog.value=false
                         openEndDateEditDialog.value=false
                     },
@@ -906,7 +926,7 @@ private fun CashFlowsStatementEditScreenContent(
                                                 name.value,
                                                 fmt.parse(startDate.value)!!,
                                                 fmt.parse(endDate.value)!!,
-                                                0.0,
+                                                cashFlowsStatementInitialCashBalance.value,
                                                 true,
                                                 0
                                             )
@@ -922,6 +942,7 @@ private fun CashFlowsStatementEditScreenContent(
                                         cashFlowsStatementId.value = 0
                                         startDate.value = ""
                                         endDate.value = ""
+                                        cashFlowsStatementInitialCashBalance.value=0.0
                                         openStartDateEditDialog.value = false
                                         openEndDateEditDialog.value = false
                                     }catch (e: Exception){
@@ -1004,6 +1025,19 @@ private fun CashFlowsStatementItemsScreenContent(
     val cashFlowItemsFlow = cashFlowsStatementViewModel.getCashFlowStatementItems(cashFlowsStatementId.value)
     val cashFlowItems by cashFlowItemsFlow.collectAsStateWithLifecycle(initialValue = emptyList())
 
+    var totalOperating = 0.0
+    var totalInvesting = 0.0
+    var totalFinancing = 0.0
+
+    var cashFlowsStatementInitialCashBalanceText = cashFlowsStatementInitialCashBalance.value.toDisplay()
+    if (!cashFlowsStatementInitialCashBalanceIsCredit.value)
+        cashFlowsStatementInitialCashBalanceText = "("+cashFlowsStatementInitialCashBalance.value.absoluteValue+")"
+
+    var cashIncreaseVal = 0.0
+    var cashIncreaseText = cashIncreaseVal.toDisplay()
+
+    var finalBalanceValue = 0.0
+    var finalBalance = finalBalanceValue.toDisplay()
 
     Column(modifier) {
         HorizontalDivider(
@@ -1041,11 +1075,6 @@ private fun CashFlowsStatementItemsScreenContent(
                 )
             }
 
-
-                var cashFlowsStatementInitialCashBalanceText = cashFlowsStatementInitialCashBalance.value.toDisplay()
-                if (!cashFlowsStatementInitialCashBalanceIsCredit.value)
-                    cashFlowsStatementInitialCashBalanceText = "("+cashFlowsStatementInitialCashBalance.value.absoluteValue+")"
-
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -1064,6 +1093,7 @@ private fun CashFlowsStatementItemsScreenContent(
                         style = TextStyle(fontFamily = FontFamily.SansSerif),
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold,
+                        modifier= Modifier.fillMaxWidth(0.5f)
                     )
                     TextButton(
                         modifier = Modifier.padding(1.dp),
@@ -1083,14 +1113,14 @@ private fun CashFlowsStatementItemsScreenContent(
                         modifier = Modifier.padding(1.dp),
                         onClick =
                             {
-                                generatePDF(context,"teste","startDate","endDate")
+                                generateExcel(context,cashFlowsStatementName.value,cashFlowsStatementStartDate.value,cashFlowsStatementEndDate.value,cashFlowsStatementInitialCashBalanceText,cashIncreaseText,finalBalance)
                             }
                     ) {
                         Icon(
-                            imageVector = ImageVector.vectorResource(R.drawable.convert_to_text_24px),
+                            imageVector = ImageVector.vectorResource(R.drawable.table_view_24px),
                             contentDescription = stringResource(R.string.cash_flows_statement_add),
                             modifier = Modifier,
-                            tint = getLightRedColor()
+                            tint = getLightGreenColor()
                         )
                     }
                     TextButton(
@@ -1112,12 +1142,6 @@ private fun CashFlowsStatementItemsScreenContent(
             HorizontalDivider(
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
             )
-
-
-
-            var totalOperating = 0.0
-            var totalInvesting = 0.0
-            var totalFinancing = 0.0
 
             Column(
                 horizontalAlignment = Alignment.Start,
@@ -1276,8 +1300,8 @@ private fun CashFlowsStatementItemsScreenContent(
                     Spacer(Modifier.height(10.dp))
                 }
 
-                val cashIncreaseVal = (totalOperating + totalInvesting + totalFinancing)
-                var cashIncreaseText = cashIncreaseVal.toDisplay()
+                cashIncreaseVal = (totalOperating + totalInvesting + totalFinancing)
+                cashIncreaseText = cashIncreaseVal.toDisplay()
                 if (cashIncreaseVal<0.0)
                     cashIncreaseText = "(" + cashIncreaseVal.absoluteValue.toDisplay() + ")"
 
@@ -1285,8 +1309,8 @@ private fun CashFlowsStatementItemsScreenContent(
                 if (!cashFlowsStatementInitialCashBalanceIsCredit.value)
                     signedCashFlowsStatementInitialCashBalance = -(signedCashFlowsStatementInitialCashBalance.absoluteValue)
 
-                val finalBalanceValue = (totalOperating + totalInvesting + totalFinancing + signedCashFlowsStatementInitialCashBalance)
-                var finalBalance = finalBalanceValue.toDisplay()
+                finalBalanceValue = (totalOperating + totalInvesting + totalFinancing + signedCashFlowsStatementInitialCashBalance)
+                finalBalance = finalBalanceValue.toDisplay()
                 if (finalBalanceValue<0.0)
                     finalBalance = "(" + finalBalanceValue.absoluteValue.toDisplay() + ")"
 
@@ -1412,9 +1436,10 @@ private fun CashFlowsStatementItemRow(
         ) {
             Text(
                 text = item.description,
-                modifier = Modifier,
+                modifier = Modifier.fillMaxWidth(0.5f),
                 style = TextStyle(fontFamily = FontFamily.SansSerif),
                 color = MaterialTheme.colorScheme.primary,
+
             )
             Text(
                 text = value,
@@ -2398,6 +2423,7 @@ private fun CashFlowsStatementHomeScreenContent(
                                 cashFlowsStatementId.value=cashFlowsStatement.cashFlowStatementId
                                 cashFlowsStatementStartDate.value = fmt.format(cashFlowsStatement.startDate)
                                 cashFlowsStatementEndDate.value = fmt.format(cashFlowsStatement.endDate)
+                                cashFlowsStatementInitialCashBalance.value =cashFlowsStatement.initialCashBalance
                             },
                             role = Role.Button
                         )
@@ -2412,7 +2438,8 @@ private fun CashFlowsStatementHomeScreenContent(
                                 text = cashFlowsStatement.name,
                                 style = TextStyle(fontFamily = FontFamily.SansSerif),
                                 color = MaterialTheme.colorScheme.primary,
-
+                                modifier = Modifier
+                                    .fillMaxWidth(0.5f)
                             )
                             Text(
                                 text = fmt.format(cashFlowsStatement.startDate) + " - " + fmt.format(cashFlowsStatement.endDate),
@@ -2431,6 +2458,7 @@ private fun CashFlowsStatementHomeScreenContent(
                                 cashFlowsStatementId.value=cashFlowsStatement.cashFlowStatementId
                                 cashFlowsStatementStartDate.value = fmt.format(cashFlowsStatement.startDate)
                                 cashFlowsStatementEndDate.value = fmt.format(cashFlowsStatement.endDate)
+                                cashFlowsStatementInitialCashBalance.value =cashFlowsStatement.initialCashBalance
                             }
                         ) {
                             Icon(
@@ -2952,69 +2980,113 @@ fun CashFlowsStatementItemDeleteDialog(
     }
 }
 
-fun generatePDF(context: Context, name: String, startDate: String, endDate: String){
-
-    val fmt = SimpleDateFormat("dd/MM/yyyy")
-    val fmtFileName = SimpleDateFormat("dd_MM_yyyy_HH_mm")
-
-    val filename = "DFC_"+fmtFileName.format(Calendar.getInstance().time)
-
-    val pdfDocument: PdfDocument = PdfDocument()
-
-    /**Dimension For A4 Size Paper**/
-    val pageHeight = 842
-    val pageWidth = 595
-    val paragraph = 50F
-
-    var page = 1
-
-    val myPageInfo: PdfDocument.PageInfo? = PdfDocument.PageInfo.Builder(pageWidth, pageHeight, page).create()
-    val myPage: PdfDocument.Page = pdfDocument.startPage(myPageInfo)
-    val canvas: Canvas = myPage.canvas
-
-    val headerStyle: android.graphics.Paint = android.graphics.Paint()
-    headerStyle.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL))
-    headerStyle.textSize = 15F
-    headerStyle.setColor(android.graphics.Color.BLUE)
-    canvas.drawText("Demonstração dos Fluxos de Caixa", 185F, 50F, headerStyle)
-
-    val nameStyle: android.graphics.Paint = android.graphics.Paint()
-    nameStyle.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL))
-    nameStyle.textSize = 15F
-    nameStyle.setColor(android.graphics.Color.BLUE)
-    canvas.drawText(name, paragraph, 100F, nameStyle)
-
-    val periodTitle: android.graphics.Paint = android.graphics.Paint()
-    periodTitle.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD))
-    periodTitle.textSize = 12F
-    periodTitle.color = android.graphics.Color.BLACK
-    canvas.drawText("Período: $startDate - $endDate", paragraph, 150F, periodTitle)
-
-    var y = 200F
-
-
-
-    pdfDocument.finishPage(myPage)
-
-    val contextWrapper = ContextWrapper(context)
-    val documentDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-    val file = File(documentDirectory, "$filename.pdf")
+fun generateExcel(context: Context, name: String, startDate: String, endDate: String, initialCash: String, cashIncrease: String,finalCash: String){
 
     try {
-        pdfDocument.writeTo(FileOutputStream(file))
+
+    val fmtFileName = SimpleDateFormat("dd_MM_yyyy_HH_mm")
+    val filename = buildString {
+        append("DFC_")
+        append(fmtFileName.format(Calendar.getInstance().time))
+        append(".xlsx")
+    }
+
+    val hssf = HSSFWorkbook()
+    val sheet = hssf.createSheet("Demonstração dos Fluxos de Caixa")
+
+        sheet.setColumnWidth(0, 20 * 256); // 20 characters wide
+
+    val row0 = sheet.createRow(0)
+    val row0c0 = row0.createCell(0)
+    row0c0.setCellValue("Demonstração dos Fluxos de Caixa")
+
+    val row1 = sheet.createRow(2)
+    val row1c0 = row1.createCell(0)
+    row1c0.setCellValue(name)
+
+    val row2 = sheet.createRow(3)
+    val row2c0 = row2.createCell(0)
+    row2c0.setCellValue("Período:")
+
+    val row2c1 = row2.createCell(1)
+    row2c1.setCellValue("$startDate - $endDate")
+
+    val row3 = sheet.createRow(4)
+    val row3c0 = row3.createCell(0)
+    row3c0.setCellValue("Saldo Inicial em Caixa:")
+
+    val row3c1 = row3.createCell(1)
+    row3c1.setCellValue(initialCash)
+
+
+        val row4 = sheet.createRow(6)
+        val row4c0 = row4.createCell(0)
+        row4c0.setCellValue("Aumento em Caixa:")
+
+        val row4c1 = row4.createCell(1)
+        row4c1.setCellValue(cashIncrease)
+
+        val row5 = sheet.createRow(7)
+        val row5c0 = row5.createCell(0)
+        row5c0.setCellValue("Saldo Final em Caixa:")
+
+        val row5c1 = row5.createCell(1)
+        row5c1.setCellValue(finalCash)
+
+
+
+
+
+
+    val activity = context.getActivity()
+    if (!hasWritePermission(context)) {
+       requestWritePermission(context, activity!!)
+    }
+
+    val filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+    val file = File(filePath, filename)
+
+
+        FileOutputStream(file).use { outputStream ->
+            hssf.write(outputStream)
+            hssf.close()
+        }
+        Toast.makeText(context, "Planilha Excel gerada na pasta: ${file.absolutePath}", Toast.LENGTH_LONG).show()
+
         val fileURI = FileProvider.getUriForFile(
             context,
             context.applicationContext.packageName + ".provider",
             file
         )
-
         val browserIntent = Intent(Intent.ACTION_VIEW, fileURI)
+            .setDataAndType(fileURI, context.contentResolver.getType(fileURI))
         browserIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        context.startActivity(browserIntent)
+        context.startActivity(Intent.createChooser(browserIntent, "Open with"));
 
-    } catch (e: kotlin.Exception) {
-        Toast.makeText(context, "Erro ao gerar arquivo PDF.", Toast.LENGTH_SHORT).show()
+
+    } catch (e: Exception) {
+        e.printStackTrace()
+        Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
     }
-    pdfDocument.close()
 
+
+}
+
+fun hasWritePermission(context: Context): Boolean {
+    return ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+            PackageManager.PERMISSION_GRANTED;
+}
+
+fun requestWritePermission(context: Context, activity: Activity) {
+    if (!hasWritePermission(context)) {
+        ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+    }
+}
+
+fun Context.getActivity(): Activity? {
+    return when (this) {
+        is Activity -> this
+        is ContextWrapper -> baseContext.getActivity()
+        else -> null
+    }
 }

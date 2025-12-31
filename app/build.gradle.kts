@@ -93,7 +93,7 @@ androidComponents {
 
 dependencies {
 
-    //implementation("com.google.devtools.ksp:symbol-processing-api:2.0.21-1.0.27")
+    implementation("org.apache.poi:poi:3.17")
 
     implementation("androidx.compose.material3:material3-window-size-class:1.1.0")
 

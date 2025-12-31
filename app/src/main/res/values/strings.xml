@@ -111,7 +111,7 @@
     <string name="cash_flows_statement_missing_startdate">Por favor, informe a Data Inicial.</string>
     <string name="cash_flows_statement_missing_enddate">Por favor, informe a Data Final.</string>
     <string name="cash_flows_statement_delete_cash_flows_statement">Excluir Demonstração dos Fluxos de Caixa:</string>
-    <string name="cash_flows_statement_initial_balance_cash_value">Saldo inicial em caixa: $</string>
+    <string name="cash_flows_statement_initial_balance_cash_value">Saldo inicial em caixa: </string>
     <string name="cash_flows_statement_credit">Crédito</string>
     <string name="cash_flows_statement_debit">(Débito)</string>
     <string name="cash_flows_statement_invalid_dates">A Data Inicial deve ser anterior à Data Final</string>

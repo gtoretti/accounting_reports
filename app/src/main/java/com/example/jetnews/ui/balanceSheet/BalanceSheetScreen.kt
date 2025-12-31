@@ -1377,10 +1377,10 @@ private fun BalanceSheetItemsScreenContent(
                         }
                 ) {
                     Icon(
-                        imageVector = ImageVector.vectorResource(R.drawable.convert_to_text_24px),
+                        imageVector = ImageVector.vectorResource(R.drawable.table_view_24px),
                         contentDescription = stringResource(R.string.cash_flows_statement_add),
                         modifier = Modifier,
-                        tint = getLightRedColor()
+                        tint = getLightGreenColor()
                     )
                 }
                 TextButton(
