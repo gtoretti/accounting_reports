@@ -134,6 +134,7 @@
     <string name="period_results_statement_endDate">Data Final:</string>
     <string name="period_results_statement_cancel">Cancelar</string>
     <string name="period_results_statement_delete">Excluir Demonstração do Resultado do Exercício:</string>
+    <string name="period_results_statement_deleted_sucess">Demonstração do Resultado do Exercício excluída com sucesso.</string>
     <string name="period_results_statement_added_success">Demonstração do Resultado do Exercício adicionada com sucesso.</string>
     <string name="period_results_statement_changed_success">Demonstração do Resultado do Exercício modificada com sucesso.</string>
     <string name="period_results_statement_missing_name">Por favor, informe o Nome.</string>
@@ -161,6 +162,8 @@
     <string name="period_results_statement_item_added_success">Resultado adicionado com sucesso.</string>
     <string name="period_results_statement_item_changed_success">Resultado modificado com sucesso.</string>
     <string name="period_results_statement_all_items_already_added">Todas as Contas de Resultado já foram Adicionadas.</string>
+    <string name="period_results_statement_delete_statement">Excluir Resultado:</string>
+    <string name="period_results_statement_result_deleted_sucess">Resultado excluído com sucesso.</string>
 
     <!-- explanatory_notes -->
     <string name="explanatory_notes_title">Notas Explicativas</string>

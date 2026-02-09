@@ -16,6 +16,11 @@
 
 package com.example.jetnews.ui.utils
 
+import android.Manifest
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
@@ -36,6 +41,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.jetnews.R
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -259,4 +266,23 @@ fun Double.toScreenParenthesis(): String {
         return this.toDisplay()
     else
         return "("+this.toDisplay()+")"
+}
+
+fun hasWritePermission(context: Context): Boolean {
+    return ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+            PackageManager.PERMISSION_GRANTED;
+}
+
+fun requestWritePermission(context: Context, activity: Activity) {
+    if (!hasWritePermission(context)) {
+        ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+    }
+}
+
+fun Context.getActivity(): Activity? {
+    return when (this) {
+        is Activity -> this
+        is ContextWrapper -> baseContext.getActivity()
+        else -> null
+    }
 }

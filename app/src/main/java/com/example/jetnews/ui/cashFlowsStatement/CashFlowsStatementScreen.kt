@@ -107,9 +107,12 @@ import com.example.jetnews.ui.accountingAccounts.AccountingAccountsViewModel
 import com.example.jetnews.ui.accountingAccounts.displayEachExpandableTitleRow
 import com.example.jetnews.ui.accountingAccounts.getResultTypes
 import com.example.jetnews.ui.utils.DatePickerModal
+import com.example.jetnews.ui.utils.getActivity
 import com.example.jetnews.ui.utils.getLightBlueColor
 import com.example.jetnews.ui.utils.getLightGreenColor
 import com.example.jetnews.ui.utils.getLightRedColor
+import com.example.jetnews.ui.utils.hasWritePermission
+import com.example.jetnews.ui.utils.requestWritePermission
 import com.example.jetnews.ui.utils.screenToDouble
 import com.example.jetnews.ui.utils.toDisplay
 import com.example.jetnews.ui.utils.toScreen
@@ -3040,7 +3043,7 @@ fun generateExcel(context: Context, name: String, startDate: String, endDate: St
 
     val activity = context.getActivity()
     if (!hasWritePermission(context)) {
-       requestWritePermission(context, activity!!)
+        requestWritePermission(context, activity!!)
     }
 
     val filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
@@ -3063,6 +3066,13 @@ fun generateExcel(context: Context, name: String, startDate: String, endDate: St
         browserIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         context.startActivity(Intent.createChooser(browserIntent, "Open with"));
 
+        /*testar
+        * Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+intent.addCategory(Intent.CATEGORY_OPENABLE);
+intent.setType("application/vnd.ms-excel");
+startActivityForResult(intent, FILE_SELECT_CODE);
+        * */
+
 
     } catch (e: Exception) {
         e.printStackTrace()
@@ -3070,23 +3080,4 @@ fun generateExcel(context: Context, name: String, startDate: String, endDate: St
     }
 
 
-}
-
-fun hasWritePermission(context: Context): Boolean {
-    return ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-            PackageManager.PERMISSION_GRANTED;
-}
-
-fun requestWritePermission(context: Context, activity: Activity) {
-    if (!hasWritePermission(context)) {
-        ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
-    }
-}
-
-fun Context.getActivity(): Activity? {
-    return when (this) {
-        is Activity -> this
-        is ContextWrapper -> baseContext.getActivity()
-        else -> null
-    }
 }

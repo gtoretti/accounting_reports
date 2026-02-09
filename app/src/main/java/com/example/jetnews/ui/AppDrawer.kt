@@ -71,6 +71,7 @@ fun AppDrawer(
             },
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
         )
+        /* habilitar no ultimo ano de curso.
         NavigationDrawerItem(
             label = { Text(stringResource(id = R.string.accounting_accounts_title)) },
             icon = { Icon(painterResource(R.drawable.ic_list_alt), null) },
@@ -90,7 +91,7 @@ fun AppDrawer(
                 closeDrawer()
             },
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
-        )
+        )*/
         NavigationDrawerItem(
             label = { Text(stringResource(id = R.string.period_results_statement_title)) },
             icon = { Icon(painterResource(R.drawable.ic_list_alt), null) },
@@ -101,6 +102,7 @@ fun AppDrawer(
             },
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
         )
+        /* habilitar no ultimo ano de curso.
         NavigationDrawerItem(
             label = { Text(stringResource(id = R.string.balance_sheet_title)) },
             icon = { Icon(painterResource(R.drawable.ic_list_alt), null) },
@@ -131,6 +133,8 @@ fun AppDrawer(
             },
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
         )
+
+         */
     }
 }
 

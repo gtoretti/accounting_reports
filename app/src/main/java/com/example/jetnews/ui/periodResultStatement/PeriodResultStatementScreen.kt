@@ -17,6 +17,9 @@
 package com.example.jetnews.ui.periodResultStatement
 
 import android.content.Context
+import android.content.Intent
+import android.icu.util.Calendar
+import android.os.Environment
 import android.widget.Toast
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -83,14 +86,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.FileProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.jetnews.R
 import com.example.jetnews.data.periodResultStatement.PeriodResultStatement
 import com.example.jetnews.data.periodResultStatement.PeriodResultStatementItem
 import com.example.jetnews.ui.accountingAccounts.displayEachExpandableTitleRow
 import com.example.jetnews.ui.utils.DatePickerModal
+import com.example.jetnews.ui.utils.getActivity
 import com.example.jetnews.ui.utils.getLightGreenColor
 import com.example.jetnews.ui.utils.getLightRedColor
+import com.example.jetnews.ui.utils.hasWritePermission
+import com.example.jetnews.ui.utils.requestWritePermission
 import com.example.jetnews.ui.utils.screenToDouble
 import com.example.jetnews.ui.utils.toDisplay
 import com.example.jetnews.ui.utils.toScreen
@@ -112,6 +119,9 @@ import com.example.jetnews.utils.PERIOD_RESULT_STATEMENT_TYPE_OPERATION_DISCONTI
 import com.example.jetnews.utils.PERIOD_RESULT_STATEMENT_TYPE_OPERATION_DISCONTINUED_LOSS_FROM_DISCONTINUED_OPERATIONS
 import com.example.jetnews.utils.PERIOD_RESULT_STATEMENT_TYPE_TAX_ON_PROFIT
 import com.example.jetnews.utils.PERIOD_RESULT_STATEMENT_TYPE_TAX_ON_PROFIT_TAX_EXPENSES_ON_PROFIT
+import org.apache.poi.hssf.usermodel.HSSFWorkbook
+import java.io.File
+import java.io.FileOutputStream
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -1151,7 +1161,13 @@ private fun PeriodResultStatementItemsScreenContent(
                         modifier = Modifier.padding(1.dp),
                         onClick =
                             {
+                                generateExcel(
+                                    context,
+                                    periodResultStatementName.value,
+                                    periodResultStatementStartDate.value,
+                                    periodResultStatementEndDate.value,
 
+                                )
                             }
                     ) {
                         Icon(
@@ -2640,7 +2656,7 @@ fun PeriodResultStatementDeleteDialog(
 
             title = {
                 Text(
-                    text = stringResource(R.string.cash_flows_statement_delete_cash_flows_statement),
+                    text = stringResource(R.string.period_results_statement_delete),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.primary,
                     textAlign = TextAlign.Center
@@ -2682,7 +2698,7 @@ fun PeriodResultStatementDeleteDialog(
                         )
                     }
 
-                    val deleteSucessMsg = stringResource(R.string.cash_flows_statement_deleted_sucess)
+                    val deleteSucessMsg = stringResource(R.string.period_results_statement_deleted_sucess)
                     Button(
                         onClick = {
                             periodResultStatementViewModel.deletePeriodResultStatement(PeriodResultStatement(isDeletingId.value,isDeletingName.value, Date(0), Date(0), 0))
@@ -2732,7 +2748,7 @@ fun PeriodResultStatementItemDeleteDialog(
 
             title = {
                 Text(
-                    text = stringResource(R.string.cash_flows_statement_delete_statement),
+                    text = stringResource(R.string.period_results_statement_delete_statement),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.primary,
                     textAlign = TextAlign.Center
@@ -2787,7 +2803,7 @@ fun PeriodResultStatementItemDeleteDialog(
                         )
                     }
 
-                    val financialMoveDeletedSucessMsg = stringResource(R.string.cash_flows_statement_financial_move_deleted_sucess)
+                    val financialMoveDeletedSucessMsg = stringResource(R.string.period_results_statement_result_deleted_sucess)
                     Button(
                         onClick = {
                             periodResultStatementViewModel.deletePeriodResultStatementItem(PeriodResultStatementItem(isDeletingPeriodResultStatementItemId.value,0, "", "", 0,"",0.0,0))
@@ -2814,4 +2830,103 @@ fun PeriodResultStatementItemDeleteDialog(
             }
         )
     }
+}
+
+fun generateExcel(context: Context, name: String, startDate: String, endDate: String){
+
+    try {
+
+        val fmtFileName = SimpleDateFormat("dd_MM_yyyy_HH_mm")
+        val filename = buildString {
+            append("DRE_")
+            append(fmtFileName.format(Calendar.getInstance().time))
+            append(".xlsx")
+        }
+
+        val hssf = HSSFWorkbook()
+        val sheet = hssf.createSheet("Demonstração do Resultado do Exercício")
+
+        sheet.setColumnWidth(0, 20 * 256); // 20 characters wide
+
+        val row0 = sheet.createRow(0)
+        val row0c0 = row0.createCell(0)
+        row0c0.setCellValue("Demonstração do Resultado do Exercício")
+
+        val row1 = sheet.createRow(2)
+        val row1c0 = row1.createCell(0)
+        row1c0.setCellValue(name)
+
+        val row2 = sheet.createRow(3)
+        val row2c0 = row2.createCell(0)
+        row2c0.setCellValue("Período:")
+
+        val row2c1 = row2.createCell(1)
+        row2c1.setCellValue("$startDate - $endDate")
+
+        val row3 = sheet.createRow(4)
+        val row3c0 = row3.createCell(0)
+        row3c0.setCellValue("Saldo Inicial em Caixa:")
+
+        val row3c1 = row3.createCell(1)
+        //row3c1.setCellValue(initialCash)
+
+
+        val row4 = sheet.createRow(6)
+        val row4c0 = row4.createCell(0)
+        row4c0.setCellValue("Aumento em Caixa:")
+
+        val row4c1 = row4.createCell(1)
+        //row4c1.setCellValue(cashIncrease)
+
+        val row5 = sheet.createRow(7)
+        val row5c0 = row5.createCell(0)
+        row5c0.setCellValue("Saldo Final em Caixa:")
+
+        val row5c1 = row5.createCell(1)
+        //row5c1.setCellValue(finalCash)
+
+
+
+
+
+
+        val activity = context.getActivity()
+        if (!hasWritePermission(context)) {
+            requestWritePermission(context, activity!!)
+        }
+
+        val filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+        val file = File(filePath, filename)
+
+
+        FileOutputStream(file).use { outputStream ->
+            hssf.write(outputStream)
+            hssf.close()
+        }
+        Toast.makeText(context, "Planilha Excel gerada na pasta: ${file.absolutePath}", Toast.LENGTH_LONG).show()
+
+        val fileURI = FileProvider.getUriForFile(
+            context,
+            context.applicationContext.packageName + ".provider",
+            file
+        )
+        val browserIntent = Intent(Intent.ACTION_VIEW, fileURI)
+            .setDataAndType(fileURI, context.contentResolver.getType(fileURI))
+        browserIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        context.startActivity(Intent.createChooser(browserIntent, "Open with"));
+
+        /*testar
+        * Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+intent.addCategory(Intent.CATEGORY_OPENABLE);
+intent.setType("application/vnd.ms-excel");
+startActivityForResult(intent, FILE_SELECT_CODE);
+        * */
+
+
+    } catch (e: Exception) {
+        e.printStackTrace()
+        Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+    }
+
+
 }
