@@ -37,6 +37,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -83,6 +84,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -1668,7 +1670,7 @@ private fun PeriodResultStatementItemRow(
             Column() {
                 Text(
                     text = item.description,
-                    modifier = Modifier,
+                    modifier = Modifier.fillMaxWidth(0.65f),
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
                     textAlign = TextAlign.Start
@@ -1676,10 +1678,10 @@ private fun PeriodResultStatementItemRow(
 
                 Text(
                     text = value,
-                    modifier = Modifier,
+                    modifier = Modifier.fillMaxWidth(0.65f),
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
-                    textAlign = TextAlign.End,
+                    textAlign = TextAlign.Start,
                     fontWeight = FontWeight.Bold
                 )
 
@@ -1891,6 +1893,9 @@ private fun PeriodResultStatementItemsAddItemScreenContent(
                         resultItemValue.value = it
                     },
                     placeholder = { Text("") },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Decimal
+                    ),
                     label = {
                         Text(
                             text = stringResource(R.string.period_results_statement_value),
@@ -2067,6 +2072,9 @@ private fun PeriodResultStatementItemsEditItemScreenContent(
                         resultItemValue.value = it
                     },
                     placeholder = { Text("") },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Decimal
+                    ),
                     label = {
                         Text(
                             text = stringResource(R.string.cash_flows_statement_value),
