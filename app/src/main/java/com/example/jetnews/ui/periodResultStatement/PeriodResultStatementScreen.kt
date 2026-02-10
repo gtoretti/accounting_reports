@@ -724,6 +724,7 @@ private fun PeriodResultStatementEditScreenContent(
         ) {
 
             OutlinedTextField(
+                modifier=Modifier.fillMaxWidth(),
                 value = name.value,
                 onValueChange = {
                     name.value = it
@@ -1884,6 +1885,7 @@ private fun PeriodResultStatementItemsAddItemScreenContent(
             )
             {
                 OutlinedTextField(
+                    modifier=Modifier.fillMaxWidth(),
                     value = resultItemValue.value,
                     onValueChange = {
                         resultItemValue.value = it
@@ -2059,6 +2061,7 @@ private fun PeriodResultStatementItemsEditItemScreenContent(
             {
 
                 OutlinedTextField(
+                    modifier=Modifier.fillMaxWidth(),
                     value = resultItemValue.value,
                     onValueChange = {
                         resultItemValue.value = it
@@ -2480,6 +2483,7 @@ private fun PeriodResultStatementAddScreenContent(
         ) {
 
             OutlinedTextField(
+                modifier=Modifier.fillMaxWidth(),
                 value = periodResultStatementName.value,
                 onValueChange = {
                     periodResultStatementName.value = it

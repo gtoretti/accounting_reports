@@ -41,6 +41,7 @@ import com.example.jetnews.ui.cashFlowsStatement.CashFlowsStatementViewModel
 import com.example.jetnews.ui.explanatoryNotes.ExplanatoryNotesScreen
 import com.example.jetnews.ui.explanatoryNotes.ExplanatoryNotesViewModel
 import com.example.jetnews.ui.home.HomeRoute
+import com.example.jetnews.ui.home.HomeScreen
 import com.example.jetnews.ui.home.HomeViewModel
 import com.example.jetnews.ui.periodResultStatement.PeriodResultStatementScreen
 import com.example.jetnews.ui.periodResultStatement.PeriodResultStatementViewModel
@@ -62,40 +63,12 @@ fun JetnewsNavGraph(
         startDestination = startDestination,
         modifier = modifier,
     ) {
-
-        /*
-        composable(
-            route = JetnewsDestinations.HOME,
-            deepLinks = listOf(
-                navDeepLink {
-                    uriPattern =
-                        "$JETNEWS_APP_URI/${JetnewsDestinations.HOME}?$POST_ID={$POST_ID}"
-                },
-            ),
-        ) { navBackStackEntry ->
-            val homeViewModel: HomeViewModel = viewModel(
-                factory = HomeViewModel.provideFactory(
-                    postsRepository = appContainer.postsRepository,
-                    preSelectedPostId = navBackStackEntry.arguments?.getString(POST_ID),
-                ),
-            )
-            HomeRoute(
-                homeViewModel = homeViewModel,
-                isExpandedScreen = isExpandedScreen,
-                openDrawer = openDrawer,
-            )
-        }
-        */
-        // HOME aponta para PeriodResultStatementScreen
         composable(JetnewsDestinations.HOME) {
-            val periodResultStatementViewModel: PeriodResultStatementViewModel = hiltViewModel()
-            PeriodResultStatementScreen(
-                periodResultStatementViewModel = periodResultStatementViewModel,
+            HomeScreen(
                 isExpandedScreen = isExpandedScreen,
                 openDrawer = openDrawer,
             )
         }
-
 
         composable(JetnewsDestinations.ACCOUNTING_ACCOUNTS) {
             val accountingAccountsViewModel: AccountingAccountsViewModel = hiltViewModel()
