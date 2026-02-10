@@ -1863,7 +1863,7 @@ private fun PeriodResultStatementItemsAddItemScreenContent(
         ) {
 
             Column(
-                horizontalAlignment = Alignment.Start,
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth())
             {
@@ -1871,11 +1871,16 @@ private fun PeriodResultStatementItemsAddItemScreenContent(
                     text = periodResultStatementName.value,
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = periodResultStatementStartDate.value + " - " + periodResultStatementEndDate.value,
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold
+                )
+                HorizontalDivider(
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
                 )
             }
 
@@ -2041,7 +2046,7 @@ private fun PeriodResultStatementItemsEditItemScreenContent(
         ) {
 
             Column(
-                horizontalAlignment = Alignment.Start,
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth())
             {
@@ -2049,11 +2054,16 @@ private fun PeriodResultStatementItemsEditItemScreenContent(
                     text = periodResultStatementName.value,
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = periodResultStatementStartDate.value + " - " + periodResultStatementEndDate.value,
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
                     color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold
+                )
+                HorizontalDivider(
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
                 )
             }
 
@@ -2949,33 +2959,79 @@ fun generateExcel(context: Context, name: String, startDate: String, endDate: St
         val row2c1 = row2.createCell(1)
         row2c1.setCellValue("$startDate - $endDate")
 
-        val row3 = sheet.createRow(4)
-        val row3c0 = row3.createCell(0)
-        row3c0.setCellValue("Saldo Inicial em Caixa:")
-
-        val row3c1 = row3.createCell(1)
-        //row3c1.setCellValue(initialCash)
-
-
-        val row4 = sheet.createRow(6)
+        val row4 = sheet.createRow(5)
         val row4c0 = row4.createCell(0)
-        row4c0.setCellValue("Aumento em Caixa:")
+        row4c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING)
 
-        val row4c1 = row4.createCell(1)
-        //row4c1.setCellValue(cashIncrease)
-
-        val row5 = sheet.createRow(7)
+        val row5 = sheet.createRow(6)
         val row5c0 = row5.createCell(0)
-        row5c0.setCellValue("Saldo Final em Caixa:")
-
+        row5c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_REVENUE)
         val row5c1 = row5.createCell(1)
-        //row5c1.setCellValue(finalCash)
+        row5c1.setCellValue("valorReceita")
+
+        val row6 = sheet.createRow(7)
+        val row6c0 = row6.createCell(0)
+        row6c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_COST_OF_SALES)
+        val row6c1 = row6.createCell(1)
+        row6c1.setCellValue("valorCusto das Vendas")
+
+        val row7 = sheet.createRow(8)
+        val row7c0 = row7.createCell(0)
+        row7c0.setCellValue("Lucro Bruto:")
+        val row7c1 = row7.createCell(1)
+        row7c1.setCellValue("valorLucro Bruto")
+
+        val row8 = sheet.createRow(9)
+        val row8c0 = row8.createCell(0)
+        row8c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_OTHER_OPERATING_EXPENSES)
+        val row8c1 = row8.createCell(1)
+        row8c1.setCellValue("valorOutras Despesas Operacionais")
+
+        val row9 = sheet.createRow(10)
+        val row9c0 = row9.createCell(0)
+        row9c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_SELLING_EXPENSES)
+        val row9c1 = row9.createCell(1)
+        row9c1.setCellValue("valorDespesas de Vendas")
+
+        val row10 = sheet.createRow(11)
+        val row10c0 = row10.createCell(0)
+        row10c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_RESEARCH_AND_DEVELOPMENT_EXPENSES)
+        val row10c1 = row10.createCell(1)
+        row10c1.setCellValue("valorDespesas de Pesquisa e Desenvolvimento")
+
+        val row11 = sheet.createRow(12)
+        val row11c0 = row11.createCell(0)
+        row11c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_GENERAL_AND_ADMINISTRATIVE_EXPENSES)
+        val row11c1 = row11.createCell(1)
+        row11c1.setCellValue("valorDespesas Gerais e Administrativas")
+
+        val row12 = sheet.createRow(13)
+        val row12c0 = row12.createCell(0)
+        row12c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_GOODWILL_IMPAIRMENT_LOSS)
+        val row12c1 = row12.createCell(1)
+        row12c1.setCellValue("valorPerda por Impairment do Goodwill")
+
+        val row13 = sheet.createRow(14)
+        val row13c0 = row13.createCell(0)
+        row13c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_OTHER_OPERATING_EXPENSES)
+        val row13c1 = row13.createCell(1)
+        row13c1.setCellValue("valorOutras Despesas Operacionais")
+
+        val row14 = sheet.createRow(15)
+        val row14c0 = row14.createCell(0)
+        row14c0.setCellValue("Lucro Operacional:")
+        val row14c1 = row14.createCell(1)
+        row14c1.setCellValue("valorLucro Operacional")
+
+        val row17 = sheet.createRow(17)
+        val row17c0 = row17.createCell(0)
+        row17c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_INVESTING)
 
 
 
 
 
-
+        
         val activity = context.getActivity()
         if (!hasWritePermission(context)) {
             requestWritePermission(context, activity!!)
