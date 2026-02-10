@@ -60,7 +60,7 @@ const val PERIOD_RESULT_STATEMENT_TYPE_OPERATING = "Categoria Operacional"
 const val PERIOD_RESULT_STATEMENT_TYPE_INVESTING = "Categoria Investimentos"
 const val PERIOD_RESULT_STATEMENT_TYPE_FINANCING = "Categoria Financiamentos"
 const val PERIOD_RESULT_STATEMENT_TYPE_TAX_ON_PROFIT = "Categoria Tributo sobre Lucro"
-const val PERIOD_RESULT_STATEMENT_TYPE_OPERATION_DISCONTINUED = "Operação Descontinuada"
+const val PERIOD_RESULT_STATEMENT_TYPE_OPERATION_DISCONTINUED = "Categoria Operação Descontinuada"
 
 
 const val PERIOD_RESULT_STATEMENT_TYPE_OPERATING_REVENUE = "Receita"

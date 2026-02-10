@@ -62,6 +62,8 @@ fun JetnewsNavGraph(
         startDestination = startDestination,
         modifier = modifier,
     ) {
+
+        /*
         composable(
             route = JetnewsDestinations.HOME,
             deepLinks = listOf(
@@ -83,6 +85,18 @@ fun JetnewsNavGraph(
                 openDrawer = openDrawer,
             )
         }
+        */
+        // HOME aponta para PeriodResultStatementScreen
+        composable(JetnewsDestinations.HOME) {
+            val periodResultStatementViewModel: PeriodResultStatementViewModel = hiltViewModel()
+            PeriodResultStatementScreen(
+                periodResultStatementViewModel = periodResultStatementViewModel,
+                isExpandedScreen = isExpandedScreen,
+                openDrawer = openDrawer,
+            )
+        }
+
+
         composable(JetnewsDestinations.ACCOUNTING_ACCOUNTS) {
             val accountingAccountsViewModel: AccountingAccountsViewModel = hiltViewModel()
             AccountingAccountsScreen(

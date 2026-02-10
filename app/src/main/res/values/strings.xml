@@ -143,12 +143,14 @@
     <string name="period_results_statement_save">Salvar</string>
     <string name="period_results_statement_total">Total:</string>
 
+
     <string name="period_results_statement_gross_profit">Lucro Bruto:</string>
     <string name="period_results_statement_operating_profit">Lucro Operacional:</string>
     <string name="period_results_statement_profit_before_financing_and_taxes">Lucro Antes da Atividade de Financiamento e Tributos sobre o Lucro:</string>
     <string name="period_results_statement_profit_before_taxes">Lucro Antes dos Tributos sobre o Lucro:</string>
     <string name="period_results_statement_profit_from_continuing_operations">Lucro das Operações Continuadas:</string>
     <string name="period_results_statement_net_profit">Lucro Líquido:</string>
+    <string name="period_results_statement_no_items">Não há resultados nesta seção.</string>
 
     <string name="period_results_statement_report">Relatório</string>
     <string name="period_results_statement_date">Data:</string>

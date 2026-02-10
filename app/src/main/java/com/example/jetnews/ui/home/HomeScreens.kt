@@ -102,8 +102,6 @@ import com.example.jetnews.data.Result
 import com.example.jetnews.data.posts.impl.BlockingFakePostsRepository
 import com.example.jetnews.model.Post
 import com.example.jetnews.model.PostsFeed
-import com.example.jetnews.ui.article.postContentItems
-import com.example.jetnews.ui.article.sharePost
 import com.example.jetnews.ui.components.JetnewsSnackbarHost
 import com.example.jetnews.ui.modifiers.interceptKey
 import com.example.jetnews.ui.theme.JetnewsTheme
@@ -184,20 +182,10 @@ fun HomeFeedWithArticleDetailsScreen(
                                     onInteractWithDetail(detailPost.id)
                                 },
                         ) {
-                            postContentItems(detailPost)
+
                         }
 
-                        // Floating toolbar
-                        val context = LocalContext.current
-                        PostTopBar(
-                            isFavorite = hasPostsUiState.favorites.contains(detailPost.id),
-                            onToggleFavorite = { onToggleFavorite(detailPost.id) },
-                            onSharePost = { sharePost(detailPost, context) },
-                            modifier = Modifier
-                                .windowInsetsPadding(WindowInsets.safeDrawing)
-                                .fillMaxWidth()
-                                .wrapContentWidth(Alignment.End),
-                        )
+
                     }
                 }
             }

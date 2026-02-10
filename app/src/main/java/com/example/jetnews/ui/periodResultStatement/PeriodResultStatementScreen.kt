@@ -1241,6 +1241,10 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemValue)
                     }
 
+                    if (revenueList.isEmpty() && costOfSalesList.isEmpty()){
+                        PeriodResultStatementNoItems(stringResource(R.string.period_results_statement_no_items))
+                    }
+
                     HorizontalDivider(
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
                     )
@@ -1264,6 +1268,11 @@ private fun PeriodResultStatementItemsScreenContent(
                             fontWeight = FontWeight.Bold,
                         )
                     }
+
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                    )
+                    Spacer(Modifier.height(10.dp))
 
                     val otherOperatingRevenuesList = operatingItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_OPERATING_OTHER_OPERATING_REVENUES }
                     if (otherOperatingRevenuesList.isNotEmpty()){
@@ -1326,6 +1335,10 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemValue)
                     }
 
+                    if (otherOperatingRevenuesList.isEmpty() && sellingExpensesList.isEmpty() && researchAndDevelopmentExpensesList.isEmpty() && generalAndAdministrativeExpensesList.isEmpty() && otherOperatingExpensesList.isEmpty() && goodwillImpairmentLossExpensesList.isEmpty()){
+                        PeriodResultStatementNoItems(stringResource(R.string.period_results_statement_no_items))
+                    }
+
                     HorizontalDivider(
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
                     )
@@ -1350,6 +1363,11 @@ private fun PeriodResultStatementItemsScreenContent(
                             fontWeight = FontWeight.Bold,
                         )
                     }
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                    )
+                    Spacer(Modifier.height(10.dp))
+
                 }
 
                 val investingExpanded = remember { mutableStateOf(false) }
@@ -1364,6 +1382,8 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemType,
                             periodResultStatementItemDescription,
                             periodResultStatementItemValue)
+                    }else{
+                        PeriodResultStatementNoItems(stringResource(R.string.period_results_statement_no_items))
                     }
 
                     HorizontalDivider(
@@ -1392,6 +1412,11 @@ private fun PeriodResultStatementItemsScreenContent(
                             fontWeight = FontWeight.Bold,
                         )
                     }
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                    )
+                    Spacer(Modifier.height(10.dp))
+
                 }
 
                 val financingExpanded = remember { mutableStateOf(false) }
@@ -1420,6 +1445,10 @@ private fun PeriodResultStatementItemsScreenContent(
                         )
                     }
 
+                    if (retirementExpensesList.isEmpty() && interestExpensesOnLoansAndLeaseLiabilitiesList.isEmpty()){
+                        PeriodResultStatementNoItems(stringResource(R.string.period_results_statement_no_items))
+                    }
+
                     HorizontalDivider(
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
                     )
@@ -1446,6 +1475,11 @@ private fun PeriodResultStatementItemsScreenContent(
                             fontWeight = FontWeight.Bold,
                         )
                     }
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                    )
+                    Spacer(Modifier.height(10.dp))
+
                 }
 
                 val taxOnProfitExpanded = remember { mutableStateOf(false) }
@@ -1460,6 +1494,8 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemDescription,
                             periodResultStatementItemValue,
                         )
+                    }else{
+                        PeriodResultStatementNoItems(stringResource(R.string.period_results_statement_no_items))
                     }
 
                     HorizontalDivider(
@@ -1488,6 +1524,11 @@ private fun PeriodResultStatementItemsScreenContent(
                             fontWeight = FontWeight.Bold,
                         )
                     }
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                    )
+                    Spacer(Modifier.height(10.dp))
+
                 }
 
 
@@ -1504,7 +1545,10 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemDescription,
                             periodResultStatementItemValue,
                         )
+                    }else{
+                        PeriodResultStatementNoItems(stringResource(R.string.period_results_statement_no_items))
                     }
+
                 }
 
                 HorizontalDivider(
@@ -1551,6 +1595,34 @@ private fun PeriodResultStatementItemsScreenContent(
     }
 }
 
+@Composable
+private fun PeriodResultStatementNoItems(text: String){
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
+            .fillMaxWidth()
+    )
+    {
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+
+        ) {
+            Column() {
+                Text(
+                    text = text,
+                    modifier = Modifier,
+                    style = TextStyle(fontFamily = FontFamily.SansSerif),
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Start
+                )
+            }
+        }
+    }
+}
 
 @Composable
 private fun PeriodResultStatementItemRow(
@@ -2537,7 +2609,7 @@ private fun PeriodResultStatementAddScreenContent(
                         )
                     )
                 }
-                val sucessMsg = stringResource(R.string.cash_flows_statement_added_sucess)
+                val sucessMsg = stringResource(R.string.period_results_statement_added_success)
                 val missingNameMsg = stringResource(R.string.cash_flows_statement_missing_name)
                 val missingStartDateMsg = stringResource(R.string.cash_flows_statement_missing_startdate)
                 val missingEndDateMsg = stringResource(R.string.cash_flows_statement_missing_enddate)
