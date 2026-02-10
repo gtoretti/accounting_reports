@@ -96,6 +96,7 @@ import com.example.jetnews.data.periodResultStatement.PeriodResultStatementItem
 import com.example.jetnews.ui.accountingAccounts.displayEachExpandableTitleRow
 import com.example.jetnews.ui.utils.DatePickerModal
 import com.example.jetnews.ui.utils.getActivity
+import com.example.jetnews.ui.utils.getColor
 import com.example.jetnews.ui.utils.getLightGreenColor
 import com.example.jetnews.ui.utils.getLightRedColor
 import com.example.jetnews.ui.utils.hasWritePermission
@@ -1267,7 +1268,7 @@ private fun PeriodResultStatementItemsScreenContent(
                         Text(
                             text = grossProfitText,
                             style = TextStyle(fontFamily = FontFamily.SansSerif),
-                            color = MaterialTheme.colorScheme.primary,
+                            color = getColor(grossProfit),
                             fontWeight = FontWeight.Bold,
                         )
                     }
@@ -1362,7 +1363,7 @@ private fun PeriodResultStatementItemsScreenContent(
                         Text(
                             text = operatingProfitText,
                             style = TextStyle(fontFamily = FontFamily.SansSerif),
-                            color = MaterialTheme.colorScheme.primary,
+                            color = getColor(operatingProfit),
                             fontWeight = FontWeight.Bold,
                         )
                     }
@@ -1411,7 +1412,7 @@ private fun PeriodResultStatementItemsScreenContent(
                         Text(
                             text = profitBeforeFinancingAndTaxesText,
                             style = TextStyle(fontFamily = FontFamily.SansSerif),
-                            color = MaterialTheme.colorScheme.primary,
+                            color = getColor(profitBeforeFinancingAndTaxes),
                             fontWeight = FontWeight.Bold,
                         )
                     }
@@ -1474,7 +1475,7 @@ private fun PeriodResultStatementItemsScreenContent(
                         Text(
                             text = profitBeforeTaxesText,
                             style = TextStyle(fontFamily = FontFamily.SansSerif),
-                            color = MaterialTheme.colorScheme.primary,
+                            color = getColor(profitBeforeTaxes),
                             fontWeight = FontWeight.Bold,
                         )
                     }
@@ -1523,7 +1524,7 @@ private fun PeriodResultStatementItemsScreenContent(
                         Text(
                             text = profitFromContinuingOperationsText,
                             style = TextStyle(fontFamily = FontFamily.SansSerif),
-                            color = MaterialTheme.colorScheme.primary,
+                            color = getColor(profitFromContinuingOperations),
                             fontWeight = FontWeight.Bold,
                         )
                     }
@@ -1576,10 +1577,11 @@ private fun PeriodResultStatementItemsScreenContent(
                     Text(
                         text = netProfitText,
                         style = TextStyle(fontFamily = FontFamily.SansSerif),
-                        color = MaterialTheme.colorScheme.primary,
+                        color = getColor(netProfit),
                         fontWeight = FontWeight.Bold,
                     )
                 }
+                Spacer(Modifier.height(30.dp))
             }
         }
     }
@@ -1680,7 +1682,7 @@ private fun PeriodResultStatementItemRow(
                     text = value,
                     modifier = Modifier.fillMaxWidth(0.65f),
                     style = TextStyle(fontFamily = FontFamily.SansSerif),
-                    color = MaterialTheme.colorScheme.primary,
+                    color = getColor(item.value),
                     textAlign = TextAlign.Start,
                     fontWeight = FontWeight.Bold
                 )

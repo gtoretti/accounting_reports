@@ -28,12 +28,14 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconToggleButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -200,43 +202,43 @@ fun isDarkTheme(): Boolean {
 }
 
 @Composable
-fun getLightGreenColor(): androidx.compose.ui.graphics.Color {
+fun getLightGreenColor(): Color {
     if (isDarkTheme())
-        return androidx.compose.ui.graphics.Color(0xFF224D23)
+        return Color(0xFF224D23)
     else
-        return androidx.compose.ui.graphics.Color(0xFF4CAF50)
+        return Color(0xFF4CAF50)
 }
 
 @Composable
-fun getLightRedColor(): androidx.compose.ui.graphics.Color {
+fun getLightRedColor(): Color {
     if (isDarkTheme())
-        return androidx.compose.ui.graphics.Color(0xFF480101)
+        return Color(0xFF480101)
     else
-        return androidx.compose.ui.graphics.Color(0xFFA91010)
+        return Color(0xFFA91010)
 }
 
 @Composable
-fun getLightBlueColor(): androidx.compose.ui.graphics.Color {
+fun getLightBlueColor(): Color {
     if (isDarkTheme())
-        return androidx.compose.ui.graphics.Color(0xFF092E4D)
+        return Color(0xFF092E4D)
     else
-        return androidx.compose.ui.graphics.Color(0xFF6790B0)
+        return Color(0xFF6790B0)
 }
 
 @Composable
-fun getPhoneColor(): androidx.compose.ui.graphics.Color {
+fun getPhoneColor(): Color {
     if (isDarkTheme())
-        return androidx.compose.ui.graphics.Color(0xFF4D694E)
+        return Color(0xFF4D694E)
     else
-        return androidx.compose.ui.graphics.Color(0xFF153116)
+        return Color(0xFF153116)
 }
 
 @Composable
-fun getRedTextColor(): androidx.compose.ui.graphics.Color {
+fun getRedTextColor(): Color {
     if (isDarkTheme())
-        return androidx.compose.ui.graphics.Color(0xFF654444)
+        return Color(0xFF654444)
     else
-        return androidx.compose.ui.graphics.Color(0xFF330101)
+        return Color(0xFF330101)
 }
 
 fun String.screenToDouble(): Double {
@@ -269,7 +271,7 @@ fun Double.toScreenParenthesis(): String {
 }
 
 fun hasWritePermission(context: Context): Boolean {
-    return ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+    return ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
             PackageManager.PERMISSION_GRANTED;
 }
 
@@ -285,4 +287,10 @@ fun Context.getActivity(): Activity? {
         is ContextWrapper -> baseContext.getActivity()
         else -> null
     }
+}
+
+@Composable
+fun getColor(value: Double): Color{
+    if (value>=0.0) return MaterialTheme.colorScheme.primary
+    return getLightRedColor()
 }
