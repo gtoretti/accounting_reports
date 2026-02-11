@@ -1845,7 +1845,8 @@ private fun PeriodResultStatementItemRow(
                     imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
                     contentDescription = stringResource(R.string.cash_flows_statement_delete),
                     modifier = Modifier,
-                    tint = Color.Red
+                    tint = getLightRedColor()
+
                 )
             }
         }
@@ -2605,7 +2606,7 @@ private fun PeriodResultStatementHomeScreenContent(
                                 imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
                                 contentDescription = stringResource(R.string.cash_flows_statement_delete),
                                 modifier = Modifier,
-                                tint = Color.Red
+                                tint = getLightRedColor()
                             )
                         }
                     }
@@ -3133,8 +3134,8 @@ fun generateExcel(context: Context,
         val hssf = HSSFWorkbook()
         val sheet = hssf.createSheet("DRE")
 
-        sheet.setColumnWidth(0, 70 * 256); // 7 0 characters wide
-        sheet.setColumnWidth(1, 20 * 256); // 7 0 characters wide
+        sheet.setColumnWidth(0, 80 * 256); // 80 characters wide
+        sheet.setColumnWidth(1, 20 * 256); // 20 characters wide
 
         val row0 = sheet.createRow(0)
         val row0c0 = row0.createCell(0)

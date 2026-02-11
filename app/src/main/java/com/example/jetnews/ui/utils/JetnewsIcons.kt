@@ -204,7 +204,7 @@ fun isDarkTheme(): Boolean {
 @Composable
 fun getLightGreenColor(): Color {
     if (isDarkTheme())
-        return Color(0xFF224D23)
+        return Color(0xFF317032)
     else
         return Color(0xFF4CAF50)
 }
@@ -212,7 +212,7 @@ fun getLightGreenColor(): Color {
 @Composable
 fun getLightRedColor(): Color {
     if (isDarkTheme())
-        return Color(0xFF480101)
+        return Color(0xFFA67272)
     else
         return Color(0xFFA91010)
 }
