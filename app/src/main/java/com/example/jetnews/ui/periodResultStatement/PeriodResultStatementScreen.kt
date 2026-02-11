@@ -3131,31 +3131,31 @@ fun generateExcel(context: Context,
         }
 
         val hssf = HSSFWorkbook()
-        val sheet = hssf.createSheet("Demonstração do Resultado do Exercício")
+        val sheet = hssf.createSheet("DRE")
 
         sheet.setColumnWidth(0, 70 * 256); // 7 0 characters wide
         sheet.setColumnWidth(1, 20 * 256); // 7 0 characters wide
 
         val row0 = sheet.createRow(0)
         val row0c0 = row0.createCell(0)
-        row0c0.setCellValue("Demonstração do Resultado do Exercício")
+        row0c0.setCellValue("DEMONSTRAÇÃO DO RESULTADO DO EXERCÍCIO")
 
         val row1 = sheet.createRow(2)
         val row1c0 = row1.createCell(0)
-        row1c0.setCellValue("Nome:")
+        row1c0.setCellValue("NOME:")
         val row1c1 = row1.createCell(1)
         row1c1.setCellValue(name)
 
 
         val row2 = sheet.createRow(3)
         val row2c0 = row2.createCell(0)
-        row2c0.setCellValue("Período:")
+        row2c0.setCellValue("PERÍODO:")
         val row2c1 = row2.createCell(1)
         row2c1.setCellValue("$startDate - $endDate")
 
         val rowExpNotesTitle = sheet.createRow(4)
         val rowExpNotesTitleC2 = rowExpNotesTitle.createCell(2)
-        rowExpNotesTitleC2.setCellValue("Notas Explicativas:")
+        rowExpNotesTitleC2.setCellValue("NOTAS EXPLICATIVAS:")
 
         val row4 = sheet.createRow(5)
         val row4c0 = row4.createCell(0)
@@ -3177,13 +3177,13 @@ fun generateExcel(context: Context,
         val row6c2 = row6.createCell(2)
         row6c2.setCellValue(excelParamCostOfSalesExplanatoryNotes)
 
-        val row7 = sheet.createRow(9)
+        val row7 = sheet.createRow(10)
         val row7c0 = row7.createCell(0)
-        row7c0.setCellValue("Lucro Bruto:")
+        row7c0.setCellValue("LUCRO BRUTO:")
         val row7c1 = row7.createCell(1)
         row7c1.setCellValue(grossProfit)
 
-        val row8 = sheet.createRow(10)
+        val row8 = sheet.createRow(12)
         val row8c0 = row8.createCell(0)
         row8c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_OTHER_OPERATING_REVENUES)
         val row8c1 = row8.createCell(1)
@@ -3191,7 +3191,7 @@ fun generateExcel(context: Context,
         val row8c2 = row8.createCell(2)
         row8c2.setCellValue(excelParamOtherOperatingRevenuesExplanatoryNotes)
 
-        val row9 = sheet.createRow(11)
+        val row9 = sheet.createRow(13)
         val row9c0 = row9.createCell(0)
         row9c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_SELLING_EXPENSES)
         val row9c1 = row9.createCell(1)
@@ -3199,7 +3199,7 @@ fun generateExcel(context: Context,
         val row9c2 = row9.createCell(2)
         row9c2.setCellValue(excelParamSellingExpensesExplanatoryNotes)
 
-        val row10 = sheet.createRow(12)
+        val row10 = sheet.createRow(14)
         val row10c0 = row10.createCell(0)
         row10c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_RESEARCH_AND_DEVELOPMENT_EXPENSES)
         val row10c1 = row10.createCell(1)
@@ -3207,7 +3207,7 @@ fun generateExcel(context: Context,
         val row10c2 = row10.createCell(2)
         row10c2.setCellValue(excelParamResearchAndDevelopmentExpensesExplanatoryNotes)
 
-        val row11 = sheet.createRow(13)
+        val row11 = sheet.createRow(15)
         val row11c0 = row11.createCell(0)
         row11c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_GENERAL_AND_ADMINISTRATIVE_EXPENSES)
         val row11c1 = row11.createCell(1)
@@ -3215,7 +3215,7 @@ fun generateExcel(context: Context,
         val row11c2 = row11.createCell(2)
         row11c2.setCellValue(excelParamGeneralAndAdministrativeExpensesExplanatoryNotes)
 
-        val row12 = sheet.createRow(14)
+        val row12 = sheet.createRow(16)
         val row12c0 = row12.createCell(0)
         row12c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_GOODWILL_IMPAIRMENT_LOSS)
         val row12c1 = row12.createCell(1)
@@ -3223,7 +3223,7 @@ fun generateExcel(context: Context,
         val row12c2 = row12.createCell(2)
         row12c2.setCellValue(excelParamGoodwillImpairmentLossExpensesExplanatoryNotes)
 
-        val row13 = sheet.createRow(15)
+        val row13 = sheet.createRow(17)
         val row13c0 = row13.createCell(0)
         row13c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_OTHER_OPERATING_EXPENSES)
         val row13c1 = row13.createCell(1)
@@ -3231,17 +3231,17 @@ fun generateExcel(context: Context,
         val row13c2 = row13.createCell(2)
         row13c2.setCellValue(excelParamOtherOperatingExpensesExplanatoryNotes)
 
-        val row14 = sheet.createRow(16)
+        val row14 = sheet.createRow(19)
         val row14c0 = row14.createCell(0)
-        row14c0.setCellValue("Lucro Operacional:")
+        row14c0.setCellValue("LUCRO OPERACIONAL:")
         val row14c1 = row14.createCell(1)
         row14c1.setCellValue(operatingProfit)
 
-        val row17 = sheet.createRow(18)
+        val row17 = sheet.createRow(21)
         val row17c0 = row17.createCell(0)
         row17c0.setCellValue("$PERIOD_RESULT_STATEMENT_TYPE_INVESTING:")
 
-        val row18 = sheet.createRow(20)
+        val row18 = sheet.createRow(23)
         val row18c0 = row18.createCell(0)
         row18c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_INVESTING_PROFIT_SHARING_AND_GAINS_FROM_SALE_OF_INTERESTS_IN_ASSOCIATES_AND_JOINT_VENTURES)
         val row18c1 = row18.createCell(1)
@@ -3249,17 +3249,17 @@ fun generateExcel(context: Context,
         val row18c2 = row18.createCell(2)
         row18c2.setCellValue(excelParamInvestingProfitSharingExplanatoryNotes)
 
-        val row19 = sheet.createRow(21)
+        val row19 = sheet.createRow(25)
         val row19c0 = row19.createCell(0)
-        row19c0.setCellValue("Lucro Antes da Atividade de Financiamento e Tributos sobre o Lucro:")
+        row19c0.setCellValue("LUCRO ANTES DA ATIVIDADE DE FINANCIAMENTO E TRIBUTOS SOBRE O LUCRO:")
         val row19c1 = row19.createCell(1)
         row19c1.setCellValue(profitBeforeFinancingAndTaxes)
 
-        val row21 = sheet.createRow(23)
+        val row21 = sheet.createRow(27)
         val row21c0 = row21.createCell(0)
         row21c0.setCellValue("$PERIOD_RESULT_STATEMENT_TYPE_FINANCING:")
 
-        val row22 = sheet.createRow(25)
+        val row22 = sheet.createRow(29)
         val row22c0 = row22.createCell(0)
         row22c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_FINANCING_INTEREST_EXPENSES_ON_LOANS_AND_LEASE_LIABILITIES)
         val row22c1 = row22.createCell(1)
@@ -3267,7 +3267,7 @@ fun generateExcel(context: Context,
         val row22c2 = row22.createCell(2)
         row22c2.setCellValue(excelParamInterestExpensesOnLoansAndLeaseLiabilitiesExplanatoryNotes)
 
-        val row23 = sheet.createRow(26)
+        val row23 = sheet.createRow(30)
         val row23c0 = row23.createCell(0)
         row23c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_FINANCING_INTEREST_EXPENSES_ON_RETIREMENT_LIABILITIES_AND_PROVISIONS)
         val row23c1 = row23.createCell(1)
@@ -3275,18 +3275,18 @@ fun generateExcel(context: Context,
         val row23c2 = row23.createCell(2)
         row23c2.setCellValue(excelParamRetirementExpensesExplanatoryNotes)
 
-        val row24 = sheet.createRow(27)
+        val row24 = sheet.createRow(32)
         val row24c0 = row24.createCell(0)
-        row24c0.setCellValue("Lucro Antes dos Tributos sobre o Lucro:")
+        row24c0.setCellValue("LUCRO ANTES DOS TRIBUTOS SOBRE O LUCRO:")
         val row24c1 = row24.createCell(1)
         row24c1.setCellValue(profitBeforeTaxes)
 
 
-        val row26 = sheet.createRow(29)
+        val row26 = sheet.createRow(34)
         val row26c0 = row26.createCell(0)
         row26c0.setCellValue("$PERIOD_RESULT_STATEMENT_TYPE_TAX_ON_PROFIT:")
 
-        val row27 = sheet.createRow(31)
+        val row27 = sheet.createRow(36)
         val row27c0 = row27.createCell(0)
         row27c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_TAX_ON_PROFIT_TAX_EXPENSES_ON_PROFIT)
         val row27c1 = row27.createCell(1)
@@ -3294,17 +3294,17 @@ fun generateExcel(context: Context,
         val row27c2 = row27.createCell(2)
         row27c2.setCellValue(excelParamTaxExpensesOnProfitExplanatoryNotes)
 
-        val row28 = sheet.createRow(32)
+        val row28 = sheet.createRow(38)
         val row28c0 = row28.createCell(0)
-        row28c0.setCellValue("Lucro das Operações Continuadas:")
+        row28c0.setCellValue("LUCRO DAS OPERAÇÕES CONTINUADAS:")
         val row28c1 = row28.createCell(1)
         row28c1.setCellValue(profitFromContinuingOperations)
 
-        val row30 = sheet.createRow(34)
+        val row30 = sheet.createRow(40)
         val row30c0 = row30.createCell(0)
         row30c0.setCellValue("$PERIOD_RESULT_STATEMENT_TYPE_OPERATION_DISCONTINUED:")
 
-        val row31 = sheet.createRow(36)
+        val row31 = sheet.createRow(42)
         val row31c0 = row31.createCell(0)
         row31c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATION_DISCONTINUED_LOSS_FROM_DISCONTINUED_OPERATIONS)
         val row31c1 = row31.createCell(1)
@@ -3312,9 +3312,9 @@ fun generateExcel(context: Context,
         val row31c2 = row31.createCell(2)
         row31c2.setCellValue(excelParamLossFromDiscontinuedOperationsExplanatoryNotes)
 
-        val row33 = sheet.createRow(38)
+        val row33 = sheet.createRow(44)
         val row33c0 = row33.createCell(0)
-        row33c0.setCellValue("Lucro Líquido:")
+        row33c0.setCellValue("LUCRO LÍQUIDO:")
         val row33c1 = row33.createCell(1)
         row33c1.setCellValue(netProfit)
 
