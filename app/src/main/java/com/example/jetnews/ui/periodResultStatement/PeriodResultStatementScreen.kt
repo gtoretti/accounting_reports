@@ -166,6 +166,7 @@ fun PeriodResultStatementScreen(
     val periodResultStatementItemType = remember { mutableStateOf("") }
     val periodResultStatementItemDescription = remember { mutableStateOf("") }
     val periodResultStatementItemValue = remember { mutableDoubleStateOf(0.0) }
+    val periodResultStatementItemExplanatoryNotes = remember { mutableStateOf("") }
 
 
     when {
@@ -206,6 +207,7 @@ fun PeriodResultStatementScreen(
                 periodResultStatementItemType,
                 periodResultStatementItemDescription,
                 periodResultStatementItemValue,
+                periodResultStatementItemExplanatoryNotes,
                 periodResultStatementDescriptionList
             )
         }
@@ -240,6 +242,7 @@ fun PeriodResultStatementScreen(
                 periodResultStatementItemType,
                 periodResultStatementItemDescription,
                 periodResultStatementItemValue,
+                periodResultStatementItemExplanatoryNotes,
                 periodResultStatementDescriptionList,
             )
         }
@@ -487,6 +490,7 @@ fun PeriodResultStatementItemsScreen(
     periodResultStatementItemType: MutableState<String>,
     periodResultStatementItemDescription: MutableState<String>,
     periodResultStatementItemValue: MutableState<Double>,
+    periodResultStatementItemExplanatoryNotes: MutableState<String>,
     periodResultStatementDescriptionList: MutableList<String>,
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
@@ -540,6 +544,7 @@ fun PeriodResultStatementItemsScreen(
             periodResultStatementItemType,
             periodResultStatementItemDescription,
             periodResultStatementItemValue,
+            periodResultStatementItemExplanatoryNotes,
             periodResultStatementDescriptionList
         )
     }
@@ -636,6 +641,7 @@ fun PeriodResultStatementItemsEditItemScreen(
     periodResultStatementItemType: MutableState<String>,
     periodResultStatementItemDescription: MutableState<String>,
     periodResultStatementItemValue: MutableState<Double>,
+    periodResultStatementItemExplanatoryNotes: MutableState<String>,
     periodResultStatementDescriptionList: MutableList<String>,
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
@@ -683,6 +689,7 @@ fun PeriodResultStatementItemsEditItemScreen(
             periodResultStatementItemType,
             periodResultStatementItemDescription,
             periodResultStatementItemValue,
+            periodResultStatementItemExplanatoryNotes,
             periodResultStatementDescriptionList,
         )
     }
@@ -894,6 +901,7 @@ private fun PeriodResultStatementEditScreenContent(
                                                 name.value,
                                                 fmt.parse(startDate.value)!!,
                                                 fmt.parse(endDate.value)!!,
+
                                                 0
                                             )
                                         )
@@ -977,6 +985,7 @@ private fun PeriodResultStatementItemsScreenContent(
     periodResultStatementItemType: MutableState<String>,
     periodResultStatementItemDescription: MutableState<String>,
     periodResultStatementItemValue: MutableState<Double>,
+    periodResultStatementItemExplanatoryNotes: MutableState<String>,
     periodResultStatementDescriptionList: MutableList<String>,
 ) {
 
@@ -986,133 +995,188 @@ private fun PeriodResultStatementItemsScreenContent(
     val periodResultItems by periodResultItemsFlow.collectAsStateWithLifecycle(initialValue = emptyList())
     periodResultStatementDescriptionList.removeAll(periodResultStatementDescriptionList)
 
-    var grossProfit = 0.0
-    var operatingProfit = 0.0
-    var profitBeforeFinancingAndTaxes = 0.0
-    var profitBeforeTaxes = 0.0
-    var profitFromContinuingOperations = 0.0
-    var netProfit = 0.0
+    val grossProfit = remember { mutableStateOf(0.0) }
+    val operatingProfit = remember { mutableStateOf(0.0) }
+    val profitBeforeFinancingAndTaxes = remember { mutableStateOf(0.0) }
+    val profitBeforeTaxes = remember { mutableStateOf(0.0) }
+    val profitFromContinuingOperations = remember { mutableStateOf(0.0) }
+    val netProfit = remember { mutableStateOf(0.0) }
+
+    val excelParamRevenue = remember { mutableStateOf("") }
+    val excelParamCostOfSales = remember { mutableStateOf("") }
+    val excelParamOtherOperatingRevenues = remember { mutableStateOf("") }
+    val excelParamSellingExpenses = remember { mutableStateOf("") }
+    val excelParamResearchAndDevelopmentExpenses = remember { mutableStateOf("") }
+    val excelParamGeneralAndAdministrativeExpenses = remember { mutableStateOf("") }
+    val excelParamGoodwillImpairmentLossExpenses = remember { mutableStateOf("") }
+    val excelParamOtherOperatingExpenses = remember { mutableStateOf("") }
+    val excelParamInvestingProfitSharing = remember { mutableStateOf("") }
+    val excelParamInterestExpensesOnLoansAndLeaseLiabilities = remember { mutableStateOf("") }
+    val excelParamRetirementExpenses = remember { mutableStateOf("") }
+    val excelParamTaxExpensesOnProfit = remember { mutableStateOf("") }
+    val excelParamLossFromDiscontinuedOperations = remember { mutableStateOf("") }
+
+    val excelParamRevenueExplanatoryNotes = remember { mutableStateOf("") }
+    val excelParamCostOfSalesExplanatoryNotes = remember { mutableStateOf("") }
+    val excelParamOtherOperatingRevenuesExplanatoryNotes = remember { mutableStateOf("") }
+    val excelParamSellingExpensesExplanatoryNotes = remember { mutableStateOf("") }
+    val excelParamResearchAndDevelopmentExpensesExplanatoryNotes = remember { mutableStateOf("") }
+    val excelParamGeneralAndAdministrativeExpensesExplanatoryNotes = remember { mutableStateOf("") }
+    val excelParamGoodwillImpairmentLossExpensesExplanatoryNotes = remember { mutableStateOf("") }
+    val excelParamOtherOperatingExpensesExplanatoryNotes = remember { mutableStateOf("") }
+    val excelParamInvestingProfitSharingExplanatoryNotes = remember { mutableStateOf("") }
+    val excelParamInterestExpensesOnLoansAndLeaseLiabilitiesExplanatoryNotes = remember { mutableStateOf("") }
+    val excelParamRetirementExpensesExplanatoryNotes = remember { mutableStateOf("") }
+    val excelParamTaxExpensesOnProfitExplanatoryNotes = remember { mutableStateOf("") }
+    val excelParamLossFromDiscontinuedOperationsExplanatoryNotes = remember { mutableStateOf("") }
 
     val operatingItems = periodResultItems.filter { it.type == PERIOD_RESULT_STATEMENT_TYPE_OPERATING }
     val revenueList = operatingItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_OPERATING_REVENUE }
+    grossProfit.value = 0.0
     if (revenueList.isNotEmpty()){
-        grossProfit += revenueList[0].value
+        excelParamRevenue.value = formatExcelValue(revenueList[0].value)
+        excelParamRevenueExplanatoryNotes.value = revenueList[0].explanatoryNotes
+        grossProfit.value += revenueList[0].value
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_REVENUE)
     }
 
     val costOfSalesList = operatingItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_OPERATING_COST_OF_SALES }
     if (costOfSalesList.isNotEmpty()){
-        grossProfit += costOfSalesList[0].value
+        excelParamCostOfSales.value = formatExcelValue(costOfSalesList[0].value)
+        excelParamCostOfSalesExplanatoryNotes.value = costOfSalesList[0].explanatoryNotes
+        grossProfit.value += costOfSalesList[0].value
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_COST_OF_SALES)
     }
 
-    var grossProfitText = grossProfit.toDisplay()
-    if (grossProfit<0.0)
-        grossProfitText = "(" + grossProfit.absoluteValue.toDisplay() + ")"
+    var grossProfitText = grossProfit.value.toDisplay()
+    if (grossProfit.value<0.0)
+        grossProfitText = "(" + grossProfit.value.absoluteValue.toDisplay() + ")"
 
-    operatingProfit = grossProfit
+    operatingProfit.value = grossProfit.value
 
     val otherOperatingRevenuesList = operatingItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_OPERATING_OTHER_OPERATING_REVENUES }
     if (otherOperatingRevenuesList.isNotEmpty()){
-        operatingProfit += otherOperatingRevenuesList[0].value
+        excelParamOtherOperatingRevenues.value = formatExcelValue(otherOperatingRevenuesList[0].value)
+        excelParamOtherOperatingRevenuesExplanatoryNotes.value = otherOperatingRevenuesList[0].explanatoryNotes
+        operatingProfit.value += otherOperatingRevenuesList[0].value
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_OTHER_OPERATING_REVENUES)
     }
 
     val sellingExpensesList = operatingItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_OPERATING_SELLING_EXPENSES }
     if (sellingExpensesList.isNotEmpty()){
-        operatingProfit += sellingExpensesList[0].value
+        excelParamSellingExpenses.value = formatExcelValue(sellingExpensesList[0].value)
+        excelParamSellingExpensesExplanatoryNotes.value = sellingExpensesList[0].explanatoryNotes
+        operatingProfit.value += sellingExpensesList[0].value
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_SELLING_EXPENSES)
     }
 
     val researchAndDevelopmentExpensesList = operatingItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_OPERATING_RESEARCH_AND_DEVELOPMENT_EXPENSES }
     if (researchAndDevelopmentExpensesList.isNotEmpty()){
-        operatingProfit += researchAndDevelopmentExpensesList[0].value
+        excelParamResearchAndDevelopmentExpenses.value = formatExcelValue(researchAndDevelopmentExpensesList[0].value)
+        excelParamResearchAndDevelopmentExpensesExplanatoryNotes.value = researchAndDevelopmentExpensesList[0].explanatoryNotes
+        operatingProfit.value += researchAndDevelopmentExpensesList[0].value
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_RESEARCH_AND_DEVELOPMENT_EXPENSES)
     }
 
     val generalAndAdministrativeExpensesList = operatingItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_OPERATING_GENERAL_AND_ADMINISTRATIVE_EXPENSES }
     if (generalAndAdministrativeExpensesList.isNotEmpty()){
-        operatingProfit += generalAndAdministrativeExpensesList[0].value
+        excelParamGeneralAndAdministrativeExpenses.value = formatExcelValue(generalAndAdministrativeExpensesList[0].value)
+        excelParamGeneralAndAdministrativeExpensesExplanatoryNotes.value = generalAndAdministrativeExpensesList[0].explanatoryNotes
+        operatingProfit.value += generalAndAdministrativeExpensesList[0].value
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_GENERAL_AND_ADMINISTRATIVE_EXPENSES)
     }
 
     val goodwillImpairmentLossExpensesList = operatingItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_OPERATING_GOODWILL_IMPAIRMENT_LOSS }
     if (goodwillImpairmentLossExpensesList.isNotEmpty()){
-        operatingProfit += goodwillImpairmentLossExpensesList[0].value
+        excelParamGoodwillImpairmentLossExpenses.value = formatExcelValue(goodwillImpairmentLossExpensesList[0].value)
+        excelParamGoodwillImpairmentLossExpensesExplanatoryNotes.value = goodwillImpairmentLossExpensesList[0].explanatoryNotes
+        operatingProfit.value += goodwillImpairmentLossExpensesList[0].value
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_GOODWILL_IMPAIRMENT_LOSS)
     }
 
     val otherOperatingExpensesList = operatingItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_OPERATING_OTHER_OPERATING_EXPENSES }
     if (otherOperatingExpensesList.isNotEmpty()){
-        operatingProfit += otherOperatingExpensesList[0].value
+        excelParamOtherOperatingExpenses.value = formatExcelValue(otherOperatingExpensesList[0].value)
+        excelParamOtherOperatingExpensesExplanatoryNotes.value = otherOperatingExpensesList[0].explanatoryNotes
+        operatingProfit.value += otherOperatingExpensesList[0].value
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_OTHER_OPERATING_EXPENSES)
     }
 
-    var operatingProfitText = operatingProfit.toDisplay()
-    if (operatingProfit<0.0)
-        operatingProfitText = "(" + operatingProfit.absoluteValue.toDisplay() + ")"
+    var operatingProfitText = operatingProfit.value.toDisplay()
+    if (operatingProfit.value<0.0)
+        operatingProfitText = "(" + operatingProfit.value.absoluteValue.toDisplay() + ")"
 
-    profitBeforeFinancingAndTaxes = operatingProfit
+    profitBeforeFinancingAndTaxes.value = operatingProfit.value
 
     val investingItems = periodResultItems.filter { it.type == PERIOD_RESULT_STATEMENT_TYPE_INVESTING }
 
     val investingProfitSharingList = investingItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_INVESTING_PROFIT_SHARING_AND_GAINS_FROM_SALE_OF_INTERESTS_IN_ASSOCIATES_AND_JOINT_VENTURES }
     if (investingProfitSharingList.isNotEmpty()){
-        profitBeforeFinancingAndTaxes += investingProfitSharingList[0].value
+        excelParamInvestingProfitSharing.value = formatExcelValue(investingProfitSharingList[0].value)
+        excelParamInvestingProfitSharingExplanatoryNotes.value = investingProfitSharingList[0].explanatoryNotes
+        profitBeforeFinancingAndTaxes.value += investingProfitSharingList[0].value
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_INVESTING_PROFIT_SHARING_AND_GAINS_FROM_SALE_OF_INTERESTS_IN_ASSOCIATES_AND_JOINT_VENTURES)
     }
 
-    var profitBeforeFinancingAndTaxesText = profitBeforeFinancingAndTaxes.toDisplay()
-    if (profitBeforeFinancingAndTaxes<0.0)
-        profitBeforeFinancingAndTaxesText = "(" + profitBeforeFinancingAndTaxes.absoluteValue.toDisplay() + ")"
+    var profitBeforeFinancingAndTaxesText = profitBeforeFinancingAndTaxes.value.toDisplay()
+    if (profitBeforeFinancingAndTaxes.value<0.0)
+        profitBeforeFinancingAndTaxesText = "(" + profitBeforeFinancingAndTaxes.value.absoluteValue.toDisplay() + ")"
 
-    profitBeforeTaxes = profitBeforeFinancingAndTaxes
+    profitBeforeTaxes.value = profitBeforeFinancingAndTaxes.value
 
     val financingItems = periodResultItems.filter { it.type == PERIOD_RESULT_STATEMENT_TYPE_FINANCING }
 
     val interestExpensesOnLoansAndLeaseLiabilitiesList = financingItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_FINANCING_INTEREST_EXPENSES_ON_LOANS_AND_LEASE_LIABILITIES }
     if (interestExpensesOnLoansAndLeaseLiabilitiesList.isNotEmpty()) {
-        profitBeforeTaxes += interestExpensesOnLoansAndLeaseLiabilitiesList[0].value
+        excelParamInterestExpensesOnLoansAndLeaseLiabilities.value = formatExcelValue(interestExpensesOnLoansAndLeaseLiabilitiesList[0].value)
+        excelParamInterestExpensesOnLoansAndLeaseLiabilitiesExplanatoryNotes.value = interestExpensesOnLoansAndLeaseLiabilitiesList[0].explanatoryNotes
+        profitBeforeTaxes.value += interestExpensesOnLoansAndLeaseLiabilitiesList[0].value
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_FINANCING_INTEREST_EXPENSES_ON_LOANS_AND_LEASE_LIABILITIES)
     }
 
     val retirementExpensesList = financingItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_FINANCING_INTEREST_EXPENSES_ON_RETIREMENT_LIABILITIES_AND_PROVISIONS }
     if (retirementExpensesList.isNotEmpty()) {
-        profitBeforeTaxes += retirementExpensesList[0].value
+        excelParamRetirementExpenses.value = formatExcelValue(retirementExpensesList[0].value)
+        excelParamRetirementExpensesExplanatoryNotes.value = retirementExpensesList[0].explanatoryNotes
+        profitBeforeTaxes.value += retirementExpensesList[0].value
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_FINANCING_INTEREST_EXPENSES_ON_RETIREMENT_LIABILITIES_AND_PROVISIONS)
     }
 
-    var profitBeforeTaxesText = profitBeforeTaxes.toDisplay()
-    if (profitBeforeTaxes<0.0)
-        profitBeforeTaxesText = "(" + profitBeforeTaxes.absoluteValue.toDisplay() + ")"
+    var profitBeforeTaxesText = profitBeforeTaxes.value.toDisplay()
+    if (profitBeforeTaxes.value<0.0)
+        profitBeforeTaxesText = "(" + profitBeforeTaxes.value.absoluteValue.toDisplay() + ")"
 
-    profitFromContinuingOperations = profitBeforeTaxes
+    profitFromContinuingOperations.value = profitBeforeTaxes.value
 
     val taxOnProfitItems = periodResultItems.filter { it.type == PERIOD_RESULT_STATEMENT_TYPE_TAX_ON_PROFIT }
 
     val taxExpensesOnProfitList = taxOnProfitItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_TAX_ON_PROFIT_TAX_EXPENSES_ON_PROFIT }
     if (taxExpensesOnProfitList.isNotEmpty()) {
-        profitFromContinuingOperations += taxExpensesOnProfitList[0].value
+        excelParamTaxExpensesOnProfit.value = formatExcelValue(taxExpensesOnProfitList[0].value)
+        excelParamTaxExpensesOnProfitExplanatoryNotes.value = taxExpensesOnProfitList[0].explanatoryNotes
+        profitFromContinuingOperations.value += taxExpensesOnProfitList[0].value
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_TAX_ON_PROFIT_TAX_EXPENSES_ON_PROFIT)
     }
 
-    var profitFromContinuingOperationsText = profitFromContinuingOperations.toDisplay()
-    if (profitFromContinuingOperations<0.0)
-        profitFromContinuingOperationsText = "(" + profitFromContinuingOperations.absoluteValue.toDisplay() + ")"
+    var profitFromContinuingOperationsText = profitFromContinuingOperations.value.toDisplay()
+    if (profitFromContinuingOperations.value<0.0)
+        profitFromContinuingOperationsText = "(" + profitFromContinuingOperations.value.absoluteValue.toDisplay() + ")"
 
-    netProfit = profitFromContinuingOperations
+    netProfit.value = profitFromContinuingOperations.value
 
     val operationDiscontinuedItems = periodResultItems.filter { it.type == PERIOD_RESULT_STATEMENT_TYPE_OPERATION_DISCONTINUED }
 
     val lossFromDiscontinuedOperationsList = operationDiscontinuedItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_OPERATION_DISCONTINUED_LOSS_FROM_DISCONTINUED_OPERATIONS }
     if (lossFromDiscontinuedOperationsList.isNotEmpty()) {
-        netProfit += lossFromDiscontinuedOperationsList[0].value
+        excelParamLossFromDiscontinuedOperations.value = formatExcelValue(lossFromDiscontinuedOperationsList[0].value)
+        excelParamLossFromDiscontinuedOperationsExplanatoryNotes.value = lossFromDiscontinuedOperationsList[0].explanatoryNotes
+        netProfit.value += lossFromDiscontinuedOperationsList[0].value
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_OPERATION_DISCONTINUED_LOSS_FROM_DISCONTINUED_OPERATIONS)
     }
 
-    var netProfitText = netProfit.toDisplay()
-    if (netProfit<0.0)
-        netProfitText = "(" + netProfit.absoluteValue.toDisplay() + ")"
+    var netProfitText = netProfit.value.toDisplay()
+    if (netProfit.value<0.0)
+        netProfitText = "(" + netProfit.value.absoluteValue.toDisplay() + ")"
 
 
     Column(modifier) {
@@ -1170,7 +1234,38 @@ private fun PeriodResultStatementItemsScreenContent(
                                     periodResultStatementName.value,
                                     periodResultStatementStartDate.value,
                                     periodResultStatementEndDate.value,
-
+                                    formatExcelValue(grossProfit.value),
+                                    formatExcelValue(operatingProfit.value),
+                                    formatExcelValue(profitBeforeFinancingAndTaxes.value),
+                                    formatExcelValue(profitBeforeTaxes.value),
+                                    formatExcelValue(profitFromContinuingOperations.value),
+                                    formatExcelValue(netProfit.value),
+                                    excelParamRevenue.value,
+                                    excelParamCostOfSales.value,
+                                    excelParamOtherOperatingRevenues.value,
+                                    excelParamSellingExpenses.value,
+                                    excelParamResearchAndDevelopmentExpenses.value,
+                                    excelParamGeneralAndAdministrativeExpenses.value,
+                                    excelParamGoodwillImpairmentLossExpenses.value,
+                                    excelParamOtherOperatingExpenses.value,
+                                    excelParamInvestingProfitSharing.value,
+                                    excelParamInterestExpensesOnLoansAndLeaseLiabilities.value,
+                                    excelParamRetirementExpenses.value,
+                                    excelParamTaxExpensesOnProfit.value,
+                                    excelParamLossFromDiscontinuedOperations.value,
+                                    excelParamRevenueExplanatoryNotes.value,
+                                    excelParamCostOfSalesExplanatoryNotes.value,
+                                    excelParamOtherOperatingRevenuesExplanatoryNotes.value,
+                                    excelParamSellingExpensesExplanatoryNotes.value,
+                                    excelParamResearchAndDevelopmentExpensesExplanatoryNotes.value,
+                                    excelParamGeneralAndAdministrativeExpensesExplanatoryNotes.value,
+                                    excelParamGoodwillImpairmentLossExpensesExplanatoryNotes.value,
+                                    excelParamOtherOperatingExpensesExplanatoryNotes.value,
+                                    excelParamInvestingProfitSharingExplanatoryNotes.value,
+                                    excelParamInterestExpensesOnLoansAndLeaseLiabilitiesExplanatoryNotes.value,
+                                    excelParamRetirementExpensesExplanatoryNotes.value,
+                                    excelParamTaxExpensesOnProfitExplanatoryNotes.value,
+                                    excelParamLossFromDiscontinuedOperationsExplanatoryNotes.value,
                                 )
                             }
                     ) {
@@ -1232,7 +1327,8 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemId,
                             periodResultStatementItemType,
                             periodResultStatementItemDescription,
-                            periodResultStatementItemValue)
+                            periodResultStatementItemValue,
+                            periodResultStatementItemExplanatoryNotes)
                     }
 
                     if (costOfSalesList.isNotEmpty()){
@@ -1242,7 +1338,8 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemId,
                             periodResultStatementItemType,
                             periodResultStatementItemDescription,
-                            periodResultStatementItemValue)
+                            periodResultStatementItemValue,
+                            periodResultStatementItemExplanatoryNotes)
                     }
 
                     if (revenueList.isEmpty() && costOfSalesList.isEmpty()){
@@ -1268,7 +1365,7 @@ private fun PeriodResultStatementItemsScreenContent(
                         Text(
                             text = grossProfitText,
                             style = TextStyle(fontFamily = FontFamily.SansSerif),
-                            color = getColor(grossProfit),
+                            color = getColor(grossProfit.value),
                             fontWeight = FontWeight.Bold,
                         )
                     }
@@ -1286,7 +1383,8 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemId,
                             periodResultStatementItemType,
                             periodResultStatementItemDescription,
-                            periodResultStatementItemValue)
+                            periodResultStatementItemValue,
+                            periodResultStatementItemExplanatoryNotes)
                     }
 
                     if (sellingExpensesList.isNotEmpty()){
@@ -1296,7 +1394,8 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemId,
                             periodResultStatementItemType,
                             periodResultStatementItemDescription,
-                            periodResultStatementItemValue)
+                            periodResultStatementItemValue,
+                            periodResultStatementItemExplanatoryNotes)
                     }
 
                     if (researchAndDevelopmentExpensesList.isNotEmpty()){
@@ -1306,7 +1405,8 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemId,
                             periodResultStatementItemType,
                             periodResultStatementItemDescription,
-                            periodResultStatementItemValue)
+                            periodResultStatementItemValue,
+                            periodResultStatementItemExplanatoryNotes)
                     }
 
                     if (generalAndAdministrativeExpensesList.isNotEmpty()){
@@ -1316,7 +1416,8 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemId,
                             periodResultStatementItemType,
                             periodResultStatementItemDescription,
-                            periodResultStatementItemValue)
+                            periodResultStatementItemValue,
+                            periodResultStatementItemExplanatoryNotes)
                     }
 
                     if (goodwillImpairmentLossExpensesList.isNotEmpty()){
@@ -1326,7 +1427,8 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemId,
                             periodResultStatementItemType,
                             periodResultStatementItemDescription,
-                            periodResultStatementItemValue)
+                            periodResultStatementItemValue,
+                            periodResultStatementItemExplanatoryNotes)
                     }
 
                     if (otherOperatingExpensesList.isNotEmpty()){
@@ -1336,7 +1438,8 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemId,
                             periodResultStatementItemType,
                             periodResultStatementItemDescription,
-                            periodResultStatementItemValue)
+                            periodResultStatementItemValue,
+                            periodResultStatementItemExplanatoryNotes)
                     }
 
                     if (otherOperatingRevenuesList.isEmpty() && sellingExpensesList.isEmpty() && researchAndDevelopmentExpensesList.isEmpty() && generalAndAdministrativeExpensesList.isEmpty() && otherOperatingExpensesList.isEmpty() && goodwillImpairmentLossExpensesList.isEmpty()){
@@ -1363,7 +1466,7 @@ private fun PeriodResultStatementItemsScreenContent(
                         Text(
                             text = operatingProfitText,
                             style = TextStyle(fontFamily = FontFamily.SansSerif),
-                            color = getColor(operatingProfit),
+                            color = getColor(operatingProfit.value),
                             fontWeight = FontWeight.Bold,
                         )
                     }
@@ -1385,7 +1488,8 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemId,
                             periodResultStatementItemType,
                             periodResultStatementItemDescription,
-                            periodResultStatementItemValue)
+                            periodResultStatementItemValue,
+                            periodResultStatementItemExplanatoryNotes)
                     }else{
                         PeriodResultStatementNoItems(stringResource(R.string.period_results_statement_no_items))
                     }
@@ -1412,7 +1516,7 @@ private fun PeriodResultStatementItemsScreenContent(
                         Text(
                             text = profitBeforeFinancingAndTaxesText,
                             style = TextStyle(fontFamily = FontFamily.SansSerif),
-                            color = getColor(profitBeforeFinancingAndTaxes),
+                            color = getColor(profitBeforeFinancingAndTaxes.value),
                             fontWeight = FontWeight.Bold,
                         )
                     }
@@ -1435,6 +1539,7 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemType,
                             periodResultStatementItemDescription,
                             periodResultStatementItemValue,
+                            periodResultStatementItemExplanatoryNotes
                         )
                     }
 
@@ -1446,6 +1551,7 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemType,
                             periodResultStatementItemDescription,
                             periodResultStatementItemValue,
+                            periodResultStatementItemExplanatoryNotes
                         )
                     }
 
@@ -1475,7 +1581,7 @@ private fun PeriodResultStatementItemsScreenContent(
                         Text(
                             text = profitBeforeTaxesText,
                             style = TextStyle(fontFamily = FontFamily.SansSerif),
-                            color = getColor(profitBeforeTaxes),
+                            color = getColor(profitBeforeTaxes.value),
                             fontWeight = FontWeight.Bold,
                         )
                     }
@@ -1497,6 +1603,7 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemType,
                             periodResultStatementItemDescription,
                             periodResultStatementItemValue,
+                            periodResultStatementItemExplanatoryNotes
                         )
                     }else{
                         PeriodResultStatementNoItems(stringResource(R.string.period_results_statement_no_items))
@@ -1524,7 +1631,7 @@ private fun PeriodResultStatementItemsScreenContent(
                         Text(
                             text = profitFromContinuingOperationsText,
                             style = TextStyle(fontFamily = FontFamily.SansSerif),
-                            color = getColor(profitFromContinuingOperations),
+                            color = getColor(profitFromContinuingOperations.value),
                             fontWeight = FontWeight.Bold,
                         )
                     }
@@ -1548,6 +1655,7 @@ private fun PeriodResultStatementItemsScreenContent(
                             periodResultStatementItemType,
                             periodResultStatementItemDescription,
                             periodResultStatementItemValue,
+                            periodResultStatementItemExplanatoryNotes
                         )
                     }else{
                         PeriodResultStatementNoItems(stringResource(R.string.period_results_statement_no_items))
@@ -1577,7 +1685,7 @@ private fun PeriodResultStatementItemsScreenContent(
                     Text(
                         text = netProfitText,
                         style = TextStyle(fontFamily = FontFamily.SansSerif),
-                        color = getColor(netProfit),
+                        color = getColor(netProfit.value),
                         fontWeight = FontWeight.Bold,
                     )
                 }
@@ -1629,6 +1737,13 @@ private fun PeriodResultStatementNoItems(text: String){
     }
 }
 
+fun formatExcelValue(value: Double): String{
+    var ret = value.toDisplay()
+    if (value<0.0)
+        ret = "("+value.absoluteValue.toDisplay()+")"
+    return ret
+}
+
 @Composable
 private fun PeriodResultStatementItemRow(
     item: PeriodResultStatementItem,
@@ -1638,6 +1753,7 @@ private fun PeriodResultStatementItemRow(
     periodResultStatementItemType: MutableState<String>,
     periodResultStatementItemDescription: MutableState<String>,
     periodResultStatementItemValue: MutableState<Double>,
+    periodResultStatementItemExplanatoryNotes: MutableState<String>,
 ){
     var value = item.value.toDisplay()
     if (item.value<0.0)
@@ -1664,6 +1780,7 @@ private fun PeriodResultStatementItemRow(
                         periodResultStatementItemType.value=item.type
                         periodResultStatementItemDescription.value=item.description
                         periodResultStatementItemValue.value=item.value.absoluteValue
+                        periodResultStatementItemExplanatoryNotes.value = item.explanatoryNotes
                     },
                     role = Role.Button
                 )
@@ -1702,6 +1819,7 @@ private fun PeriodResultStatementItemRow(
                         periodResultStatementItemType.value=item.type
                         periodResultStatementItemDescription.value=item.description
                         periodResultStatementItemValue.value=item.value.absoluteValue
+                        periodResultStatementItemExplanatoryNotes.value = item.explanatoryNotes
                     }
             ) {
                 Icon(
@@ -1720,6 +1838,7 @@ private fun PeriodResultStatementItemRow(
                         periodResultStatementItemType.value = item.type
                         periodResultStatementItemDescription.value = item.description
                         periodResultStatementItemValue.value = item.value.absoluteValue
+                        periodResultStatementItemExplanatoryNotes.value = item.explanatoryNotes
                     }
             ) {
                 Icon(
@@ -1848,6 +1967,7 @@ private fun PeriodResultStatementItemsAddItemScreenContent(
     val accountingAccountlevel4Description = remember { mutableStateOf("") }
     val resultItemValue = remember { mutableStateOf("") }
     val resultTypes = getMissingCategoryTypesForDescriptionList("",periodResultStatementDescriptionList)
+    val explanatoryContent = remember { mutableStateOf("") }
 
     Column(modifier) {
         HorizontalDivider(
@@ -1911,6 +2031,20 @@ private fun PeriodResultStatementItemsAddItemScreenContent(
                 )
             }
 
+            OutlinedTextField(
+                value = explanatoryContent.value,
+                onValueChange = {
+                    explanatoryContent.value = it
+                },
+                placeholder = { Text("") },
+                modifier = Modifier.fillMaxWidth().height(250.dp),singleLine = false,
+                label = {
+                    Text(
+                        text = stringResource(R.string.period_results_statement_explanatory_notes_text),
+                    )
+                }
+            )
+
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -1972,6 +2106,7 @@ private fun PeriodResultStatementItemsAddItemScreenContent(
                                                     0,
                                                     accountingAccountlevel1.value,
                                                     resultDouble,
+                                                    explanatoryContent.value,
                                                     0
                                                 )
                                             )
@@ -2022,6 +2157,7 @@ private fun PeriodResultStatementItemsEditItemScreenContent(
     periodResultStatementItemType: MutableState<String>,
     periodResultStatementItemDescription: MutableState<String>,
     periodResultStatementItemValue: MutableState<Double>,
+    periodResultStatementItemExplanatoryNotes: MutableState<String>,
     periodResultStatementDescriptionList: MutableList<String>,
 ) {
 
@@ -2031,6 +2167,8 @@ private fun PeriodResultStatementItemsEditItemScreenContent(
     val resultItemValue = remember { mutableStateOf(periodResultStatementItemValue.value.toScreen()) }
 
     val resultTypes = getMissingCategoryTypesForDescriptionList("",periodResultStatementDescriptionList)
+
+    val explanatoryContent = remember { mutableStateOf(periodResultStatementItemExplanatoryNotes.value) }
 
     Column(modifier) {
         HorizontalDivider(
@@ -2096,6 +2234,21 @@ private fun PeriodResultStatementItemsEditItemScreenContent(
 
             }
 
+            OutlinedTextField(
+                value = explanatoryContent.value,
+                onValueChange = {
+                    explanatoryContent.value = it
+                },
+                placeholder = { Text("") },
+                modifier = Modifier.fillMaxWidth().height(250.dp),singleLine = false,
+                label = {
+                    Text(
+                        text = stringResource(R.string.period_results_statement_explanatory_notes_text),
+                    )
+                }
+            )
+
+
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -2156,6 +2309,7 @@ private fun PeriodResultStatementItemsEditItemScreenContent(
                                                     0,
                                                     accountingAccountlevel1.value,
                                                     resultDouble,
+                                                    explanatoryContent.value,
                                                     0
                                                 )
                                             )
@@ -2670,6 +2824,7 @@ private fun PeriodResultStatementAddScreenContent(
                                                     periodResultStatementName.value,
                                                     fmt.parse(startDate)!!,
                                                     fmt.parse(endDate)!!,
+
                                                     0
                                                 )
                                             )
@@ -2902,7 +3057,7 @@ fun PeriodResultStatementItemDeleteDialog(
                     val financialMoveDeletedSucessMsg = stringResource(R.string.period_results_statement_result_deleted_sucess)
                     Button(
                         onClick = {
-                            periodResultStatementViewModel.deletePeriodResultStatementItem(PeriodResultStatementItem(isDeletingPeriodResultStatementItemId.value,0, "", "", 0,"",0.0,0))
+                            periodResultStatementViewModel.deletePeriodResultStatementItem(PeriodResultStatementItem(isDeletingPeriodResultStatementItemId.value,0, "", "", 0,"",0.0,"",0))
                             isDeletingPeriodResultStatementItem.value = false
                             isDeletingPeriodResultStatementItemId.value=0
                             isDeletingPeriodResultStatementItemType.value=""
@@ -2928,7 +3083,43 @@ fun PeriodResultStatementItemDeleteDialog(
     }
 }
 
-fun generateExcel(context: Context, name: String, startDate: String, endDate: String){
+fun generateExcel(context: Context,
+                  name: String,
+                  startDate: String,
+                  endDate: String,
+                  grossProfit: String,
+                  operatingProfit: String,
+                  profitBeforeFinancingAndTaxes: String,
+                  profitBeforeTaxes: String,
+                  profitFromContinuingOperations: String,
+                  netProfit: String,
+                  excelParamRevenue: String,
+                  excelParamCostOfSales: String,
+                  excelParamOtherOperatingRevenues: String,
+                  excelParamSellingExpenses: String,
+                  excelParamResearchAndDevelopmentExpenses: String,
+                  excelParamGeneralAndAdministrativeExpenses: String,
+                  excelParamGoodwillImpairmentLossExpenses: String,
+                  excelParamOtherOperatingExpenses: String,
+                  excelParamInvestingProfitSharing: String,
+                  excelParamInterestExpensesOnLoansAndLeaseLiabilities: String,
+                  excelParamRetirementExpenses: String,
+                  excelParamTaxExpensesOnProfit: String,
+                  excelParamLossFromDiscontinuedOperations: String,
+                  excelParamRevenueExplanatoryNotes:String,
+                  excelParamCostOfSalesExplanatoryNotes:String,
+                  excelParamOtherOperatingRevenuesExplanatoryNotes:String,
+                  excelParamSellingExpensesExplanatoryNotes:String,
+                  excelParamResearchAndDevelopmentExpensesExplanatoryNotes:String,
+                  excelParamGeneralAndAdministrativeExpensesExplanatoryNotes:String,
+                  excelParamGoodwillImpairmentLossExpensesExplanatoryNotes:String,
+                  excelParamOtherOperatingExpensesExplanatoryNotes:String,
+                  excelParamInvestingProfitSharingExplanatoryNotes:String,
+                  excelParamInterestExpensesOnLoansAndLeaseLiabilitiesExplanatoryNotes:String,
+                  excelParamRetirementExpensesExplanatoryNotes:String,
+                  excelParamTaxExpensesOnProfitExplanatoryNotes:String,
+                  excelParamLossFromDiscontinuedOperationsExplanatoryNotes:String,
+                  ){
 
     try {
 
@@ -2942,7 +3133,8 @@ fun generateExcel(context: Context, name: String, startDate: String, endDate: St
         val hssf = HSSFWorkbook()
         val sheet = hssf.createSheet("Demonstração do Resultado do Exercício")
 
-        sheet.setColumnWidth(0, 20 * 256); // 20 characters wide
+        sheet.setColumnWidth(0, 70 * 256); // 7 0 characters wide
+        sheet.setColumnWidth(1, 20 * 256); // 7 0 characters wide
 
         val row0 = sheet.createRow(0)
         val row0c0 = row0.createCell(0)
@@ -2950,88 +3142,182 @@ fun generateExcel(context: Context, name: String, startDate: String, endDate: St
 
         val row1 = sheet.createRow(2)
         val row1c0 = row1.createCell(0)
-        row1c0.setCellValue(name)
+        row1c0.setCellValue("Nome:")
+        val row1c1 = row1.createCell(1)
+        row1c1.setCellValue(name)
+
 
         val row2 = sheet.createRow(3)
         val row2c0 = row2.createCell(0)
         row2c0.setCellValue("Período:")
-
         val row2c1 = row2.createCell(1)
         row2c1.setCellValue("$startDate - $endDate")
 
+        val rowExpNotesTitle = sheet.createRow(4)
+        val rowExpNotesTitleC2 = rowExpNotesTitle.createCell(2)
+        rowExpNotesTitleC2.setCellValue("Notas Explicativas:")
+
         val row4 = sheet.createRow(5)
         val row4c0 = row4.createCell(0)
-        row4c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING)
+        row4c0.setCellValue("$PERIOD_RESULT_STATEMENT_TYPE_OPERATING:")
 
-        val row5 = sheet.createRow(6)
+        val row5 = sheet.createRow(7)
         val row5c0 = row5.createCell(0)
         row5c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_REVENUE)
         val row5c1 = row5.createCell(1)
-        row5c1.setCellValue("valorReceita")
+        row5c1.setCellValue(excelParamRevenue)
+        val row5c2 = row5.createCell(2)
+        row5c2.setCellValue(excelParamRevenueExplanatoryNotes)
 
-        val row6 = sheet.createRow(7)
+        val row6 = sheet.createRow(8)
         val row6c0 = row6.createCell(0)
         row6c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_COST_OF_SALES)
         val row6c1 = row6.createCell(1)
-        row6c1.setCellValue("valorCusto das Vendas")
+        row6c1.setCellValue(excelParamCostOfSales)
+        val row6c2 = row6.createCell(2)
+        row6c2.setCellValue(excelParamCostOfSalesExplanatoryNotes)
 
-        val row7 = sheet.createRow(8)
+        val row7 = sheet.createRow(9)
         val row7c0 = row7.createCell(0)
         row7c0.setCellValue("Lucro Bruto:")
         val row7c1 = row7.createCell(1)
-        row7c1.setCellValue("valorLucro Bruto")
+        row7c1.setCellValue(grossProfit)
 
-        val row8 = sheet.createRow(9)
+        val row8 = sheet.createRow(10)
         val row8c0 = row8.createCell(0)
-        row8c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_OTHER_OPERATING_EXPENSES)
+        row8c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_OTHER_OPERATING_REVENUES)
         val row8c1 = row8.createCell(1)
-        row8c1.setCellValue("valorOutras Despesas Operacionais")
+        row8c1.setCellValue(excelParamOtherOperatingRevenues)
+        val row8c2 = row8.createCell(2)
+        row8c2.setCellValue(excelParamOtherOperatingRevenuesExplanatoryNotes)
 
-        val row9 = sheet.createRow(10)
+        val row9 = sheet.createRow(11)
         val row9c0 = row9.createCell(0)
         row9c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_SELLING_EXPENSES)
         val row9c1 = row9.createCell(1)
-        row9c1.setCellValue("valorDespesas de Vendas")
+        row9c1.setCellValue(excelParamSellingExpenses)
+        val row9c2 = row9.createCell(2)
+        row9c2.setCellValue(excelParamSellingExpensesExplanatoryNotes)
 
-        val row10 = sheet.createRow(11)
+        val row10 = sheet.createRow(12)
         val row10c0 = row10.createCell(0)
         row10c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_RESEARCH_AND_DEVELOPMENT_EXPENSES)
         val row10c1 = row10.createCell(1)
-        row10c1.setCellValue("valorDespesas de Pesquisa e Desenvolvimento")
+        row10c1.setCellValue(excelParamResearchAndDevelopmentExpenses)
+        val row10c2 = row10.createCell(2)
+        row10c2.setCellValue(excelParamResearchAndDevelopmentExpensesExplanatoryNotes)
 
-        val row11 = sheet.createRow(12)
+        val row11 = sheet.createRow(13)
         val row11c0 = row11.createCell(0)
         row11c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_GENERAL_AND_ADMINISTRATIVE_EXPENSES)
         val row11c1 = row11.createCell(1)
-        row11c1.setCellValue("valorDespesas Gerais e Administrativas")
+        row11c1.setCellValue(excelParamGeneralAndAdministrativeExpenses)
+        val row11c2 = row11.createCell(2)
+        row11c2.setCellValue(excelParamGeneralAndAdministrativeExpensesExplanatoryNotes)
 
-        val row12 = sheet.createRow(13)
+        val row12 = sheet.createRow(14)
         val row12c0 = row12.createCell(0)
         row12c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_GOODWILL_IMPAIRMENT_LOSS)
         val row12c1 = row12.createCell(1)
-        row12c1.setCellValue("valorPerda por Impairment do Goodwill")
+        row12c1.setCellValue(excelParamGoodwillImpairmentLossExpenses)
+        val row12c2 = row12.createCell(2)
+        row12c2.setCellValue(excelParamGoodwillImpairmentLossExpensesExplanatoryNotes)
 
-        val row13 = sheet.createRow(14)
+        val row13 = sheet.createRow(15)
         val row13c0 = row13.createCell(0)
         row13c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_OTHER_OPERATING_EXPENSES)
         val row13c1 = row13.createCell(1)
-        row13c1.setCellValue("valorOutras Despesas Operacionais")
+        row13c1.setCellValue(excelParamOtherOperatingExpenses)
+        val row13c2 = row13.createCell(2)
+        row13c2.setCellValue(excelParamOtherOperatingExpensesExplanatoryNotes)
 
-        val row14 = sheet.createRow(15)
+        val row14 = sheet.createRow(16)
         val row14c0 = row14.createCell(0)
         row14c0.setCellValue("Lucro Operacional:")
         val row14c1 = row14.createCell(1)
-        row14c1.setCellValue("valorLucro Operacional")
+        row14c1.setCellValue(operatingProfit)
 
-        val row17 = sheet.createRow(17)
+        val row17 = sheet.createRow(18)
         val row17c0 = row17.createCell(0)
-        row17c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_INVESTING)
+        row17c0.setCellValue("$PERIOD_RESULT_STATEMENT_TYPE_INVESTING:")
+
+        val row18 = sheet.createRow(20)
+        val row18c0 = row18.createCell(0)
+        row18c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_INVESTING_PROFIT_SHARING_AND_GAINS_FROM_SALE_OF_INTERESTS_IN_ASSOCIATES_AND_JOINT_VENTURES)
+        val row18c1 = row18.createCell(1)
+        row18c1.setCellValue(excelParamInvestingProfitSharing)
+        val row18c2 = row18.createCell(2)
+        row18c2.setCellValue(excelParamInvestingProfitSharingExplanatoryNotes)
+
+        val row19 = sheet.createRow(21)
+        val row19c0 = row19.createCell(0)
+        row19c0.setCellValue("Lucro Antes da Atividade de Financiamento e Tributos sobre o Lucro:")
+        val row19c1 = row19.createCell(1)
+        row19c1.setCellValue(profitBeforeFinancingAndTaxes)
+
+        val row21 = sheet.createRow(23)
+        val row21c0 = row21.createCell(0)
+        row21c0.setCellValue("$PERIOD_RESULT_STATEMENT_TYPE_FINANCING:")
+
+        val row22 = sheet.createRow(25)
+        val row22c0 = row22.createCell(0)
+        row22c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_FINANCING_INTEREST_EXPENSES_ON_LOANS_AND_LEASE_LIABILITIES)
+        val row22c1 = row22.createCell(1)
+        row22c1.setCellValue(excelParamInterestExpensesOnLoansAndLeaseLiabilities)
+        val row22c2 = row22.createCell(2)
+        row22c2.setCellValue(excelParamInterestExpensesOnLoansAndLeaseLiabilitiesExplanatoryNotes)
+
+        val row23 = sheet.createRow(26)
+        val row23c0 = row23.createCell(0)
+        row23c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_FINANCING_INTEREST_EXPENSES_ON_RETIREMENT_LIABILITIES_AND_PROVISIONS)
+        val row23c1 = row23.createCell(1)
+        row23c1.setCellValue(excelParamRetirementExpenses)
+        val row23c2 = row23.createCell(2)
+        row23c2.setCellValue(excelParamRetirementExpensesExplanatoryNotes)
+
+        val row24 = sheet.createRow(27)
+        val row24c0 = row24.createCell(0)
+        row24c0.setCellValue("Lucro Antes dos Tributos sobre o Lucro:")
+        val row24c1 = row24.createCell(1)
+        row24c1.setCellValue(profitBeforeTaxes)
 
 
+        val row26 = sheet.createRow(29)
+        val row26c0 = row26.createCell(0)
+        row26c0.setCellValue("$PERIOD_RESULT_STATEMENT_TYPE_TAX_ON_PROFIT:")
 
+        val row27 = sheet.createRow(31)
+        val row27c0 = row27.createCell(0)
+        row27c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_TAX_ON_PROFIT_TAX_EXPENSES_ON_PROFIT)
+        val row27c1 = row27.createCell(1)
+        row27c1.setCellValue(excelParamTaxExpensesOnProfit)
+        val row27c2 = row27.createCell(2)
+        row27c2.setCellValue(excelParamTaxExpensesOnProfitExplanatoryNotes)
 
+        val row28 = sheet.createRow(32)
+        val row28c0 = row28.createCell(0)
+        row28c0.setCellValue("Lucro das Operações Continuadas:")
+        val row28c1 = row28.createCell(1)
+        row28c1.setCellValue(profitFromContinuingOperations)
 
-        
+        val row30 = sheet.createRow(34)
+        val row30c0 = row30.createCell(0)
+        row30c0.setCellValue("$PERIOD_RESULT_STATEMENT_TYPE_OPERATION_DISCONTINUED:")
+
+        val row31 = sheet.createRow(36)
+        val row31c0 = row31.createCell(0)
+        row31c0.setCellValue(PERIOD_RESULT_STATEMENT_TYPE_OPERATION_DISCONTINUED_LOSS_FROM_DISCONTINUED_OPERATIONS)
+        val row31c1 = row31.createCell(1)
+        row31c1.setCellValue(excelParamLossFromDiscontinuedOperations)
+        val row31c2 = row31.createCell(2)
+        row31c2.setCellValue(excelParamLossFromDiscontinuedOperationsExplanatoryNotes)
+
+        val row33 = sheet.createRow(38)
+        val row33c0 = row33.createCell(0)
+        row33c0.setCellValue("Lucro Líquido:")
+        val row33c1 = row33.createCell(1)
+        row33c1.setCellValue(netProfit)
+
         val activity = context.getActivity()
         if (!hasWritePermission(context)) {
             requestWritePermission(context, activity!!)

@@ -2160,7 +2160,7 @@ private fun BalanceSheetItemsAddItemScreenContent(
                                                 Toast.LENGTH_SHORT,
                                             ).show()
                                         }else{
-                                            balanceSheetViewModel.saveBalanceSheetItem(BalanceSheetItem(0,balanceSheetId.value,accountingAccountlevel1.value,accountingAccountlevel2.value,accountingAccountlevel3.value,accountingAccountlevel4Description.value,itemValue.value.screenToDouble(),0))
+                                            balanceSheetViewModel.saveBalanceSheetItem(BalanceSheetItem(0,balanceSheetId.value,accountingAccountlevel1.value,accountingAccountlevel2.value,accountingAccountlevel3.value,accountingAccountlevel4Description.value,itemValue.value.screenToDouble(),"",0))
                                             isBalanceSheetItemsAddItemScreen.value = false
                                             Toast.makeText(
                                                 context,
@@ -2549,7 +2549,7 @@ private fun BalanceSheetItemsEditItemScreenContent(
                                                 Toast.LENGTH_SHORT,
                                             ).show()
                                         }else{
-                                            balanceSheetViewModel.saveBalanceSheetItem(BalanceSheetItem(balanceSheetItemId.value,balanceSheetId.value,accountingAccountlevel1.value,accountingAccountlevel2.value,accountingAccountlevel3.value,accountingAccountlevel4Description.value,itemValue.value.screenToDouble(),0))
+                                            balanceSheetViewModel.saveBalanceSheetItem(BalanceSheetItem(balanceSheetItemId.value,balanceSheetId.value,accountingAccountlevel1.value,accountingAccountlevel2.value,accountingAccountlevel3.value,accountingAccountlevel4Description.value,itemValue.value.screenToDouble(),"",0))
                                             isBalanceSheetItemsEditItemScreen.value = false
                                             Toast.makeText(
                                                 context,
@@ -3053,7 +3053,7 @@ fun BalanceSheetItemDeleteDialog(
                     val deletedSuccessMsg = stringResource(R.string.balance_sheet_deleted_success)
                     Button(
                         onClick = {
-                            balanceSheetViewModel.deleteBalanceSheetItem(BalanceSheetItem(balanceSheetItemId.value,0, "", "", "","",0.0,0))
+                            balanceSheetViewModel.deleteBalanceSheetItem(BalanceSheetItem(balanceSheetItemId.value,0, "", "", "","",0.0,"",0))
                             isBalanceSheetItemsDeleteItemDialog.value = false
                             balanceSheetItemId.value=0
                             Toast.makeText(

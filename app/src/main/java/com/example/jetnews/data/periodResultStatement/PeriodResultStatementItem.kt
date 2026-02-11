@@ -18,6 +18,7 @@ data class PeriodResultStatementItem(
     val explanatoryNoteId: Long,
     val type: String,
     val value: Double,
+    val explanatoryNotes: String,
     val deleted: Int,
     ) {
 

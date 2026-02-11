@@ -6,7 +6,7 @@ package com.example.jetnews.utils
 /**
  * Constants used throughout the app.
  */
-const val DATABASE_NAME = "db0"
+const val DATABASE_NAME = "db"
 
 const val ACCOUNTING_ACCOUNTS_ALL = "Todos"
 

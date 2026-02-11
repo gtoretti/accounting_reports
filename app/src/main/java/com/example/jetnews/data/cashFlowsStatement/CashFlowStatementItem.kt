@@ -21,6 +21,7 @@ data class CashFlowStatementItem(
     val value: Double,
     val isCredit: Boolean,
     val date: Date,
+    val explanatoryNote: String,
     val deleted: Int,
     ) {
 

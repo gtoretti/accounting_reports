@@ -167,6 +167,8 @@
     <string name="period_results_statement_delete_statement">Excluir Resultado:</string>
     <string name="period_results_statement_result_deleted_sucess">Resultado excluído com sucesso.</string>
 
+    <string name="period_results_statement_explanatory_notes_text">Nota Explicativa (Opcional):</string>
+
     <!-- explanatory_notes -->
     <string name="explanatory_notes_title">Notas Explicativas</string>
     <string name="explanatory_notes_delete_note">Excluir Nota Explicativa:</string>

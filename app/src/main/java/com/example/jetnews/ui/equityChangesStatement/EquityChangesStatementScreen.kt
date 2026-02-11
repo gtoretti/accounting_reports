@@ -1175,7 +1175,7 @@ fun hasType(equityChangesItems: List<EquityChangesStatementItem>, type:String): 
         if (it.type == type)
             return it
     }
-    return EquityChangesStatementItem(0,0,"",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0)
+    return EquityChangesStatementItem(0,0,"",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,"",0)
 }
 
 @Composable
@@ -2245,7 +2245,7 @@ private fun EquityChangesStatementItemsAddItemScreenContent(
                                         getSignedDouble(equityOfTheParentCompanyShareholdersValue.value,equityOfTheParentCompanyShareholdersValueIsCredit.value),
                                         getSignedDouble(nonControllingInterestsInEquityOfSubsidiaryValue.value,nonControllingInterestsInEquityOfSubsidiaryValueIsCredit.value),
                                         consolidatedEquityValueSaved,
-                                        0))
+                                        "",0))
 
                                 isEquityChangesStatementItemsAddItemScreen.value = false
                                 Toast.makeText(
@@ -2515,7 +2515,7 @@ private fun EquityChangesStatementItemsEditItemScreenContent(
                                         getSignedDouble(equityOfTheParentCompanyShareholdersValue.value,equityOfTheParentCompanyShareholdersValueIsCredit.value),
                                         getSignedDouble(nonControllingInterestsInEquityOfSubsidiaryValue.value,nonControllingInterestsInEquityOfSubsidiaryValueIsCredit.value),
                                         consolidatedEquityValueSaved,
-                                        0))
+                                        "",0))
 
                                 isEquityChangesStatementItemsEditItemScreen.value = false
                                 Toast.makeText(
@@ -3174,7 +3174,7 @@ fun EquityChangesStatementItemDeleteDialog(
                     val deletedSuccessMsg = stringResource(R.string.equity_changes_statement_item_deleted_success)
                     Button(
                         onClick = {
-                            equityChangesStatementViewModel.deleteEquityChangesStatementItem(EquityChangesStatementItem(isDeletingEquityChangesStatementItemId.value,0, "", 0.0, 0.0,0.0,0.0,0.0,0.0,0.0,0.0,0))
+                            equityChangesStatementViewModel.deleteEquityChangesStatementItem(EquityChangesStatementItem(isDeletingEquityChangesStatementItemId.value,0, "", 0.0, 0.0,0.0,0.0,0.0,0.0,0.0,0.0,"",0))
                             isDeletingEquityChangesStatementItem.value = false
                             isDeletingEquityChangesStatementItemId.value=0
                             isDeletingEquityChangesStatementItemType.value=""

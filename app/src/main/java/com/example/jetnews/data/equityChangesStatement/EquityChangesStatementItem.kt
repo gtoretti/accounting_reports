@@ -40,6 +40,8 @@ data class EquityChangesStatementItem(
     //Patrimônio Líquido Consolidado
     val consolidatedEquityValue: Double,
 
+    val explanatoryNote: String,
+
     val deleted: Int,
     ) {
 

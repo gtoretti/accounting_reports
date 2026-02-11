@@ -1732,6 +1732,7 @@ private fun CashFlowsStatementItemsAddItemScreenContent(
                                                     financialMovementValue.value.screenToDouble(),
                                                     financialMovementSignal.value,
                                                     fmt.parse(financialMovementDate.value)!!,
+                                                    "",
                                                     0
                                                 ),
                                                 CashFlowStatement(0,
@@ -2009,6 +2010,7 @@ private fun CashFlowsStatementItemsEditItemScreenContent(
                                                     financialMovementValue.value.screenToDouble(),
                                                     financialMovementSignal.value,
                                                     fmt.parse(financialMovementDate.value)!!,
+                                                    "",
                                                     0
                                                 ),
                                                 CashFlowStatement(0,
@@ -2956,7 +2958,7 @@ fun CashFlowsStatementItemDeleteDialog(
                     val financialMoveDeletedSucessMsg = stringResource(R.string.cash_flows_statement_financial_move_deleted_sucess)
                     Button(
                         onClick = {
-                            cashFlowsStatementViewModel.deleteCashFlowStatementItem(CashFlowStatementItem(isDeletingCashFlowStatementItemId.value,0, "", "", 0,"",0.0,false,Date(0),0))
+                            cashFlowsStatementViewModel.deleteCashFlowStatementItem(CashFlowStatementItem(isDeletingCashFlowStatementItemId.value,0, "", "", 0,"",0.0,false,Date(0),"",0))
                             isDeletingCashFlowStatementItem.value = false
                             isDeletingCashFlowStatementItemId.value=0
                             isDeletingCashFlowStatementItemType.value=""

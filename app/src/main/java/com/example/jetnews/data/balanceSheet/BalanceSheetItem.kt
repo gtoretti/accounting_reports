@@ -17,6 +17,7 @@ data class BalanceSheetItem(
     val level3: String,
     val level4Description: String,
     val value: Double,
+    val explanatoryNote: String,
     val deleted: Int,
     ) {
     override fun toString() = balanceSheetItemId.toString()
