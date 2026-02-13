@@ -13,7 +13,7 @@
   the License.
   -->
 <resources>
-    <string name="app_name">Editor de Demonstrações Contábeis</string>
+    <string name="app_name">DRE go!</string>
     <string name="load_error">Can\'t update latest news</string>
     <string name="retry">Retry</string>
     <string name="cd_add_to_favorites">Add to favorites</string>
@@ -261,7 +261,10 @@
 
 
     <!-- Home Screen -->
-    <string name="home_screen_1">Bem-vindo ao aplicativo Editor de DRE.</string>
+    <string name="home_screen_1">Bem-vindo ao DRE go!</string>
+
+    <string name="home_screen_1a">Instruções para utilização:</string>
+
     <string name="home_screen_2">
         Se você quer se tornar um grande empresário, você precisa antes de qualquer coisa começar a se comportar como um grande empresário.
 Grandes empresas utilizam ferramentas administrativas que ajudam elas a continuarem grandes. Essas ferramentas ajudam seus administradores a tomarem decisões certas baseadas em informações. Ou seja: grandes empresários tem as informações certas para tomar decisões e crescerem cada vez mais.
@@ -274,23 +277,35 @@ Entre essas demonstrações contábeis está a DRE - demonstração do resultado
 
     <string name="home_screen_4">Torne-se um grande empresário, baixe o app e comece a usar as mesmas ferramentas que os grandes empresários usam.</string>
 
-    <string name="home_screen_5">A estrutura da Demonstração do Resultado do Exercício (DRE) utilizada neste aplicativo utiliza como referencia as estruturas das demonstrações contábeis divulgadas publicamente por grandes empresas em seus canais de comunicação com investidores, e a Norma Brasileira de Contabilidade (NBC) TG 51, publicada em 22 de dezembro de 2025, que estabelece requisitos para a apresentação e divulgação de informações nas demonstrações contábeis, alinhando-se às normas internacionais de contabilidade, especialmente à IFRS 18 (International Financial Reporting Standards). A norma visa garantir que as demonstrações contábeis forneçam informações relevantes e fidedignas, promovendo maior transparência e detalhamento nas rubricas das demonstrações financeiras.</string>
+    <string name="home_screen_5">A estrutura da Demonstração do Resultado do Exercício (DRE) neste aplicativo utiliza como referencia as estruturas das demonstrações contábeis divulgadas publicamente por grandes empresas em seus canais de comunicação com investidores, além da Norma Brasileira de Contabilidade (NBC) TG 51, publicada em 22 de dezembro de 2025, que estabelece requisitos para a apresentação e divulgação de informações nas demonstrações contábeis, alinhando-se às normas internacionais de contabilidade, especialmente à IFRS 18 (International Financial Reporting Standards).</string>
+
+    <string name="home_screen_5a">A norma visa garantir que as demonstrações contábeis forneçam informações relevantes e fidedignas, promovendo maior transparência e detalhamento nas rubricas das demonstrações financeiras.</string>
 
 
     <string name="home_screen_6">Para iniciar o editor de Demonstração do Resultado do Exercício (DRE), acesse o menu acima à esquerda e selecione Demonstração do Resultado do Exercício.</string>
 
-    <string name="home_screen_7">Os botões abaixo tem as seguintes funções:</string>
+    <string name="home_screen_7">Os botões tem as seguintes funções:</string>
 
-    <string name="home_screen_8">- adiciona uma nova DRE.</string>
+    <string name="home_screen_8">  Adicionar nova DRE.</string>
 
-    <string name="home_screen_9">- edita as informações.</string>
+    <string name="home_screen_8a">Não há Demonstração do Resultado do Exercício cadastrada ainda. Utilize este botão localizado acima à direita para cadastrar uma nova Demonstração do Resultado do Exercício.</string>
 
-    <string name="home_screen_10">- apaga a DRE (na tela que lista DRE).</string>
+    <string name="home_screen_9">  Editar informações.</string>
 
-    <string name="home_screen_11">- exporta os dados para uma planilha Excel.</string>
+    <string name="home_screen_9a"> Exibir informações da DRE detalhadas.</string>
 
-    <string name="home_screen_12">- adiciona resultado a DRE.</string>
+    <string name="home_screen_10"> Deletar DRE.</string>
 
+    <string name="home_screen_10a"> Tela de detalhes da DRE: Deletar resultado.</string>
+
+    <string name="home_screen_11"> Tela de detalhes da DRE: Gerar planilha Excel com as informações da DRE.</string>
+
+    <string name="home_screen_12"> Tela de detalhes da DRE: Adicionar resultado à DRE.</string>
+
+    <string name="home_screen_12a"> Tela de detalhes da DRE: Abre e fecha pasta exibindo informações da categoria.</string>
+
+    <string name="home_screen_13">Contato para suporte:</string>
+    <string name="home_screen_13a">gtorettidevimoveis@gmail.com</string>
 
     <!-- Navigation actions -->
     <string name="cd_navigate_up">Navigate up</string>

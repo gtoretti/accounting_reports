@@ -2510,12 +2510,39 @@ private fun PeriodResultStatementHomeScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 5.dp)
+                .padding(horizontal = 10.dp)
                 .verticalScroll(rememberScrollState()),
         ) {
             val periodResultStatementsFlow = periodResultStatementViewModel.getPeriodResultStatements()
             val periodResultStatements by periodResultStatementsFlow.collectAsStateWithLifecycle(initialValue = emptyList())
 
+            if (periodResultStatements.isEmpty()){
+
+                Spacer(Modifier.height(30.dp))
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 30.dp)
+                ) {
+
+                        Text(
+                            text = stringResource(R.string.home_screen_8a),
+                            modifier = Modifier,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            textAlign = TextAlign.Justify
+                        )
+                        Icon(
+                            painter = painterResource(R.drawable.ic_add),
+                            contentDescription = stringResource(R.string.period_results_statement_add_statement),
+                            modifier = Modifier.padding(20.dp),
+                        )
+                }
+
+
+            }else
             periodResultStatements.forEach { periodResultStatement ->
 
                 Row(

@@ -17,9 +17,13 @@
 package com.example.jetnews.ui.home
 
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 
 
 import androidx.compose.foundation.layout.padding
@@ -49,16 +53,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 
 import androidx.compose.ui.unit.dp
 
 import com.example.jetnews.R
+import com.example.jetnews.ui.utils.getLightGreenColor
+import com.example.jetnews.ui.utils.getLightRedColor
 
 import kotlin.Boolean
 
@@ -147,19 +156,309 @@ private fun HomeScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 5.dp)
+                .padding(horizontal = 20.dp)
                 .verticalScroll(rememberScrollState()),
         ) {
 
+            Spacer(Modifier.height(30.dp))
 
             Text(
                 text = stringResource(R.string.home_screen_1),
                 modifier = Modifier,
                 style = TextStyle(fontFamily = FontFamily.SansSerif),
                 color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.Start
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
             )
 
+
+            Spacer(Modifier.height(30.dp))
+
+            Text(
+                text = stringResource(R.string.home_screen_1a),
+                modifier = Modifier,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
+            )
+
+
+
+            Spacer(Modifier.height(20.dp))
+
+            Text(
+                text = stringResource(R.string.home_screen_6),
+                modifier = Modifier,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Justify
+            )
+
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+            )
+            Spacer(Modifier.height(20.dp))
+
+
+
+            Text(
+                text = stringResource(R.string.home_screen_7),
+                modifier = Modifier,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
+            )
+
+
+            Spacer(Modifier.height(10.dp))
+
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 5.dp)
+            ) {
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+
+
+                        Icon(
+                            painter = painterResource(R.drawable.ic_add),
+                            contentDescription = stringResource(R.string.period_results_statement_add_statement),
+                            modifier = Modifier.padding(20.dp),
+                        )
+
+
+                    Text(
+                        text = stringResource(R.string.home_screen_8),
+                        modifier = Modifier,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
+                        textAlign = TextAlign.Start
+                    )
+
+
+
+                }
+
+
+
+                HorizontalDivider(
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                )
+                Spacer(Modifier.height(10.dp))
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(R.drawable.edit_24px),
+                        contentDescription = stringResource(R.string.cash_flows_statement_add),
+                        modifier = Modifier.padding(20.dp),
+                    )
+
+                    Text(
+                        text = stringResource(R.string.home_screen_9),
+                        modifier = Modifier,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
+                        textAlign = TextAlign.Start
+                    )
+                }
+
+
+                HorizontalDivider(
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                )
+                Spacer(Modifier.height(10.dp))
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(R.drawable.format_list_bulleted_24px),
+                        contentDescription = stringResource(R.string.cash_flows_statement_items),
+                        modifier = Modifier.padding(20.dp)
+                    )
+
+                    Text(
+                        text = stringResource(R.string.home_screen_9a),
+                        modifier = Modifier,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
+                        textAlign = TextAlign.Start
+                    )
+                }
+
+
+                HorizontalDivider(
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                )
+                Spacer(Modifier.height(10.dp))
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
+                        contentDescription = stringResource(R.string.cash_flows_statement_delete),
+                        modifier = Modifier.padding(20.dp),
+                        tint = getLightRedColor()
+
+                    )
+
+                    Text(
+                        text = stringResource(R.string.home_screen_10),
+                        modifier = Modifier,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
+                        textAlign = TextAlign.Start
+                    )
+                }
+
+
+                HorizontalDivider(
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                )
+                Spacer(Modifier.height(10.dp))
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(R.drawable.delete_24px),
+                        contentDescription = stringResource(R.string.cash_flows_statement_delete),
+                        modifier = Modifier.padding(20.dp),
+                        tint = getLightRedColor()
+
+                    )
+
+                    Text(
+                        text = stringResource(R.string.home_screen_10a),
+                        modifier = Modifier,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
+                        textAlign = TextAlign.Start
+                    )
+                }
+
+
+                HorizontalDivider(
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                )
+                Spacer(Modifier.height(10.dp))
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(R.drawable.table_view_24px),
+                        contentDescription = stringResource(R.string.cash_flows_statement_add),
+                        modifier = Modifier.padding(20.dp),
+                        tint = getLightGreenColor()
+                    )
+
+                    Text(
+                        text = stringResource(R.string.home_screen_11),
+                        modifier = Modifier,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
+                        textAlign = TextAlign.Start
+                    )
+                }
+
+
+                HorizontalDivider(
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                )
+                Spacer(Modifier.height(10.dp))
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(R.drawable.forms_add_on_24px),
+                        contentDescription = stringResource(R.string.cash_flows_statement_add),
+                        modifier = Modifier.padding(20.dp),
+                        tint = getLightGreenColor()
+                    )
+
+                    Text(
+                        text = stringResource(R.string.home_screen_12),
+                        modifier = Modifier,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
+                        textAlign = TextAlign.Start
+                    )
+                }
+
+
+                HorizontalDivider(
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                )
+                Spacer(Modifier.height(10.dp))
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(R.drawable.keyboard_arrow_right_24px),
+                        contentDescription = "Fechar",
+                        modifier = Modifier.padding(start = 20.dp),
+                    )
+                    Icon(
+                        imageVector = ImageVector.vectorResource(R.drawable.folder_24px),
+                        contentDescription = "Abrir",
+                        modifier = Modifier.padding(end = 20.dp),
+                    )
+
+                    Text(
+                        text = stringResource(R.string.home_screen_12a),
+                        modifier = Modifier,
+                        style = TextStyle(fontFamily = FontFamily.SansSerif),
+                        color = MaterialTheme.colorScheme.primary,
+                        textAlign = TextAlign.Start
+                    )
+                }
+            }
+
+
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+            )
+            Spacer(Modifier.height(30.dp))
+
+
+
+            /*
             Text(
                 text = stringResource(R.string.home_screen_2),
                 modifier = Modifier,
@@ -168,6 +467,10 @@ private fun HomeScreenContent(
                 textAlign = TextAlign.Start
             )
 
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+            )
+            Spacer(Modifier.height(10.dp))
 
             Text(
                 text = stringResource(R.string.home_screen_3),
@@ -177,6 +480,11 @@ private fun HomeScreenContent(
                 textAlign = TextAlign.Start
             )
 
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+            )
+            Spacer(Modifier.height(10.dp))
+
             Text(
                 text = stringResource(R.string.home_screen_4),
                 modifier = Modifier,
@@ -185,70 +493,57 @@ private fun HomeScreenContent(
                 textAlign = TextAlign.Start
             )
 
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+            )
+            Spacer(Modifier.height(10.dp))
+*/
             Text(
                 text = stringResource(R.string.home_screen_5),
                 modifier = Modifier,
                 style = TextStyle(fontFamily = FontFamily.SansSerif),
                 color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.Start
+                textAlign = TextAlign.Justify
             )
 
+
+
+            Spacer(Modifier.height(10.dp))
+
             Text(
-                text = stringResource(R.string.home_screen_6),
+                text = stringResource(R.string.home_screen_5a),
                 modifier = Modifier,
                 style = TextStyle(fontFamily = FontFamily.SansSerif),
                 color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.Start
+                textAlign = TextAlign.Justify
             )
 
+
+
+            Spacer(Modifier.height(30.dp))
+
+
+
+
+
             Text(
-                text = stringResource(R.string.home_screen_7),
+                text = stringResource(R.string.home_screen_13),
                 modifier = Modifier,
                 style = TextStyle(fontFamily = FontFamily.SansSerif),
                 color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.Start
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
             )
-
             Text(
-                text = stringResource(R.string.home_screen_8),
+                text = stringResource(R.string.home_screen_13a),
                 modifier = Modifier,
                 style = TextStyle(fontFamily = FontFamily.SansSerif),
                 color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.Start
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
             )
 
-            Text(
-                text = stringResource(R.string.home_screen_9),
-                modifier = Modifier,
-                style = TextStyle(fontFamily = FontFamily.SansSerif),
-                color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.Start
-            )
-
-            Text(
-                text = stringResource(R.string.home_screen_10),
-                modifier = Modifier,
-                style = TextStyle(fontFamily = FontFamily.SansSerif),
-                color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.Start
-            )
-
-            Text(
-                text = stringResource(R.string.home_screen_11),
-                modifier = Modifier,
-                style = TextStyle(fontFamily = FontFamily.SansSerif),
-                color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.Start
-            )
-
-            Text(
-                text = stringResource(R.string.home_screen_12),
-                modifier = Modifier,
-                style = TextStyle(fontFamily = FontFamily.SansSerif),
-                color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.Start
-            )
-
+            Spacer(Modifier.height(30.dp))
 
         }
     }
