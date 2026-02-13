@@ -153,7 +153,96 @@ private fun HomeScreenContent(
 
 
             Text(
-                text = "Bem-Vindo(a) ao Editor de DRE.",
+                text = stringResource(R.string.home_screen_1),
+                modifier = Modifier,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Start
+            )
+
+            Text(
+                text = stringResource(R.string.home_screen_2),
+                modifier = Modifier,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Start
+            )
+
+
+            Text(
+                text = stringResource(R.string.home_screen_3),
+                modifier = Modifier,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Start
+            )
+
+            Text(
+                text = stringResource(R.string.home_screen_4),
+                modifier = Modifier,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Start
+            )
+
+            Text(
+                text = stringResource(R.string.home_screen_5),
+                modifier = Modifier,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Start
+            )
+
+            Text(
+                text = stringResource(R.string.home_screen_6),
+                modifier = Modifier,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Start
+            )
+
+            Text(
+                text = stringResource(R.string.home_screen_7),
+                modifier = Modifier,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Start
+            )
+
+            Text(
+                text = stringResource(R.string.home_screen_8),
+                modifier = Modifier,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Start
+            )
+
+            Text(
+                text = stringResource(R.string.home_screen_9),
+                modifier = Modifier,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Start
+            )
+
+            Text(
+                text = stringResource(R.string.home_screen_10),
+                modifier = Modifier,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Start
+            )
+
+            Text(
+                text = stringResource(R.string.home_screen_11),
+                modifier = Modifier,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Start
+            )
+
+            Text(
+                text = stringResource(R.string.home_screen_12),
                 modifier = Modifier,
                 style = TextStyle(fontFamily = FontFamily.SansSerif),
                 color = MaterialTheme.colorScheme.primary,

@@ -58,14 +58,14 @@ fun AppNavRail(currentRoute: String, navigateToHome: () -> Unit, navigateToAccou
         NavigationRailItem(
             selected = currentRoute == JetnewsDestinations.ACCOUNTING_ACCOUNTS,
             onClick = navigateToAccountingAccounts,
-            icon = { Icon(painterResource(id = R.drawable.ic_list_alt), stringResource(R.string.home_title)) },
+            icon = { Icon(painterResource(id = R.drawable.ic_list_alt), stringResource(R.string.accounting_accounts_title)) },
             label = { Text(stringResource(R.string.accounting_accounts_title)) },
             alwaysShowLabel = false,
         )
         NavigationRailItem(
             selected = currentRoute == JetnewsDestinations.BALANCE_SHEET,
             onClick = navigateToAccountingAccounts,
-            icon = { Icon(painterResource(id = R.drawable.ic_list_alt), stringResource(R.string.interests_title)) },
+            icon = { Icon(painterResource(id = R.drawable.ic_list_alt), stringResource(R.string.balance_sheet_title)) },
             label = { Text(stringResource(R.string.balance_sheet_title)) },
             alwaysShowLabel = false,
         )

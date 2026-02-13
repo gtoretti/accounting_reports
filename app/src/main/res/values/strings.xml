@@ -260,16 +260,37 @@
     <string name="equity_changes_statement_item_missing_type">Por favor, informe o Tipo.</string>
 
 
-    <!-- Article Screen -->
-    <string name="article_functionality_not_available">Functionality not available \uD83D\uDE48</string>
-    <string name="article_share_post">Share post</string>
-    <string name="article_post_min_read">%1$s • %2$d min read</string>
+    <!-- Home Screen -->
+    <string name="home_screen_1">Bem-vindo ao aplicativo Editor de DRE.</string>
+    <string name="home_screen_2">
+        Se você quer se tornar um grande empresário, você precisa antes de qualquer coisa começar a se comportar como um grande empresário.
+Grandes empresas utilizam ferramentas administrativas que ajudam elas a continuarem grandes. Essas ferramentas ajudam seus administradores a tomarem decisões certas baseadas em informações. Ou seja: grandes empresários tem as informações certas para tomar decisões e crescerem cada vez mais.
+Mas quais informações são essas ?
+    </string>
 
-    <!-- Interests Screen -->
-    <string name="interests_title">Balanço Patrimonial</string>
-    <string name="interests_section_topics">Topics</string>
-    <string name="interests_section_people">People</string>
-    <string name="interests_section_publications">Publications</string>
+    <string name="home_screen_3">As grandes empresas são normalmente do tipo SA (sociedades anonimas) e a administração delas é feita pelos seus acionistas, utilizando demonstrações contábeis especificas , definidas por leis e padronizadas globalmente, que facilitam a tomada de decisões que farão a empresa crescer e lucrar ainda mais.
+Entre essas demonstrações contábeis está a DRE - demonstração do resultado do exercício.
+    </string>
+
+    <string name="home_screen_4">Torne-se um grande empresário, baixe o app e comece a usar as mesmas ferramentas que os grandes empresários usam.</string>
+
+    <string name="home_screen_5">A estrutura da Demonstração do Resultado do Exercício (DRE) utilizada neste aplicativo utiliza como referencia as estruturas das demonstrações contábeis divulgadas publicamente por grandes empresas em seus canais de comunicação com investidores, e a Norma Brasileira de Contabilidade (NBC) TG 51, publicada em 22 de dezembro de 2025, que estabelece requisitos para a apresentação e divulgação de informações nas demonstrações contábeis, alinhando-se às normas internacionais de contabilidade, especialmente à IFRS 18 (International Financial Reporting Standards). A norma visa garantir que as demonstrações contábeis forneçam informações relevantes e fidedignas, promovendo maior transparência e detalhamento nas rubricas das demonstrações financeiras.</string>
+
+
+    <string name="home_screen_6">Para iniciar o editor de Demonstração do Resultado do Exercício (DRE), acesse o menu acima à esquerda e selecione Demonstração do Resultado do Exercício.</string>
+
+    <string name="home_screen_7">Os botões abaixo tem as seguintes funções:</string>
+
+    <string name="home_screen_8">- adiciona uma nova DRE.</string>
+
+    <string name="home_screen_9">- edita as informações.</string>
+
+    <string name="home_screen_10">- apaga a DRE (na tela que lista DRE).</string>
+
+    <string name="home_screen_11">- exporta os dados para uma planilha Excel.</string>
+
+    <string name="home_screen_12">- adiciona resultado a DRE.</string>
+
 
     <!-- Navigation actions -->
     <string name="cd_navigate_up">Navigate up</string>
