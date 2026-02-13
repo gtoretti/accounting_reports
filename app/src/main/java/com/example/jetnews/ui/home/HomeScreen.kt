@@ -121,7 +121,7 @@ fun HomeScreen(
                     if (!isExpandedScreen) {
                         IconButton(onClick = openDrawer) {
                             Icon(
-                                painter = painterResource(R.drawable.ic_jetnews_logo),
+                                painter = painterResource(R.drawable.ic_more_vert),
                                 contentDescription = stringResource(
                                     R.string.cd_open_navigation_drawer,
                                 ),
