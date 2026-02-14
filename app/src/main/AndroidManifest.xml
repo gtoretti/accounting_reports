@@ -18,7 +18,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".JetnewsApplication"
+        android:name=".DREgoApplication"
         android:allowBackup="true"
         android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher"
@@ -50,7 +50,7 @@
             <category android:name="android.intent.category.BROWSABLE"/>
             <data
                 android:host="developer.android.com"
-                android:pathPrefix="/jetnews"
+                android:pathPrefix="/drego"
                 android:scheme="https" />
         </intent-filter>
 

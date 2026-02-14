@@ -13,7 +13,7 @@ android {
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.example.jetnews"
+        applicationId = "com.gtoretti.drego"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -80,7 +80,7 @@ android {
             }
         }
     }
-    namespace = "com.example.jetnews"
+    namespace = "com.gtoretti.drego"
 }
 
 androidComponents {
