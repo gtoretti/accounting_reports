@@ -1,0 +1,23 @@
+/*
+ */
+
+package com.gtoretti.drego.data.periodResultStatement
+
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import java.util.Date
+
+@Entity(tableName = "period_result_statement")
+data class PeriodResultStatement(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    val periodResultStatementId: Long,
+    val name: String,
+    val startDate: Date,
+    val endDate: Date,
+    val deleted: Int,
+    ) {
+
+    override fun toString() = name
+}
