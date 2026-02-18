@@ -277,7 +277,7 @@ Entre essas demonstrações contábeis está a DRE - demonstração do resultado
 
     <string name="home_screen_4">Torne-se um grande empresário, baixe o app e comece a usar as mesmas ferramentas que os grandes empresários usam.</string>
 
-    <string name="home_screen_5">A estrutura da Demonstração do Resultado do Exercício (DRE) neste aplicativo utiliza como referência as estruturas das demonstrações contábeis divulgadas publicamente por grandes empresas em seus canais de comunicação com investidores, além da Norma Brasileira de Contabilidade (NBC) TG 51, publicada em 22 de dezembro de 2025, que estabelece requisitos para a apresentação e divulgação de informações nas demonstrações contábeis, alinhando-se às normas internacionais de contabilidade, especialmente à IFRS 18 (International Financial Reporting Standards).</string>
+    <string name="home_screen_5">A estrutura da DRE neste aplicativo utiliza como referência as estruturas das demonstrações contábeis divulgadas publicamente por grandes empresas em seus canais de comunicação com investidores, além da Norma Brasileira de Contabilidade (NBC) TG 51, publicada em 22 de dezembro de 2025, que estabelece requisitos para a apresentação e divulgação de informações nas demonstrações contábeis, alinhando-se às normas internacionais de contabilidade, especialmente à IFRS 18 (International Financial Reporting Standards).</string>
 
     <string name="home_screen_5a">A norma visa garantir que as demonstrações contábeis forneçam informações relevantes e fidedignas, promovendo maior transparência e detalhamento nas rubricas das demonstrações financeiras.</string>
 
@@ -306,6 +306,12 @@ Entre essas demonstrações contábeis está a DRE - demonstração do resultado
 
     <string name="home_screen_13">Contato para suporte:</string>
     <string name="home_screen_13a">gtorettidevimoveis@gmail.com</string>
+
+    <string name="home_screen_14">A importância da DRE.</string>
+
+    <string name="home_screen_15">A Demonstração do Resultado do Exercício (DRE) é um relatório contábil que resume a performance financeira de uma empresa apresentando receitas, despesas e o lucro líquido de um período específico, que pode ser mensal, trimestral ou anual.</string>
+    <string name="home_screen_16">A DRE é uma ferramenta valiosa para a gestão financeira, pois permite analisar a eficiência operacional, identificar áreas de melhoria e tomar decisões estratégicas com segurança sobre o futuro da empresa. Dessa forma, a DRE mostra o crescimento financeiro ao longo do tempo.</string>
+    <string name="home_screen_17">Para elaborar uma DRE corretamente, é fundamental seguir a estrutura padronizada e garantir que todos os dados financeiros sejam organizados com precisão. A DRE deve ser elaborada em conformidade com a Lei nº 6.404/76, que estabelece as diretrizes contábeis no Brasil.</string>
 
     <!-- Navigation actions -->
     <string name="cd_navigate_up">Navigate up</string>

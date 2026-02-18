@@ -458,46 +458,47 @@ private fun HomeScreenContent(
 
 
 
-            /*
+
             Text(
-                text = stringResource(R.string.home_screen_2),
+                text = stringResource(R.string.home_screen_14),
                 modifier = Modifier,
                 style = TextStyle(fontFamily = FontFamily.SansSerif),
                 color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.Start
-            )
-
-            HorizontalDivider(
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
             )
             Spacer(Modifier.height(10.dp))
 
             Text(
-                text = stringResource(R.string.home_screen_3),
+                text = stringResource(R.string.home_screen_15),
                 modifier = Modifier,
                 style = TextStyle(fontFamily = FontFamily.SansSerif),
                 color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.Start
+                textAlign = TextAlign.Justify
             )
 
-            HorizontalDivider(
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
-            )
             Spacer(Modifier.height(10.dp))
 
             Text(
-                text = stringResource(R.string.home_screen_4),
+                text = stringResource(R.string.home_screen_16),
                 modifier = Modifier,
                 style = TextStyle(fontFamily = FontFamily.SansSerif),
                 color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.Start
+                textAlign = TextAlign.Justify
             )
 
-            HorizontalDivider(
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
-            )
             Spacer(Modifier.height(10.dp))
-*/
+
+            Text(
+                text = stringResource(R.string.home_screen_17),
+                modifier = Modifier,
+                style = TextStyle(fontFamily = FontFamily.SansSerif),
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Justify
+            )
+
+            Spacer(Modifier.height(10.dp))
+
             Text(
                 text = stringResource(R.string.home_screen_5),
                 modifier = Modifier,
