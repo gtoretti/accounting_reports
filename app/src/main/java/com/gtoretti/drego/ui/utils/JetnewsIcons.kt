@@ -263,6 +263,11 @@ fun Double.toDisplay(): String {
     return brFormatter.format(intPart.toLong()) + ret.substring(ret.length-3,ret.length)
 }
 
+fun Double.toPerc(): String {
+    val ret = this.toDisplay() + " %"
+    return ret
+}
+
 fun Double.toScreenParenthesis(): String {
     if (this>=0.0)
         return this.toDisplay()

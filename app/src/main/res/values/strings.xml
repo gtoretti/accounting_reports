@@ -168,6 +168,7 @@
     <string name="period_results_statement_result_deleted_sucess">Resultado excluído com sucesso.</string>
 
     <string name="period_results_statement_explanatory_notes_text">Nota Explicativa (Opcional):</string>
+    <string name="period_results_statement_margin">Margem de Lucro (Lucro Líquido / Receita):</string>
 
     <!-- explanatory_notes -->
     <string name="explanatory_notes_title">Notas Explicativas</string>

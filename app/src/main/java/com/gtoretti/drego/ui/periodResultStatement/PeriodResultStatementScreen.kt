@@ -103,6 +103,7 @@ import com.gtoretti.drego.ui.utils.hasWritePermission
 import com.gtoretti.drego.ui.utils.requestWritePermission
 import com.gtoretti.drego.ui.utils.screenToDouble
 import com.gtoretti.drego.ui.utils.toDisplay
+import com.gtoretti.drego.ui.utils.toPerc
 import com.gtoretti.drego.ui.utils.toScreen
 import com.gtoretti.drego.utils.PERIOD_RESULT_STATEMENT_TYPE_FINANCING
 import com.gtoretti.drego.utils.PERIOD_RESULT_STATEMENT_TYPE_FINANCING_INTEREST_EXPENSES_ON_LOANS_AND_LEASE_LIABILITIES
@@ -1001,6 +1002,8 @@ private fun PeriodResultStatementItemsScreenContent(
     val profitBeforeTaxes = remember { mutableStateOf(0.0) }
     val profitFromContinuingOperations = remember { mutableStateOf(0.0) }
     val netProfit = remember { mutableStateOf(0.0) }
+    val margin = remember { mutableStateOf(0.0) }
+    val revenue = remember { mutableStateOf(0.0) }
 
     val excelParamRevenue = remember { mutableStateOf("") }
     val excelParamCostOfSales = remember { mutableStateOf("") }
@@ -1033,10 +1036,12 @@ private fun PeriodResultStatementItemsScreenContent(
     val operatingItems = periodResultItems.filter { it.type == PERIOD_RESULT_STATEMENT_TYPE_OPERATING }
     val revenueList = operatingItems.filter { it.description == PERIOD_RESULT_STATEMENT_TYPE_OPERATING_REVENUE }
     grossProfit.value = 0.0
+    revenue.value = 0.0
     if (revenueList.isNotEmpty()){
         excelParamRevenue.value = formatExcelValue(revenueList[0].value)
         excelParamRevenueExplanatoryNotes.value = revenueList[0].explanatoryNotes
         grossProfit.value += revenueList[0].value
+        revenue.value = revenueList[0].value
         periodResultStatementDescriptionList.add(PERIOD_RESULT_STATEMENT_TYPE_OPERATING_REVENUE)
     }
 
@@ -1178,6 +1183,15 @@ private fun PeriodResultStatementItemsScreenContent(
     if (netProfit.value<0.0)
         netProfitText = "(" + netProfit.value.absoluteValue.toDisplay() + ")"
 
+    var marginText = margin.value.toPerc()
+    if (revenue.value>0.0){
+        margin.value = (netProfit.value / revenue.value) * 100.0
+        if (margin.value<0.0)
+            marginText = "(" + margin.value.absoluteValue.toPerc() + ")"
+    }else{
+        marginText = ""
+    }
+
 
     Column(modifier) {
         HorizontalDivider(
@@ -1240,6 +1254,7 @@ private fun PeriodResultStatementItemsScreenContent(
                                     formatExcelValue(profitBeforeTaxes.value),
                                     formatExcelValue(profitFromContinuingOperations.value),
                                     formatExcelValue(netProfit.value),
+                                    formatExcelValue(margin.value),
                                     excelParamRevenue.value,
                                     excelParamCostOfSales.value,
                                     excelParamOtherOperatingRevenues.value,
@@ -1689,7 +1704,40 @@ private fun PeriodResultStatementItemsScreenContent(
                         fontWeight = FontWeight.Bold,
                     )
                 }
+
+
+
+                if (revenue.value>0.0){
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                    )
+                    Spacer(Modifier.height(10.dp))
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ){
+                        Text(
+                            text = stringResource(R.string.period_results_statement_margin),
+                            modifier = Modifier
+                                .fillMaxWidth(0.8f),
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                        )
+                        Text(
+                            text = marginText,
+                            style = TextStyle(fontFamily = FontFamily.SansSerif),
+                            color = getColor(margin.value),
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
+                }
+
                 Spacer(Modifier.height(30.dp))
+
             }
         }
     }
@@ -3121,6 +3169,7 @@ fun generateExcel(context: Context,
                   profitBeforeTaxes: String,
                   profitFromContinuingOperations: String,
                   netProfit: String,
+                  margin: String,
                   excelParamRevenue: String,
                   excelParamCostOfSales: String,
                   excelParamOtherOperatingRevenues: String,
@@ -3345,6 +3394,15 @@ fun generateExcel(context: Context,
         row33c0.setCellValue("LUCRO LÍQUIDO:")
         val row33c1 = row33.createCell(1)
         row33c1.setCellValue(netProfit)
+
+        if (excelParamRevenue.isNotEmpty()){
+            val row34 = sheet.createRow(46)
+            val row34c0 = row34.createCell(0)
+            row34c0.setCellValue("MARGEM DE LUCRO (LUCRO LÍQUIDO/RECEITA):")
+            val row34c1 = row34.createCell(1)
+            row34c1.setCellValue(margin + " %")
+        }
+
 
         val activity = context.getActivity()
         if (!hasWritePermission(context)) {
