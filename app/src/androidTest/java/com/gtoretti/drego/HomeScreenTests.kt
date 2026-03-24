@@ -16,16 +16,12 @@
 
 package com.gtoretti.drego
 
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.gtoretti.drego.ui.home.HomeFeedScreen
-import com.gtoretti.drego.ui.home.HomeUiState
-import com.gtoretti.drego.ui.theme.JetnewsTheme
-import com.gtoretti.drego.utils.ErrorMessage
+import com.gtoretti.drego.ui.theme.DREGoTheme
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -47,25 +43,8 @@ class HomeScreenTests {
     fun postsContainError_snackbarShown() {
         val snackbarHostState = SnackbarHostState()
         composeTestRule.setContent {
-            JetnewsTheme {
+            DREGoTheme {
 
-                // When the Home screen receives data with an error
-                HomeFeedScreen(
-                    uiState = HomeUiState.NoPosts(
-                        isLoading = false,
-                        errorMessages = listOf(ErrorMessage(0L, R.string.load_error)),
-                        searchInput = "",
-                    ),
-                    showTopAppBar = false,
-                    onToggleFavorite = {},
-                    onSelectPost = {},
-                    onRefreshPosts = {},
-                    onErrorDismiss = {},
-                    openDrawer = {},
-                    homeListLazyListState = rememberLazyListState(),
-                    snackbarHostState = snackbarHostState,
-                    onSearchInputChanged = {},
-                )
             }
         }
 

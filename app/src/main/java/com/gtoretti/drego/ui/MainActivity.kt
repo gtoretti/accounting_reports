@@ -23,6 +23,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import com.gtoretti.drego.DREgoApplication
+import com.gtoretti.drego.ui.menu.DREGoApp
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -37,7 +38,7 @@ class MainActivity : ComponentActivity() {
         val appContainer = (application as DREgoApplication).container
         setContent {
             val widthSizeClass = calculateWindowSizeClass(this).widthSizeClass
-            JetnewsApp(appContainer, widthSizeClass)
+            DREGoApp(appContainer, widthSizeClass)
         }
     }
 }
