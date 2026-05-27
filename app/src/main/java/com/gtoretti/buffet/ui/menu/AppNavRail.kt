@@ -34,7 +34,7 @@ import com.gtoretti.buffet.R
 import com.gtoretti.buffet.ui.theme.BuffetTheme
 
 @Composable
-fun AppNavRail(currentRoute: String, navigateToHome: () -> Unit, navigateToAccountingAccounts: () -> Unit,modifier: Modifier = Modifier) {
+fun AppNavRail(currentRoute: String, navigateToHome: () -> Unit, navigateToTesouro: () -> Unit,modifier: Modifier = Modifier) {
     NavigationRail(
         header = {
             Icon(
@@ -47,6 +47,8 @@ fun AppNavRail(currentRoute: String, navigateToHome: () -> Unit, navigateToAccou
         modifier = modifier,
     ) {
         Spacer(Modifier.weight(1f))
+
+
         NavigationRailItem(
             selected = currentRoute == BuffetDestinations.HOME,
             onClick = navigateToHome,
@@ -55,22 +57,22 @@ fun AppNavRail(currentRoute: String, navigateToHome: () -> Unit, navigateToAccou
             alwaysShowLabel = false,
         )
         NavigationRailItem(
-            selected = currentRoute == BuffetDestinations.ATRACOES,
-            onClick = navigateToAccountingAccounts,
-            icon = { Icon(painterResource(id = R.drawable.ic_list_alt), stringResource(R.string.atracoes_title)) },
-            label = { Text(stringResource(R.string.atracoes_title)) },
+            selected = currentRoute == BuffetDestinations.INSTAGRAM,
+            onClick = navigateToHome,
+            icon = { Icon(painterResource(id = R.drawable.ic_list_alt), stringResource(R.string.istagram_title)) },
+            label = { Text(stringResource(R.string.istagram_title)) },
             alwaysShowLabel = false,
         )
         NavigationRailItem(
-            selected = currentRoute == BuffetDestinations.FESTAS,
-            onClick = navigateToAccountingAccounts,
-            icon = { Icon(painterResource(id = R.drawable.ic_list_alt), stringResource(R.string.festas_title)) },
-            label = { Text(stringResource(R.string.festas_title)) },
+            selected = currentRoute == BuffetDestinations.FACEBOOK,
+            onClick = navigateToHome,
+            icon = { Icon(painterResource(id = R.drawable.ic_list_alt), stringResource(R.string.facebook_title)) },
+            label = { Text(stringResource(R.string.facebook_title)) },
             alwaysShowLabel = false,
         )
         NavigationRailItem(
             selected = currentRoute == BuffetDestinations.TESOURO,
-            onClick = navigateToAccountingAccounts,
+            onClick = navigateToTesouro,
             icon = { Icon(painterResource(id = R.drawable.ic_list_alt), stringResource(R.string.tesouro_title)) },
             label = { Text(stringResource(R.string.tesouro_title)) },
             alwaysShowLabel = false,
@@ -85,9 +87,9 @@ fun AppNavRail(currentRoute: String, navigateToHome: () -> Unit, navigateToAccou
 fun PreviewAppNavRail() {
     BuffetTheme {
         AppNavRail(
-            currentRoute = BuffetDestinations.ATRACOES,
+            currentRoute = BuffetDestinations.INSTAGRAM,
             navigateToHome = {},
-            navigateToAccountingAccounts = {},
+            navigateToTesouro = {},
         )
     }
 }

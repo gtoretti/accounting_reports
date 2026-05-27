@@ -24,9 +24,8 @@ import androidx.navigation.NavHostController
  */
 object BuffetDestinations {
     const val HOME = "Início"
-    const val ATRACOES = "Atrações"
-    const val FESTAS = "Festas"
-    const val O_BUFFET = "O Buffet"
+    const val INSTAGRAM = "Instagram"
+    const val FACEBOOK = "Facebook"
     const val TESOURO = "Caça ao Tesouro"
 }
 
@@ -49,25 +48,7 @@ class BuffetNavigationActions(navController: NavHostController) {
             restoreState = true
         }
     }
-    val navigateToAccountingAccounts: () -> Unit = {
-        navController.navigate(BuffetDestinations.ATRACOES) {
-            popUpTo(navController.graph.findStartDestination().id) {
-                saveState = true
-            }
-            launchSingleTop = true
-            restoreState = true
-        }
-    }
-    val navigateToCashFlowsStatement: () -> Unit = {
-        navController.navigate(BuffetDestinations.FESTAS) {
-            popUpTo(navController.graph.findStartDestination().id) {
-                saveState = true
-            }
-            launchSingleTop = true
-            restoreState = true
-        }
-    }
-    val navigateToPeriodResultsStatement: () -> Unit = {
+    val navigateToTesouro: () -> Unit = {
         navController.navigate(BuffetDestinations.TESOURO) {
             popUpTo(navController.graph.findStartDestination().id) {
                 saveState = true
@@ -76,13 +57,5 @@ class BuffetNavigationActions(navController: NavHostController) {
             restoreState = true
         }
     }
-    val navigateToExplanatoryNotes: () -> Unit = {
-        navController.navigate(BuffetDestinations.O_BUFFET) {
-            popUpTo(navController.graph.findStartDestination().id) {
-                saveState = true
-            }
-            launchSingleTop = true
-            restoreState = true
-        }
-    }
+
 }

@@ -55,10 +55,7 @@ fun BuffetApp(widthSizeClass: WindowWidthSizeClass) {
                     drawerState = sizeAwareDrawerState,
                     currentRoute = currentRoute,
                     navigateToHome = navigationActions.navigateToHome,
-                    navigateToLocalizacao = navigationActions.navigateToAccountingAccounts,
-                    navigationActions.navigateToCashFlowsStatement,
-                    navigationActions.navigateToPeriodResultsStatement,
-                    navigationActions.navigateToExplanatoryNotes,
+                    navigateToTesouro = navigationActions.navigateToTesouro,
                     closeDrawer = { coroutineScope.launch { sizeAwareDrawerState.close() } },
                 )
             },
@@ -71,7 +68,7 @@ fun BuffetApp(widthSizeClass: WindowWidthSizeClass) {
                     AppNavRail(
                         currentRoute = currentRoute,
                         navigateToHome = navigationActions.navigateToHome,
-                        navigateToAccountingAccounts = navigationActions.navigateToAccountingAccounts,
+                        navigateToTesouro = navigationActions.navigateToTesouro,
                     )
                 }
                 BuffetAppNavGraph(

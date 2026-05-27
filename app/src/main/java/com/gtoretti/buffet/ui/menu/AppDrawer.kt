@@ -50,11 +50,7 @@ fun AppDrawer(
     drawerState: DrawerState,
     currentRoute: String,
     navigateToHome: () -> Unit,
-    navigateToLocalizacao: () -> Unit,
-    navigateToEstrutura: () -> Unit,
     navigateToTesouro: () -> Unit,
-    navigateToCardapio: () -> Unit,
-
     closeDrawer: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -78,19 +74,19 @@ fun AppDrawer(
 
         val context = LocalContext.current
         NavigationDrawerItem(
-            label = { Text(stringResource(id = R.string.atracoes_title)) },
+            label = { Text(stringResource(id = R.string.istagram_title)) },
             icon = { Icon(painterResource(R.drawable.ic_list_alt), null) },
-            selected = currentRoute == BuffetDestinations.ATRACOES,
+            selected = currentRoute == BuffetDestinations.INSTAGRAM,
             onClick = {
                 closeDrawer()
                 try{
-                    val uri = Uri.parse("https://www.instagram.com/stories/highlights/18082910431052846/")
+                    val uri = Uri.parse("https://www.instagram.com/buffetrealizeeventos")
                     val intent = Intent(Intent.ACTION_VIEW, uri).apply {
                         setPackage("com.instagram.android")
                     }
                     context.startActivity(intent)
                 }catch (e: Exception){
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/stories/highlights/18082910431052846/"))
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/buffetrealizeeventos"))
                     context.startActivity(browserIntent)
                 }
             },
@@ -98,43 +94,23 @@ fun AppDrawer(
         )
 
         NavigationDrawerItem(
-            label = { Text(stringResource(id = R.string.festas_title)) },
+            label = { Text(stringResource(id = R.string.facebook_title)) },
             icon = { Icon(painterResource(R.drawable.ic_list_alt), null) },
-            selected = currentRoute == BuffetDestinations.FESTAS,
+            selected = currentRoute == BuffetDestinations.FACEBOOK,
             onClick = {
                 closeDrawer()
                 try{
-                    val uri = Uri.parse("https://www.instagram.com/stories/highlights/18046259222541789/")
-                    val intent = Intent(Intent.ACTION_VIEW, uri).apply {
-                        setPackage("com.instagram.android")
-                    }
-                    context.startActivity(intent)
-                }catch (e: Exception){
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/stories/highlights/18046259222541789/"))
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/realizeeventospaulinia/"))
                     context.startActivity(browserIntent)
+                }catch (e: Exception){
+
+
                 }
             },
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
         )
-        NavigationDrawerItem(
-            label = { Text(stringResource(id = R.string.oBuffet_title)) },
-            icon = { Icon(painterResource(R.drawable.ic_list_alt), null) },
-            selected = currentRoute == BuffetDestinations.O_BUFFET,
-            onClick = {
-                closeDrawer()
-                try{
-                    val uri = Uri.parse("https://www.instagram.com/stories/highlights/18046928272177426/")
-                    val intent = Intent(Intent.ACTION_VIEW, uri).apply {
-                        setPackage("com.instagram.android")
-                    }
-                    context.startActivity(intent)
-                }catch (e: Exception){
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/stories/highlights/18046928272177426/"))
-                    context.startActivity(browserIntent)
-                }
-            },
-            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
-        )
+
+
 
         NavigationDrawerItem(
             label = { Text(stringResource(id = R.string.tesouro_title)) },
@@ -172,12 +148,9 @@ fun PreviewAppDrawer() {
     BuffetTheme {
         AppDrawer(
             drawerState = rememberDrawerState(initialValue = DrawerValue.Open),
-            currentRoute = BuffetDestinations.ATRACOES,
+            currentRoute = BuffetDestinations.INSTAGRAM,
             navigateToHome = {},
-            navigateToLocalizacao = {},
-            navigateToEstrutura = {},
             navigateToTesouro = {},
-            navigateToCardapio = {},
             closeDrawer = { },
         )
     }
