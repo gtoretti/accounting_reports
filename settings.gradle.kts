@@ -34,6 +34,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "DREgo"
+rootProject.name = "Buffet"
 include(":app")
 

@@ -13,303 +13,47 @@
   the License.
   -->
 <resources>
-    <string name="app_name">DRE go!</string>
-    <string name="load_error">Can\'t update latest news</string>
-    <string name="retry">Retry</string>
-    <string name="cd_add_to_favorites">Add to favorites</string>
-    <string name="cd_share">Share</string>
-    <string name="cd_text_settings">Text settings</string>
+    <string name="app_name">Buffet Realize</string>
     <string name="cd_open_navigation_drawer">Exibir menu</string>
-    <string name="cd_more_actions">More actions</string>
-    <string name="unbookmark">unbookmark</string>
-    <string name="bookmark">bookmark</string>
-    <string name="cd_search">Search</string>
-    <string name="addAccountingAccount">Adicionar Conta Contábil</string>
-    <string name="editAccountingAccount">Editar Conta Contábil</string>
-    <string name="addBalanceSheet">Adicionar Balanço Patrimonial</string>
-    <string name="editBalanceSheet">Editar Balanço Patrimonial</string>
-    <string name="editEquitySheet">Editar Patrimônio</string>
-    <string name="addAssetEvolution">Adicionar Demonstração das Mutações do Patrimônio Líquido</string>
-    <string name="addExplanatoryNote">Adicionar Nota Explicativa</string>
-    <string name="addPeriodResultStatement">Adicionar Demonstração do Resultado do Exercício</string>
-    <string name="addCashFlowsStatement">Adicionar Demonstração dos Fluxos de Caixa</string>
-    <string name="editAssetEvolution">Editar Demonstração das Mutações do Patrimônio Líquido</string>
-    <string name="editExplanatoryNote">Editar Nota Explicativa</string>
-    <string name="editPeriodResultStatement">Editar Demonstração do Resultado do Exercício</string>
-    <string name="editCashFlowsStatement">Editar Demonstração dos Fluxos de Caixa</string>
-    <string name="itemsCashFlowsStatement">Detalhes da Demonstração dos Fluxos de Caixa</string>
-    <string name="itemsAddCashFlowsStatement">Adicionar Movimentação Financeira</string>
-    <string name="itemsEditCashFlowsStatement">Modificar Movimentação Financeira</string>
-    <string name="cd_accounting_accounts">Plano de Contas Contábeis</string>
-    <string name="cd_balance_sheet">Balanço Patrimonial</string>
-    <string name="cd_asset_evolution">Demonstração das Mutações do Patrimônio Líquido</string>
-    <string name="published_in">Published in: \n%1$s</string>
-    <string name="fewer_stories">Show fewer stories like this?</string>
-    <string name="fewer_stories_content">This feature is not yet implemented</string>
-    <string name="agree">Agree</string>
-    <string name="close">Close</string>
-
-    <string name="fmtDatePattern">dd/MM/yyyy</string>
-    <string name="fmtMMDatePattern">dd/MM</string>
-
-    <!-- Accounting Accounts Screen -->
-    <string name="accounting_accounts_title">Plano de Contas Contábeis</string>
-    <string name="accounting_accounts_save">Salvar</string>
-    <string name="accounting_accounts_cancel">Cancelar</string>
-    <string name="accounting_accounts_currency">Liquidez:</string>
-    <string name="accounting_accounts_added_success">Conta contábil adicionada com sucesso.</string>
-    <string name="accounting_accounts_changed_success">Conta contábil modificada com sucesso.</string>
-    <string name="accounting_accounts_analytic">Conta Analítica:</string>
-    <string name="accounting_accounts_synthetic">Conta Sintética:</string>
-    <string name="accounting_accounts_delete_title">Excluir Conta Contábil:</string>
-    <string name="accounting_accounts_delete">Excluir</string>
-    <string name="accounting_accounts_deleted_success">Conta contábil excluída com sucesso.</string>
-    <string name="accounting_accounts_type">Tipo:</string>
-    <string name="accounting_accounts_account_asset">Conta Patrimonial:</string>
-    <string name="accounting_accounts_subtype">Subtipo:</string>
-
-    <!-- cash_flows_statement -->
-    <string name="cash_flows_statement_title">Demonstração dos Fluxos de Caixa</string>
-    <string name="cash_flows_statement_name">Nome:</string>
-    <string name="cash_flows_statement_startDate">Data Inicial:</string>
-    <string name="cash_flows_statement_endDate">Data Final:</string>
-    <string name="cash_flows_statement_cancel">Cancelar</string>
-    <string name="cash_flows_statement_save">Salvar</string>
-    <string name="cash_flows_statement_delete">Excluir</string>
-    <string name="cash_flows_statement_add">Adicionar</string>
-    <string name="cash_flows_statement_total">Total:</string>
-    <string name="cash_flows_statement_delete_statement">Excluir Movimentação Financeira:</string>
-    <string name="cash_flows_statement_added_sucess">Demonstração dos Fluxos de Caixa adicionada com sucesso.</string>
-    <string name="cash_flows_statement_changed_sucess">Demonstração dos Fluxos de Caixa modificada com sucesso.</string>
-    <string name="cash_flows_statement_increase">Aumento em caixa:</string>
-    <string name="cash_flows_statement_final_balance">Saldo final em caixa:</string>
-    <string name="cash_flows_statement_report">Relatório</string>
-    <string name="cash_flows_statement_date">Data:</string>
-    <string name="cash_flows_statement_move_date">Data da movimentação</string>
-    <string name="cash_flows_statement_value">Valor:</string>
-    <string name="cash_flows_statement_financial_move_added_success">Movimentação Financeira adicionada com sucesso.</string>
-    <string name="cash_flows_statement_financial_move_date">Data da Movimentação Financeira</string>
-    <string name="cash_flows_statement_financial_move_changed_success">Movimentação Financeira modificada com sucesso.</string>
-    <string name="cash_flows_statement_cash_flow">Fluxo de Caixa:</string>
-    <string name="cash_flows_statement_result_account">Conta de Resultado:</string>
-    <string name="cash_flows_statement_change_initial_balance">Modificar Saldo Inicial em Caixa:</string>
-    <string name="cash_flows_statement_initial_balance">Saldo Inicial em Caixa:</string>
-    <string name="cash_flows_statement_initial_balance_changed_success">Saldo Inicial em Caixa modificado com sucesso.</string>
-    <string name="cash_flows_statement_deleted_sucess">Demonstração dos Fluxos de Caixa excluída com sucesso.</string>
-    <string name="cash_flows_statement_financial_move_deleted_sucess">Movimentação Financeira excluída com sucesso.</string>
-    <string name="cash_flows_statement_items">Itens</string>
-    <string name="cash_flows_statement_missing_name">Por favor, informe o Nome.</string>
-    <string name="cash_flows_statement_missing_startdate">Por favor, informe a Data Inicial.</string>
-    <string name="cash_flows_statement_missing_enddate">Por favor, informe a Data Final.</string>
-    <string name="cash_flows_statement_delete_cash_flows_statement">Excluir Demonstração dos Fluxos de Caixa:</string>
-    <string name="cash_flows_statement_initial_balance_cash_value">Saldo inicial em caixa: </string>
-    <string name="cash_flows_statement_credit">Crédito</string>
-    <string name="cash_flows_statement_debit">(Débito)</string>
-    <string name="cash_flows_statement_invalid_dates">A Data Inicial deve ser anterior à Data Final</string>
-    <string name="cash_flows_statement_Item_empty_type">Por favor, selecione o Tipo de Fluxo de Caixa.</string>
-    <string name="cash_flows_statement_Item_empty_result_account">Por favor, selecione a Conta de Resultado.</string>
-    <string name="cash_flows_statement_Item_empty_date">Por favor, informe a Data.</string>
-    <string name="cash_flows_statement_Item_empty_value">Por favor, informe o Valor.</string>
-    <string name="cash_flows_statement_Item_invalid_date">Por favor, informe a Data dentro do período.</string>
 
 
-    <!-- period_results_statement -->
-    <string name="period_results_statement_title">Demonstração do Resultado do Exercício</string>
-    <string name="period_results_statement_add_statement">Adicionar Demonstração do Resultado do Exercício</string>
-    <string name="period_results_statement_edit_statement">Editar Demonstração do Resultado do Exercício</string>
-    <string name="period_results_statement_items">Detalhes da Demonstração do Resultado do Exercício</string>
-    <string name="period_results_statement_items_add_item">Adicionar Resultado</string>
-    <string name="period_results_statement_items_edit">Modificar Resultado</string>
-    <string name="period_results_statement_name">Nome:</string>
-    <string name="period_results_statement_startDate">Data Inicial:</string>
-    <string name="period_results_statement_endDate">Data Final:</string>
-    <string name="period_results_statement_cancel">Cancelar</string>
-    <string name="period_results_statement_delete">Excluir Demonstração do Resultado do Exercício:</string>
-    <string name="period_results_statement_deleted_sucess">Demonstração do Resultado do Exercício excluída com sucesso.</string>
-    <string name="period_results_statement_added_success">Demonstração do Resultado do Exercício adicionada com sucesso.</string>
-    <string name="period_results_statement_changed_success">Demonstração do Resultado do Exercício modificada com sucesso.</string>
-    <string name="period_results_statement_missing_name">Por favor, informe o Nome.</string>
-    <string name="period_results_statement_missing_startdate">Por favor, informe a Data Inicial.</string>
-    <string name="period_results_statement_missing_enddate">Por favor, informe a Data Final.</string>
-    <string name="period_results_statement_save">Salvar</string>
-    <string name="period_results_statement_total">Total:</string>
-
-
-    <string name="period_results_statement_gross_profit">Lucro Bruto:</string>
-    <string name="period_results_statement_operating_profit">Lucro Operacional:</string>
-    <string name="period_results_statement_profit_before_financing_and_taxes">Lucro Antes da Atividade de Financiamento e Tributos sobre o Lucro:</string>
-    <string name="period_results_statement_profit_before_taxes">Lucro Antes dos Tributos sobre o Lucro:</string>
-    <string name="period_results_statement_profit_from_continuing_operations">Lucro das Operações Continuadas:</string>
-    <string name="period_results_statement_net_profit">Lucro Líquido:</string>
-    <string name="period_results_statement_no_items">Não há resultados nesta seção.</string>
-
-    <string name="period_results_statement_report">Relatório</string>
-    <string name="period_results_statement_date">Data:</string>
-    <string name="period_results_statement_category">Categoria:</string>
-    <string name="period_results_statement_Item_empty_type">Por favor, selecione a Categoria.</string>
-    <string name="period_results_statement_value">Valor:</string>
-    <string name="period_results_statement_credit">Crédito</string>
-    <string name="period_results_statement_debit">(Débito)</string>
-    <string name="period_results_statement_Item_empty_result_account">Por favor, selecione a Conta de Resultado.</string>
-    <string name="period_results_statement_Item_empty_value">Por favor, informe o Valor.</string>
-    <string name="period_results_statement_item_added_success">Resultado adicionado com sucesso.</string>
-    <string name="period_results_statement_item_changed_success">Resultado modificado com sucesso.</string>
-    <string name="period_results_statement_all_items_already_added">Todas as Contas de Resultado já foram Adicionadas.</string>
-    <string name="period_results_statement_delete_statement">Excluir Resultado:</string>
-    <string name="period_results_statement_result_deleted_sucess">Resultado excluído com sucesso.</string>
-
-    <string name="period_results_statement_explanatory_notes_text">Nota Explicativa (Opcional):</string>
-    <string name="period_results_statement_margin">Margem de Lucro (Lucro Líquido / Receita):</string>
-
-    <!-- explanatory_notes -->
-    <string name="explanatory_notes_title">Notas Explicativas</string>
-    <string name="explanatory_notes_delete_note">Excluir Nota Explicativa:</string>
-    <string name="explanatory_notes_save">Salvar</string>
-    <string name="explanatory_notes_delete">Excluir</string>
-    <string name="explanatory_notes_cancel">Cancelar</string>
-    <string name="explanatory_notes_added_success">Nota Explicativa adicionada com sucesso.</string>
-    <string name="explanatory_notes_text">Texto:</string>
-    <string name="explanatory_notes_index">Índice/Título:</string>
-
-
-    <!-- Balance Sheet Screen -->
-    <string name="balance_sheet_title">Balanço Patrimonial</string>
-    <string name="balance_sheet_add_accounting_account">Adicionar Conta Patrimonial</string>
-    <string name="balance_sheet_edit_accounting_account">Modificar Conta Patrimonial</string>
-    <string name="balance_sheet_edit_Item_accounting_account">Modificar Conta Patrimonial do Balanço Patrimonial</string>
-    <string name="balance_sheet_date">Data:</string>
-    <string name="balance_sheet_name">Nome:</string>
-    <string name="balance_sheet_cancel">Cancelar</string>
-    <string name="balance_sheet_save">Salvar</string>
-    <string name="balance_sheet_delete">Excluir</string>
-    <string name="balance_sheet_delete_balance">Excluir Balanço Patrimonial</string>
-    <string name="balance_sheet_delete_account">Excluir Conta Patrimonial do Balanço Patrimonial</string>
-    <string name="balance_sheet_add">Adicionar</string>
-    <string name="balance_sheet_total">Total:</string>
-    <string name="balance_sheet_missing_name">Por favor, informe o Nome.</string>
-    <string name="balance_sheet_missing_date">Por favor, informe a Data.</string>
-    <string name="balance_sheet_added_sucess">Balanço Patrimonial adicionado com sucesso.</string>
-    <string name="balance_sheet_changed_sucess">Balanço Patrimonial modificado com sucesso.</string>
-    <string name="balance_sheet_deleted_success">Balanço Patrimonial excluído com sucesso.</string>
-    <string name="balance_sheet_items">Itens</string>
-    <string name="balance_sheet_credit">Crédito</string>
-    <string name="balance_sheet_debit">(Débito)</string>
-    <string name="balance_sheet_report">Relatório</string>
-    <string name="balance_sheet_assets">Ativo:</string>
-    <string name="balance_sheet_liabilities">Passivo:</string>
-    <string name="balance_sheet_current">Circulante:</string>
-    <string name="balance_sheet_non_current">Não-Circulante:</string>
-    <string name="balance_sheet_net_worth">Patrimônio Líquido:</string>
-    <string name="balance_sheet_item_value">Valor:</string>
-    <string name="balance_sheet_item_added_success">Conta Patrimonial adicionada com sucesso.</string>
-    <string name="balance_sheet_item_changed_success">Conta Patrimonial modificada com sucesso.</string>
-    <string name="balance_sheet_item_empty_type">Por favor, selecione a Conta Patrimonial.</string>
-    <string name="balance_sheet_item_empty_currency">Por favor, selecione a Liquidez.</string>
-    <string name="balance_sheet_item_empty_subtype">Por favor, selecione o Subtipo.</string>
-    <string name="balance_sheet_item_empty_account">Por favor, selecione a Conta Sintética e Analítica.</string>
-    <string name="balance_sheet_item_empty_value">Por favor, informe o Valor.</string>
-
-    <!-- equity_changes_statement -->
-    <string name="equity_changes_statement_title">Demonstração das Mutações do Patrimônio Líquido</string>
-    <string name="equity_changes_statement_topics">Topics</string>
-    <string name="equity_changes_statement_people">People</string>
-    <string name="equity_changes_statement_add_statement">Adicionar Demonstração das Mutações do Patrimônio Líquido</string>
-    <string name="equity_changes_statement_change_statement">Modificar Demonstração das Mutações do Patrimônio Líquido</string>
-    <string name="equity_changes_statement_items">Detalhes da Demonstração das Mutações do Patrimônio Líquido</string>
-    <string name="equity_changes_statement_items_add_item">Adicionar Mutação do Patrimônio Líquido</string>
-    <string name="equity_changes_statement_items_edit">Modificar Mutação do Patrimônio Líquido</string>
-    <string name="equity_changes_statement_name">Nome:</string>
-    <string name="equity_changes_statement_startDate">Data Inicial:</string>
-    <string name="equity_changes_statement_endDate">Data Final:</string>
-    <string name="equity_changes_statement_cancel">Cancelar</string>
-    <string name="equity_changes_statement_delete">Excluir Demonstração das Mutações do Patrimônio Líquido:</string>
-    <string name="equity_changes_statement_added_success">Demonstração das Mutações do Patrimônio Líquido adicionada com sucesso.</string>
-    <string name="equity_changes_statement_changed_success">Demonstração das Mutações do Patrimônio Líquido modificada com sucesso.</string>
-    <string name="equity_changes_statement_missing_name">Por favor, informe o Nome.</string>
-    <string name="equity_changes_statement_missing_startdate">Por favor, informe a Data Inicial.</string>
-    <string name="equity_changes_statement_missing_enddate">Por favor, informe a Data Final.</string>
-    <string name="equity_changes_statement_save">Salvar</string>
-    <string name="equity_changes_statement_total">Total:</string>
-    <string name="equity_changes_statement_all_items_already_added">Todos os Tipos de Mutação já foram Adicionados.</string>
-    <string name="equity_changes_statement_item_type">Tipo:</string>
-    <string name="equity_changes_statement_item_delete">Excluir</string>
-    <string name="equity_changes_statement_item_edit">Modificar</string>
-    <string name="equity_changes_statement_item_delete_title">Excluir Mutação do Patrimônio Líquido:</string>
-    <string name="equity_changes_statement_item_deleted_success">Mutação do Patrimônio Líquido excluída com sucesso.</string>
-
-
-    <string name="equity_changes_statement_paidInCapitalValue">Capital Social Integralizado:</string>
-    <string name="equity_changes_statement_capitalReservesGrantedOptionsAndTreasurySharesValue">Reservas de Capital, Opções Outorgadas e Acões em Tesouraria:</string>
-    <string name="equity_changes_statement_accumulatedProfitsOrLossesValue">Lucros ou Prejuízos Acumulados:</string>
-    <string name="equity_changes_statement_profitReservesValue">Reservas de Lucros:</string>
-    <string name="equity_changes_statement_otherComprehensiveResultsValue">Outros Resultados Abrangentes:</string>
-    <string name="equity_changes_statement_equityOfTheParentCompanyShareholdersValue">Patrimônio Líquido dos Sócios da Controladora:</string>
-    <string name="equity_changes_statement_nonControllingInterestsInEquityOfSubsidiaryValue">Participação dos Não- Controladores no Pat. Líq. das Controladas:</string>
-    <string name="equity_changes_statement_consolidatedEquityValue">Patrimônio Líquido Consolidado:</string>
-    <string name="equity_changes_statement_item_added_success">Mutação do Patrimônio Líquido adicionada com sucesso.</string>
-    <string name="equity_changes_statement_item_type_grid">Tipo de Mutação:</string>
-    <string name="equity_changes_statement_item_changed_success">Mutação do Patrimônio Líquido modificada com sucesso.</string>
-    <string name="equity_changes_statement_item_missing_type">Por favor, informe o Tipo.</string>
-
-
-    <!-- Home Screen -->
+    <!-- Inicio -->
     <string name="home_title">Início</string>
+    <string name="home_bemvindo">Bem-vindo ao Realize!</string>
+    <string name="home_contato">Contato para reservas:</string>
 
-    <string name="home_screen_1">Bem-vindo ao DRE go!</string>
+    <string name="home_endereco">Endereço:</string>
 
-    <string name="home_screen_1a">Instruções para utilização:</string>
-
-    <string name="home_screen_2">
-        Se você quer se tornar um grande empresário, você precisa antes de qualquer coisa começar a se comportar como um grande empresário.
-Grandes empresas utilizam ferramentas administrativas que ajudam elas a continuarem grandes. Essas ferramentas ajudam seus administradores a tomarem decisões certas baseadas em informações. Ou seja: grandes empresários tem as informações certas para tomar decisões e crescerem cada vez mais.
-Mas quais informações são essas ?
-    </string>
-
-    <string name="home_screen_3">As grandes empresas são normalmente do tipo SA (sociedades anonimas) e a administração delas é feita pelos seus acionistas, utilizando demonstrações contábeis especificas , definidas por leis e padronizadas globalmente, que facilitam a tomada de decisões que farão a empresa crescer e lucrar ainda mais.
-Entre essas demonstrações contábeis está a DRE - demonstração do resultado do exercício.
-    </string>
-
-    <string name="home_screen_4">Torne-se um grande empresário, baixe o app e comece a usar as mesmas ferramentas que os grandes empresários usam.</string>
-
-    <string name="home_screen_5">A estrutura da DRE neste aplicativo utiliza como referência as estruturas das demonstrações contábeis divulgadas publicamente por grandes empresas em seus canais de comunicação com investidores, além da Norma Brasileira de Contabilidade (NBC) TG 51, publicada em 22 de dezembro de 2025, que estabelece requisitos para a apresentação e divulgação de informações nas demonstrações contábeis, alinhando-se às normas internacionais de contabilidade, especialmente à IFRS 18 (International Financial Reporting Standards).</string>
-
-    <string name="home_screen_5a">A norma visa garantir que as demonstrações contábeis forneçam informações relevantes e fidedignas, promovendo maior transparência e detalhamento nas rubricas das demonstrações financeiras.</string>
+    <string name="home_endereco_rua">Rua Joana Antoniolli Scarassatti 349 Recanto do Lago, Paulínia 13140-868</string>
 
 
-    <string name="home_screen_6">Para iniciar o editor de Demonstração do Resultado do Exercício (DRE), acesse o menu acima à esquerda e selecione Demonstração do Resultado do Exercício.</string>
 
-    <string name="home_screen_7">Os botões tem as seguintes funções:</string>
 
-    <string name="home_screen_8">  Adicionar nova DRE.</string>
 
-    <string name="home_screen_8a">Não há Demonstração do Resultado do Exercício cadastrada ainda. Utilize este botão localizado acima à direita para cadastrar uma nova Demonstração do Resultado do Exercício.</string>
+    <!-- Atrações -->
+    <string name="atracoes_title">Atrações</string>
 
-    <string name="home_screen_9">  Editar informações.</string>
 
-    <string name="home_screen_9a"> Exibir informações da DRE detalhadas.</string>
 
-    <string name="home_screen_10"> Deletar DRE.</string>
 
-    <string name="home_screen_10a"> Tela de detalhes da DRE: Deletar resultado.</string>
 
-    <string name="home_screen_11"> Tela de detalhes da DRE: Gerar planilha Excel com as informações da DRE.</string>
+    <!-- Festas -->
+    <string name="festas_title">Festas</string>
 
-    <string name="home_screen_12"> Tela de detalhes da DRE: Adicionar resultado à DRE.</string>
 
-    <string name="home_screen_12a"> Tela de detalhes da DRE: Abre e fecha pasta exibindo informações da categoria.</string>
 
-    <string name="home_screen_13">Contato para suporte:</string>
-    <string name="home_screen_13a">gtorettidevimoveis@gmail.com</string>
 
-    <string name="home_screen_14">A importância da DRE.</string>
+    <!-- Caça ao Tesouro -->
+    <string name="tesouro_title">Caça ao Tesouro</string>
 
-    <string name="home_screen_15">A Demonstração do Resultado do Exercício (DRE) é um relatório contábil que resume a performance financeira de uma empresa apresentando receitas, despesas e o lucro líquido de um período específico, que pode ser mensal, trimestral ou anual.</string>
-    <string name="home_screen_16">A DRE é uma ferramenta valiosa para a gestão financeira, pois permite analisar a eficiência operacional, identificar áreas de melhoria e tomar decisões estratégicas com segurança sobre o futuro da empresa. Dessa forma, a DRE mostra o crescimento financeiro ao longo do tempo.</string>
-    <string name="home_screen_17">Para elaborar uma DRE corretamente, é fundamental seguir a estrutura padronizada e garantir que todos os dados financeiros sejam organizados com precisão. A DRE deve ser elaborada em conformidade com a Lei nº 6.404/76, que estabelece as diretrizes contábeis no Brasil.</string>
 
-    <!-- Navigation actions -->
-    <string name="cd_navigate_up">Navigate up</string>
-    <string name="cd_navigate_home">Navigate to the home screen</string>
-    <string name="cd_navigate_interests">Navigate to the interests screen</string>
+
+
+
+
+    <!-- O Buffet -->
+    <string name="oBuffet_title">O Buffet</string>
+
+
 
 </resources>

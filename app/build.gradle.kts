@@ -7,13 +7,14 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.compose.compiler)
+    id ("org.jetbrains.kotlin.plugin.serialization") version "1.9.22" // match your Kotlin version
 }
 
 android {
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.gtoretti.drego"
+        applicationId = "com.gtoretti.buffet"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -80,7 +81,7 @@ android {
             }
         }
     }
-    namespace = "com.gtoretti.drego"
+    namespace = "com.gtoretti.buffet"
 }
 
 androidComponents {
@@ -96,6 +97,28 @@ dependencies {
     implementation("org.apache.poi:poi:3.17")
 
     implementation("androidx.compose.material3:material3-window-size-class:1.1.0")
+
+    implementation("io.ktor:ktor-client-core:2.3.7")
+    implementation("io.ktor:ktor-client-cio:2.3.7") // or Android engine
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.7")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.7")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+    implementation("org.osmdroid:osmdroid-android:6.1.18")
+
+
+    // Accompanist Pager for carousel
+    implementation("androidx.compose.ui:ui:1.6.7")
+    implementation("androidx.compose.foundation:foundation:1.6.0")
+    implementation("androidx.compose.material3:material3:1.2.1")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.6.7")
+    implementation("androidx.activity:activity-compose:1.9.0")
+    implementation("com.google.accompanist:accompanist-pager:0.34.0")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.34.0")
+    // Coil for image loading
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
 
     implementation(libs.okhttp)
     ksp(libs.androidx.room.compiler)
