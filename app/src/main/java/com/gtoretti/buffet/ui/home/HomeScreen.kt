@@ -222,11 +222,14 @@ private fun HomeScreenContent(
 
 
 
-            // Carrosel de imagens:
+            // Carrosel de imagens:  pasta app\src\main\assets
             val images = listOf(
-                "atracoes.jpg",
-                "festas.jpg",
-                "obuffet.jpg",
+                "1.jpg",
+                "2.jpg",
+                "3.jpg",
+                "4.jpg",
+                "5.jpg",
+                "6.jpg",
             )
             ImageCarousel(images)
 
